@@ -6,7 +6,7 @@ function pdo_connect_mysql() {
     $db = 'technart';
     $user = USERNAME;
     $pass = PASSWORD;
-    $charset = 'utf8mb4';
+    $charset = 'utf8';
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
     $options = [

@@ -809,10 +809,11 @@ $spreadsheet->setActiveSheetIndex(0);
 $writer->save($novoRelatorio);
 
 //::::::::::::DESCARREGAR RELATORIO::::::::::::
-
+/* não funciona no php do site de produção
 $finfo = finfo_open(FILEINFO_MIME_TYPE); 
 $mime =  finfo_file($finfo, basename($novoRelatorio));
-finfo_close($finfo);
+finfo_close($finfo);*/
+$mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 header('Content-Type: '.$mime.'; charset=UTF-8');
 header('Content-Disposition: attachment;  filename="'.basename($novoRelatorio).'"');
 header('Content-Length: ' . filesize(basename($novoRelatorio)));
