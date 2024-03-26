@@ -179,15 +179,15 @@ function ret_dic_en()
         "board-member5" => "<a href='/tecnart/integrado.php?integrado=90'>Miguel Duarte Antunes da Silva Jorge</a>",
         //Etiqueta 'Conselho cinetifico'
         "org-struct-page-scinetific-conucil-tag" => "Scientific Council",
-        "all-integrated-members" => "Composed of all integrated members.",
+        "all-integrated-members" => "Composed of all integrated and collaborators members.",
         //Etiqueta 'Conselho consultivo'
         "org-struct-page-advisory-council-tag" => "Advisory Council",
         //Elementos integrantes do conselho consultivo
-        "advisory-council-one" => "Ana María Calvo Manuel, Faculty of Fine Arts of Completense University of Madrid, Spain.",
-        "advisory-council-two" => "Chao Gejin, Institute of Oral Tradition of the Chinese Academy of Social Sciences.",
+        "advisory-council-one" => "Ana María Calvo Manuel, Faculty of Fine Arts of Complutense University of Madrid, Spain.",
+        "advisory-council-two" => "Chao Gejin, Institute of Oral Tradition of the Chinese Academy of Social Sciences, Beijing, China.",
         "advisory-council-three" => "José Julio García Arranz, University of Extremadura, Spain.",
-        "advisory-council-four" => "Laurent Tissot, University of Neuchântel, Switzerland.",
-        "advisory-council-five" => "Maria Filomena Guerra, Panthéon Sorbonne University, Nanterre, France.",
+        "advisory-council-four" => "Laurent Tissot, University of Neuchâtel, Switzerland.",
+        "advisory-council-five" => "Maria Filomena Guerra, Centre national de la recherche scientifique, Paris, França.",
         "advisory-council-six" => "Zoltán Somhegyi, Károli Gáspár University, Budapest, Hungary.",
 
         //::::::oportunidades.php::::::
@@ -342,6 +342,7 @@ function ret_dic_en()
         "admission-cancel" => "Cancel",
         //Mensagens de Submissão
         "admission-file-size-error" => "ERROR: File size exceeds the maximum limit of " . MAX_FILE_SIZE . "MB",
+        "admission-file-type-error" => "ERRO: File must be pdf or image (jpg, jpeg, png)",
         "admission-required-error" => "ERROR: Failed to retrieve data from the fields",
         "admission-send-error" => "Database ERROR: Please try again later",
         "admission-successful" => "The form was successfully submitted",

@@ -178,15 +178,15 @@ function ret_dic_pt(){
         "board-member5" => "<a href='/tecnart/integrado.php?integrado=90'>Miguel Duarte Antunes da Silva Jorge</a>",
         //Etiqueta 'Conselho cinetifico'
         "org-struct-page-scinetific-conucil-tag" => "Conselho Científico",
-        "all-integrated-members" => "Composto por todos os membros integrados.",
+        "all-integrated-members" => "Composto por todos os membros integrados e colaboradores.",
         //Etiqueta 'Conselho consultivo'
         "org-struct-page-advisory-council-tag" => "Conselho Consultivo",
         //Elementos integrantes do conselho consultivo
-        "advisory-council-one" => "Ana María Calvo Manuel, Faculdade de Belas Artes da Universidade Completense de Madrid, Espanha.",
-        "advisory-council-two" => "Chao Gejin, Instituto de Tradição Oral da Academia Chinesa de Ciências Sociais.",
-        "advisory-council-three" => "José Julio García Arranz, Universidade da Estremadura, Espanha.",
-        "advisory-council-four" => "Laurent Tissot, Universidade de Neuchântel, Suíça.",
-        "advisory-council-five" => "Maria Filomena Guerra, Universidade Panthéon Sorbonne, Nanterre, França.",
+        "advisory-council-one" => "Ana María Calvo Manuel, Faculdade de Belas Artes da Universidade Complutense de Madrid, Espanha.",
+        "advisory-council-two" => "Chao Gejin, Instituto de Tradição Oral da Academia Chinesa de Ciências Sociais, Pequim, China",
+        "advisory-council-three" => "José Julio García Arranz, Universidade da Extremadura, Espanha.",
+        "advisory-council-four" => "Laurent Tissot, Universidade de Neuchâtel, Suíça.",
+        "advisory-council-five" => "Maria Filomena Guerra, Centre national de la recherche scientifique, Paris, França.",
         "advisory-council-six" => "Zoltán Somhegyi, Universidade Károli Gáspár, Budapeste, Hungria.",
 
         //::::::oportunidades.php::::::
@@ -341,6 +341,7 @@ function ret_dic_pt(){
         "admission-cancel" => "Cancelar",
         //Mensagens de Submissão
         "admission-file-size-error" => "ERRO: O tamanho do ficheiro excede o limite máximo de " . MAX_FILE_SIZE . "MB",
+        "admission-file-type-error" => "ERRO: O ficheiro tem de ser um pdf ou uma imagem (jpg, jpeg, png)",
         "admission-required-error" => "ERRO: Não foi possível obter os dados dos campos",
         "admission-send-error" => "ERRO Base de dados: Por favor, tente novamente mais tarde",
         "admission-successful" => "O formulário foi enviado com sucesso",
