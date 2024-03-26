@@ -161,21 +161,21 @@ function ret_dic_pt(){
         "org-struct-page-description" => "A atividade do Techn&Art é suportada pelos seguintes órgãos de direção, gestão e administração:",
         //Etiqueta 'Diretor'
         "org-struct-page-director-tag" => "Diretor",
-        "director" => "<a href='#'>Célio Gonçalo Marques</a>, Tecnologias de Informação e Comunicação",
+        "director" => "<a href='/tecnart/integrado.php?integrado=29'>Hermínia Maria Pimenta Ferreira Sol</a>",
         //Etiqueta 'Diretor adjunto'
         "org-struct-page-deputy-director-tag" => "Diretora Adjunta",
-        "deputy-director" => "<a href='#'>Hermínia Maria Pimenta Ferreira Sol</a>, Literatura",
+        "deputy-director" => "<a href='/tecnart/integrado.php?integrado=36'>Ana Cláudia Leal Marques Pires da Silva</a>",
         //Etiqueta 'secretarios administrativos'
         "org-struct-page-executive-secretary-tag" => "Secretário Administrativo",
         "executive-secretary" => "Hirondina Alves São Pedro",
         //Etiqueta 'Conselho diretivo'
         "org-struct-page-board-tag" => "Conselho Diretivo",
-        "board-composed" => "Composto pelo Diretor, pela Diretora Adjunta e por:",
-        "board-member1" => "<a href='#'>Ricardo Pereira Triães</a>, Conservação e Restauro",
-        "board-member2" => "<a href='#'>Eunice Ferreira Ramos Lopes</a>, Turismo",
-        "board-member3" => "<a href='#'>Regina Aparecida Delfino</a>, Artes Gráficas",
-        "board-member4" => "<a href='#'>Marta Margarida S. Dionísio</a>, Línguas",
-        "board-member5" => "<a href='#'>Ana Cláudia Pires da Silva</a>, Gestão",
+        "board-composed" => "Composto pelo Diretora, pela Diretora Adjunta e por:",
+        "board-member1" => "<a href='/tecnart/integrado.php?integrado=69'>Eduardo Jorge Marques de Oliveira Ferraz</a>",
+        "board-member2" => "<a href='/tecnart/integrado.php?integrado=119'>Liliana Cristina Vidais Rosa</a>",
+        "board-member3" => "<a href='/tecnart/integrado.php?integrado=104'>João Pedro Tomaz Simões</a>",
+        "board-member4" => "<a href='/tecnart/integrado.php?integrado=44'>Anabela Mendes Moreira</a>",
+        "board-member5" => "<a href='/tecnart/integrado.php?integrado=90'>Miguel Duarte Antunes da Silva Jorge</a>",
         //Etiqueta 'Conselho cinetifico'
         "org-struct-page-scinetific-conucil-tag" => "Conselho Científico",
         "all-integrated-members" => "Composto por todos os membros integrados.",
