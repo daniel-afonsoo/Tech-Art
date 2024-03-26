@@ -172,7 +172,7 @@ function ret_dic_en()
         //Etiqueta 'Conselho diretivo'
         "org-struct-page-board-tag" => "Board",
         "board-composed" => "Comprised of the Director, the Deputy Director and by:",
-        "board-member1" => "<a href='/tecnart/integrado.php?integrado=69'>Eduardo Jorge Marques de Oliveira Ferraz</a>",
+        "board-member1" => "<a href='/tecnart/integrado.php?integrado=68'>Eduardo Jorge Marques de Oliveira Ferraz</a>",
         "board-member2" => "<a href='/tecnart/integrado.php?integrado=119'>Liliana Cristina Vidais Rosa</a>",
         "board-member3" => "<a href='/tecnart/integrado.php?integrado=104'>João Pedro Tomaz Simões</a>",
         "board-member4" => "<a href='/tecnart/integrado.php?integrado=44'>Anabela Mendes Moreira</a>",
