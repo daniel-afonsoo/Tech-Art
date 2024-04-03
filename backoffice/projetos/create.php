@@ -2,7 +2,9 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-$mainDir = "../assets/projetos/";
+//$mainDir = "../assets/projetos/";
+$mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\projetos\\";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];

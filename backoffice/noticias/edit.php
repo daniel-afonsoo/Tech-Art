@@ -3,7 +3,10 @@ require "../verifica.php";
 require "../config/basedados.php";
 require "bloqueador.php";
 
-$mainDir = "../assets/noticias/";
+//$mainDir = "../assets/noticias/";
+$mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\noticias\\";
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
     $titulo = $_POST["titulo"];

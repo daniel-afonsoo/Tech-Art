@@ -1,6 +1,7 @@
 <?php
 // Set the upload directory path where the uploaded images will be stored
-$uploadDirectory = '../assets/imgs_texto/';
+//$uploadDirectory = '../assets/imgs_texto/';
+$uploadDirectory = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\imgs_texto\\";
 $url = get_absolute_from_relative('../assets/imgs_texto/');
 
 // Check if the directory exists

@@ -5,7 +5,9 @@ require "../config/basedados.php";
 if ($_SESSION["autenticado"] != 'administrador' && $_SESSION["autenticado"] != $_GET["id"]) {
     header("Location: index.php");
 }
-$filesDir = "../assets/investigadores/";
+//$filesDir = "../assets/investigadores/";
+$filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\investigadores\\";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];

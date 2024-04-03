@@ -3,7 +3,9 @@ require "../verifica.php";
 require "../config/basedados.php";
 require "bloqueador.php";
 
-$mainDir = "../assets/noticias/";
+//$mainDir = "../assets/noticias/";
+$mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\noticias\\";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file =  uniqid() . '_' . $_FILES["imagem"]["name"];
     move_uploaded_file($_FILES["imagem"]["tmp_name"], $mainDir . $target_file);

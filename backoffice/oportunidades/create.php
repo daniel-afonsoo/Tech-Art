@@ -3,7 +3,9 @@ require "../verifica.php";
 require "../config/basedados.php";
 require "bloqueador.php";
 
-$mainDir = "../assets/oportunidades/";
+//$mainDir = "../assets/oportunidades/";
+$mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\oportunidades\\";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

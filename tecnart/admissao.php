@@ -6,7 +6,9 @@ include_once "config/configurations.php";
 //Guardar um ficheiro na pasta pedido_<id pedido> mudando o nome do ficheiro
 function save_file($id, $new_name, $file)
 {
-    $directory = "../backoffice/assets/ficheiros_admissao/admissao_$id/";
+    //$directory = "../backoffice/assets/ficheiros_admissao/admissao_$id/";
+    $directory = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\ficheiros_admissao\\admissao_$id\\";
+
     if (!is_dir($directory) && !mkdir($directory, 0777, true)) {
         //Se ocurrer algum erro e não possivel criar a pasta returnar falso
         return false;

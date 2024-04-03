@@ -11,7 +11,9 @@ $visivel = '';
 $titulo_en = '';
 $conteudo_en = '';
 
-$mainDir = "../assets/oportunidades/";
+//$mainDir = "../assets/oportunidades/";
+$mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\data\\techneart\\assets\\oportunidades\\";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];

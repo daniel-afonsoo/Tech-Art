@@ -7,7 +7,8 @@ if ($_SESSION["autenticado"] != "administrador") {
     header("Location: index.php");
     exit;
 }
-$filesDir = "../assets/investigadores/";
+//$filesDir = "../assets/investigadores/";
+$filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\investigadores\\";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['password'] == $_POST['repeatPassword']) {
