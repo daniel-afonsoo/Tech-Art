@@ -20,7 +20,7 @@ include 'models/functions.php';
                     $lang = $_SESSION["lang"];
                 }
                 $valorSiteName = "valor_site_$lang";
-                $query = "SELECT dados, YEAR(data) AS publication_year, p.tipo, pt.$valorSiteName FROM publicacoes p
+                $query = "SELECT distinct dados, YEAR(data) AS publication_year, p.tipo, pt.$valorSiteName FROM publicacoes p
                                 LEFT JOIN publicacoes_tipos pt ON p.tipo = pt.valor_API
                                 WHERE visivel = true
                                 ORDER BY publication_year DESC, pt.$valorSiteName, data DESC";
@@ -60,13 +60,17 @@ include 'models/functions.php';
                             <?php foreach ($yearPublica as $site => $publicacoes) : ?>
                                 <div style="margin-left: 10px;" class="mt-3"><b><?= $site ?></b><br></div>
                                 <div style="margin-left: 20px;" id="publications<?= $year ?><?= $site ?>">
-                                    <?php foreach ($publicacoes as $publicacao) : ?>
+                                    <?php 
+                                        foreach ($publicacoes as $publicacao) : 
+                                    ?>
                                         <script>
+                                            
                                         var formattedCitation = new Cite(<?= json_encode($publicacao) ?>).format('bibliography', {
                                                 format: 'html',
                                                 template: 'apa',
                                                 lang: 'en-US'
                                             });;
+                                            
                                             var citationContainer = document.createElement('div');
                                             citationContainer.innerHTML = formattedCitation;
                                             citationContainer.classList.add('mb-3');

@@ -68,8 +68,8 @@ $orcid = $rows["orcid"]; //orcid
 $relatorioModelo = "./relatorio.xlsx";
 $aux = "./auxiliar.xlsx";
 
-$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/person-info?lang=User%20defined";
-//$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/person-info?lang=User%20defined";
+//$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/person-info?lang=User%20defined";
+$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/person-info?lang=User%20defined";
 
 //adicionar url ao handler cURL
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -483,8 +483,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //retornar transferencia ativada
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC); //autenticacao cURL basica ativada
 curl_setopt($ch, CURLOPT_USERPWD, "$login:$password"); //user e password para o swagger UI
 
-$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
-//$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
+//$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
+$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
 
 //adicionar url ao handler cURL
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -584,8 +584,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //retornar transferencia ativada
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC); //autenticacao cURL basica ativada
 curl_setopt($ch, CURLOPT_USERPWD, "$login:$password"); //user e password para o swagger UI
 
-$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
-//$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
+//$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
+$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/service?lang=User%20defined";
 
 //adicionar url ao handler cURL
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -730,8 +730,8 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //retornar transferencia ativada
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC); //autenticacao cURL basica ativada
 curl_setopt($ch, CURLOPT_USERPWD, "$login:$password"); //user e password para o swagger UI
 
-$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/distinction?lang=User%20defined";
-//$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/distinction?lang=User%20defined";
+//$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $ciencia_id . "/distinction?lang=User%20defined";
+$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $ciencia_id . "/distinction?lang=User%20defined";
 
 //adicionar url ao handler cURL
 curl_setopt($ch, CURLOPT_URL, $url);

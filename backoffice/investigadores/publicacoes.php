@@ -574,7 +574,7 @@ function getPublicationInfo($dataOutput, $typeOutput)
             return null;
     }
     //Adicionar as keywords
-    $formatedData["keywords"] =   implode(', ', isset($dataOutput->{"keywords"}->{"keyword"}) ? $dataOutput->{"keywords"}->{"keyword"} : array());
+    //$formatedData["keywords"] =   implode(', ', isset($dataOutput->{"keywords"}->{"keyword"}) ? $dataOutput->{"keywords"}->{"keyword"} : array());
     if ($date == null && isset($dataOutput->{"publication-date"})) {
         $date = $dataOutput->{"publication-date"};
     }
@@ -693,8 +693,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $loginAPI = USERCIENCIA;
         $passwordAPI = PASSWORDCIENCIA;
 
-        $url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $cienciaId . "/output/cached?lang=User%20defined";
-        //$url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $cienciaId . "/output/cached?lang=User%20defined";
+        //$url = "https://qa.cienciavitae.pt/api/v1.1/curriculum/" . $cienciaId . "/output/cached?lang=User%20defined";
+        $url = "https://api.cienciavitae.pt/v1.1/curriculum/" . $cienciaId . "/output/cached?lang=User%20defined";
         
         
         $ch = curl_init();
@@ -707,6 +707,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_USERPWD, "$loginAPI:$passwordAPI");
+        
         $result_curl = curl_exec($ch);
         curl_close($ch);
         $data = json_decode($result_curl);
