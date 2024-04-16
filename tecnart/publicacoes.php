@@ -20,7 +20,7 @@ include 'models/functions.php';
                     $lang = $_SESSION["lang"];
                 }
                 $valorSiteName = "valor_site_$lang";
-                $query = "SELECT distinct dados, YEAR(data) AS publication_year, p.tipo, pt.$valorSiteName FROM publicacoes p
+                $query = "SELECT dados, YEAR(data) AS publication_year, p.tipo, pt.$valorSiteName FROM publicacoes p
                                 LEFT JOIN publicacoes_tipos pt ON p.tipo = pt.valor_API
                                 WHERE visivel = true
                                 ORDER BY publication_year DESC, pt.$valorSiteName, data DESC";
@@ -51,6 +51,7 @@ include 'models/functions.php';
                 <script src="../backoffice/assets/js/citation-js-0.6.8.js"></script>
                 <script>
                     const Cite = require('citation-js');
+                    var lastFormattedCitation;
                 </script>
 
                 <div id="publications">
@@ -70,11 +71,31 @@ include 'models/functions.php';
                                                 template: 'apa',
                                                 lang: 'en-US'
                                             });;
-                                            
-                                            var citationContainer = document.createElement('div');
-                                            citationContainer.innerHTML = formattedCitation;
-                                            citationContainer.classList.add('mb-3');
-                                            document.getElementById('publications<?= $year ?><?= $site ?>').appendChild(citationContainer);
+
+                                            if (lastFormattedCitation === undefined) {
+                                                lastFormattedCitation=formattedCitation;
+                                                var citationContainer = document.createElement('div');
+                                                citationContainer.innerHTML = formattedCitation;
+                                                citationContainer.classList.add('mb-3');
+                                                document.getElementById('publications<?= $year ?><?= $site ?>').appendChild(citationContainer);
+                                            } else {
+                                                var div1 = document.createElement("div");
+                                                div1.innerHTML = formattedCitation;
+                                                var div2 = document.createElement("div");
+                                                div2.innerHTML = lastFormattedCitation;
+                                                var str1 = div1.childNodes[0].childNodes[1].innerHTML;
+                                                var str2 = div2.childNodes[0].childNodes[1].innerHTML;
+
+                                                if (str1===str2) {
+                                                        ;
+                                                } else {
+                                                    lastFormattedCitation=formattedCitation;
+                                                    var citationContainer = document.createElement('div');
+                                                    citationContainer.innerHTML = formattedCitation;
+                                                    citationContainer.classList.add('mb-3');
+                                                    document.getElementById('publications<?= $year ?><?= $site ?>').appendChild(citationContainer);
+                                                }
+                                            }
                                         </script>
                                     <?php endforeach; ?>
                                 </div>
