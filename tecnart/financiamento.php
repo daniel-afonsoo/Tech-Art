@@ -42,7 +42,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-table1-investigator") ?></strong></p>
                                     </td>
                                     <td>
-                                        <p>Doutor Célio Marques</p>
+                                        <p>Doutora Hermínia Sol</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -77,7 +77,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-table1-end-date") ?></strong></p>
                                     </td>
                                     <td>
-                                        <p>31/12/2023</p>
+                                        <p>31/12/2024</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -85,7 +85,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-table1-total-investment") ?></strong></p>
                                     </td>
                                     <td>
-                                        <p>556 000,00€</p>
+                                        <p>691 750,00€</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -93,7 +93,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-table1-funding") ?></strong></p>
                                     </td>
                                     <td>
-                                        <p>556 000,00€</p>
+                                        <p>691 750,00€</p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -119,7 +119,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-tables-funding") ?></strong></p>
                                     </td>
                                     <td width="217">
-                                        <p>285 000,00€</p>
+                                        <p>353 750,00€</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,7 +127,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-tables-execution-period") ?></strong></p>
                                     </td>
                                     <td width="217">
-                                        <p>01/01/2020 - 31/12/2023</p>
+                                        <p>01/01/2020 - 31/12/2024</p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -147,7 +147,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-tables-universal-code") ?></strong></p>
                                     </td>
                                     <td width="217">
-                                        <p>UIDB/05488/2020</p>
+                                        <p>UIDP/05488/2020</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -155,7 +155,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-tables-funding") ?></strong></p>
                                     </td>
                                     <td width="217">
-                                        <p>271 000,00 €</p>
+                                        <p>338 000,00 €</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -163,7 +163,7 @@ include 'models/functions.php';
                                         <p><strong><?= change_lang("funding-tables-execution-period") ?></strong></p>
                                     </td>
                                     <td width="217">
-                                        <p>01/01/2020 - 31/12/2023</p>
+                                        <p>01/01/2020 - 31/12/2024</p>
                                     </td>
                                 </tr>
                             </tbody>

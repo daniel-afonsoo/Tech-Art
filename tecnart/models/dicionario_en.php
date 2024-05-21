@@ -109,7 +109,7 @@ function ret_dic_en()
         //Titulo 'Missao e Objetivos'
         "mission-and-goals-page-heading" => "mission and goals",
         //ponto 1
-        "mission-and-goals-page-point-one" => "Techn&Art develops research in the fields of Safeguarding Heritage and Valuing Heritage, both in experimental development and in applied research.",
+        "mission-and-goals-page-point-one" => "TECHN&ART develops research in the fields of Safeguarding Heritage and Valuing Heritage, both in experimental development and in applied research.",
         //ponto 2
         "mission-and-goals-page-point-two" => "This R&amp;D unit's mission is:",
         //ponto 2, alinea a)

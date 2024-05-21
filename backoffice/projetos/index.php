@@ -31,8 +31,14 @@ $result = mysqli_query($conn, $sql);
 							<h2>Projetos</h2>
 						</div>
 						<div class="col-sm-6">
+							<?php 
+							if ($_SESSION["autenticado"] == 'administrador') {
+							?>
 							<a href="create.php" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Adicionar
 									Novo Projeto</span></a>
+							<?php
+							}
+							?>
 						</div>
 					</div>
 				</div>

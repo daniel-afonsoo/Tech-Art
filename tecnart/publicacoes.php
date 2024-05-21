@@ -22,7 +22,7 @@ include 'models/functions.php';
                 $valorSiteName = "valor_site_$lang";
                 $query = "SELECT dados, YEAR(data) AS publication_year, p.tipo, pt.$valorSiteName FROM publicacoes p
                                 LEFT JOIN publicacoes_tipos pt ON p.tipo = pt.valor_API
-                                WHERE visivel = true
+                                WHERE visivel = true and YEAR(data) >= 2018
                                 ORDER BY publication_year DESC, pt.$valorSiteName, SUBSTRING(dados,POSITION(\"author = {\" IN dados),100)";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute();

@@ -43,11 +43,11 @@ if (@$_SESSION["anoRelatorio"] != "") {
 <div class="container mt-3">
 	<form id="formAnoRelatorio">
 
-		<input required name="anoRelatorio" type="number" class="form-control mr-2" placeholder="Ano do relatório" min="1950" max="2999" step="1" pattern="\d{4}" data-error="Por favor insira um ano válido" style="max-width: 200px; min-width: 160px; display: inline-block;" value="<?= $anoAtual ?>" />
-		<input type="submit" value="Selecionar Ano" class="btn btn-success" />
+		<!--<input required name="anoRelatorio" type="number" class="form-control mr-2" placeholder="Ano do relatório" min="1950" max="2999" step="1" pattern="\d{4}" data-error="Por favor insira um ano válido" style="max-width: 200px; min-width: 160px; display: inline-block;" value="<?= $anoAtual ?>" />
+		<input type="submit" value="Selecionar Ano" class="btn btn-success" />-->
 
 		<?php
-		if (isset($_SESSION["anoRelatorio"])) {
+		/*if (isset($_SESSION["anoRelatorio"])) {
 			$class = "text-danger";
 			$symbol = "&#xE002;";
 			if (@$_SESSION["anoRelatorio"] != "") {
@@ -60,13 +60,13 @@ if (@$_SESSION["anoRelatorio"] != "") {
 			$class = "text-info";
 			$symbol = "&#xE88E;";
 			$msg = "Ano Atual: " . date("Y");
-		}
+		}*/
 		?>
 
-		<span id="anoSpan" class="<?= $class ?>" style="height:20px; display: inline-block; vertical-align: middle;">
+		<!--<span id="anoSpan" class="<?= $class ?>" style="height:20px; display: inline-block; vertical-align: middle;">
 			<span id="anoSymbol" class="material-icons ml-3" style="font-size: 18px; vertical-align: middle;"><?= $symbol ?></span>
 			<span class="ml-2" id="anoSubmit" id="anoSubmit" style="font-size:15px;"><?= $msg ?></span>
-		</span>
+		</span>-->
 
 	</form>
 
@@ -120,13 +120,13 @@ if (@$_SESSION["anoRelatorio"] != "") {
 								echo "<td>".$row["scholar"]."</td>";
 								*/
 								echo "<td><img src='../assets/investigadores/$row[fotografia]' width = '100px' height = '100px'></td>";
-								echo "<td style='min-width:250px;'><a href='edit.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-primary'><span>Alterar</span></a>";
+								echo "<td style='min-width:250px;'><a href='edit.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-primary'><span>Alterar Perfil</span></a>";
 								if ($_SESSION["autenticado"] == 'administrador') {
 									echo "<a href='remove.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-danger'><span>Apagar</span></a><br>";
 								}
 								if ($row["tipo"] != "Externo") {
 									echo "<a href='resetpassword.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-warning'><span>Alterar Password</span></a><br>";
-									echo "<a data-id='" . $row["id"] . "' class='gerarRelatorio w-100 mb-1 btn btn-info'><span>Gerar Relatório</span></a><br>";
+									//echo "<a data-id='" . $row["id"] . "' class='gerarRelatorio w-100 mb-1 btn btn-info'><span>Gerar Relatório</span></a><br>";
 									echo "<a href='publicacoes.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-secondary'><span>Selecionar Publicações</span></a><br>";
 								}
 								echo "</td>";
