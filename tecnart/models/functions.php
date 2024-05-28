@@ -273,7 +273,7 @@ $change_lang =  function ($key) {
                                 </div>
                             </div>
                                 <div class="widget_menu">
-                                    <br><ul><li><a style="color: white;">sec.techenart@ipt.pt</a></li></ul>
+                                    <br><ul><li><a style="color: white;">sec.techneart@ipt.pt</a></li></ul>
                                 </div>
                                 <div class="widget_menu">
                                     <br><ul><li><a style="color: white;"><strong>{$change_lang("follow-us-txt")}</strong></a></li></ul>
