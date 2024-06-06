@@ -14,12 +14,14 @@ $stmt->bindParam(1, $_GET["oportunidade"], PDO::PARAM_INT);
 $stmt->execute();
 $oportunidades = $stmt->fetch(PDO::FETCH_ASSOC);
 $id = $oportunidades['id'];
-$filesDir = "../backoffice/assets/oportunidades/ficheiros_$id/" . $_SESSION["lang"] . "/";
+$filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\oportunidades\\ficheiros_$id\\" . $_SESSION["lang"] . "\\";
+$filesDir1 = "../backoffice/assets/oportunidades/ficheiros_$id/" . $_SESSION["lang"] . "/";
 if (is_dir($filesDir)) {
     $files = scandir($filesDir);
     $files = array_diff($files, array('.', '..'));
     if (empty($files)) {
-        $filesDir = "../backoffice/assets/oportunidades/ficheiros_$id/pt/";;
+        $filesDir1 = "../backoffice/assets/oportunidades/ficheiros_$id/pt/";«;
+        $filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\oportunidades\\ficheiros_$id\\pt\\";
         $files = scandir($filesDir);
         $files = array_diff($files, array('.', '..'));
     }
@@ -54,7 +56,7 @@ if (is_dir($filesDir)) {
                     '.change_lang("opport-page-file").'</h3>
                 <div class="textInfo" style="padding-bottom: 80px;">';
                     foreach ($files as $file) {
-                        echo '<a href="' . $filesDir . '/' . $file . '" target="_blank">' . $file . '</a><br>';
+                        echo '<a href="' . $filesDir1 . '/' . $file . '" target="_blank">' . $file . '</a><br>';
                     }
                 }
                 echo '</div>';
