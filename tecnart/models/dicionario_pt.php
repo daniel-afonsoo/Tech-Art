@@ -160,7 +160,7 @@ function ret_dic_pt(){
         //Descricao / texto da pagina 'Estrutura Organica', logo abaixo do subtitulo
         "org-struct-page-description" => "A atividade do Techn&Art é suportada pelos seguintes órgãos de direção, gestão e administração:",
         //Etiqueta 'Diretor'
-        "org-struct-page-director-tag" => "Diretor",
+        "org-struct-page-director-tag" => "Diretora",
         "director" => "<a href='/tecnart/integrado.php?integrado=29'>Hermínia Maria Pimenta Ferreira Sol</a>",
         //Etiqueta 'Diretor adjunto'
         "org-struct-page-deputy-director-tag" => "Diretora Adjunta",
