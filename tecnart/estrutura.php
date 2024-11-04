@@ -42,7 +42,7 @@ include 'models/functions.php';
                         <?= change_lang("board-member5") ?><br><br>
 
                         <b><?= change_lang("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= change_lang("all-integrated-members") ?><br><br>
-
+<!--
                         <b><?= change_lang("org-struct-page-advisory-council-tag") ?><br>
                         </b><?= change_lang("advisory-council-one") ?><br>
                         <?= change_lang("advisory-council-two") ?><br>
@@ -50,6 +50,65 @@ include 'models/functions.php';
                         <?= change_lang("advisory-council-four") ?><br>
                         <?= change_lang("advisory-council-five") ?><br>
                         <?= change_lang("advisory-council-six") ?><br><br>
+-->
+                        <b><?= change_lang("org-struct-page-advisory-council-tag") ?><br>
+                        </b>
+                        <section class="product_section layout_padding">
+                            <div style="padding-top: 20px;">
+                                <div class="container">
+                                    <div class="row justify-content-center mt-3">
+                                        <div  class="ml-5 imgList">
+                                            <a href="consAnaCalvoManuel.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/AnaCalvoManuel.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">Ana María Calvo Manuel</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                        <div  class="ml-5 imgList">
+                                            <a href="consChaoGejin.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/ChaoGejin.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">Chao Gejin</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                        <div  class="ml-5 imgList">
+                                            <a href="consJoseJulioGarciaArranz.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/JoseJulioGarciaArranz.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">José Julio García Arranz</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                        <div  class="ml-5 imgList">
+                                            <a href="consLaurentTissot.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/LaurentTissot.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">Laurent Tissot</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                        <div  class="ml-5 imgList">
+                                            <a href="consMariaFilomenaGuerra.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/MariaFilomenaGuerra.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">Maria Filomena Guerra</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                        <div  class="ml-5 imgList">
+                                            <a href="consZoltanSomhegyi.php">
+                                                <div  class="image_default">
+                                                    <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="./assets/images/ZoltanSomhegyi.png" alt="">
+                                                    <div class="imgText justify-content-center m-auto">Zoltán Somhegyi</div>
+                                                </div>
+                                            </a> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
                     </div>
                 </div>
