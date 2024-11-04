@@ -22,11 +22,12 @@ function ret_dic_en()
         //Imagem com o logotipo da techn&art
         "header-site-logo" => "./assets/images/TechnArt11FundoTrans.png",
         //Drop-down 'Sobre o Techn&Art'
-        "about-technart-drop-down" => "About Techn&art",
+        "about-technart-drop-down" => "About TECHN&ART",
         "mission-and-goals-option" => "Mission and Goals",
         "research-axes-option" => "Research Axes",
         "org-struct-option" => "Organic Structure",
         "opportunities-option" => "Opportunities",
+        "regulation-option" => "Regulations",
         "funding-option" => "Funding",
         //Drop-down 'Projetos'
         "projects-tab" => "Projects",
@@ -48,15 +49,15 @@ function ret_dic_en()
         //Imagem com o logotipo da techn&art
         "footer-site-logo" => "./assets/images/TechnArt12FundoTrans.png",
         //Etiqueta / texto com parte da morada
-        "address-txt-1" => "Contador Farm,",
+        "address-txt-1" => "Quinta do Contador,",
         //Etiqueta / texto com parte da morada
-        "address-txt-2" => "Serra Road",
+        "address-txt-2" => "Estrada da Serra",
         //Etiqueta / texto 'Siga-nos',
         "follow-us-txt" => "Follow Us",
         //Divisoria com 'projeto UD ...'
-        "project-ud-txt" => "Project UDP/05488/2020",
+        "project-ud-txt" => "Project UDI/05488/2020",
         //Etiqueta / texto com 'Instituto Pol...'
-        "ipt-copyright-txt" => "©Polytechnic Institute of Tomar",
+        "ipt-copyright-txt" => "©Polytechnic University of Tomar",
         //Etiqueta / texto com 'Todos os direitos reservados'
         "all-rights-reserved-txt" => "All rights reserved",
 
@@ -65,7 +66,7 @@ function ret_dic_en()
         //Titulo do 1 slide
         "index-first-slide" => "About TECHN&ART",
         //Breve descricao do 1 slide
-        "index-first-slide-desc" => "A research and development centre focussed on the safeguard and enhancement of heritage, both experimental and applied",
+        "index-first-slide-desc" => "A research and development centre focused on the safeguard and enhancement of heritage, both experimental and applied",
         //Titulo do 2 slide
         "index-second-slide" => "Technology and interdisciplinarity in service of Heritage",
         //Breve descricao do 2 slide
@@ -92,7 +93,7 @@ function ret_dic_en()
         //Titulo 'Sobre o Techn&Art'
         "about-technart-page-heading" => "About TECHN&ART",
         //Subitulo página 'Sobre o Techn&Art'
-        "about-technart-page-subtitle" => "The <b>TECHN&ART - Center for Technology, Restoration, and Valorization of the Arts</b> is a research and development unit of the Polytechnic Institute of Tomar. TECHN&ART brings together researchers from multiple disciplinary areas with the mission of developing research strategies and methodologies in the field of <b>Safeguarding and Valorization of Artistic and Cultural Heritage</b> in its various forms of expression. This work is carried out with a sustainable, holistic, and transdisciplinary approach, aiming to connect the present with the past.",
+        "about-technart-page-subtitle" => "The <b>TECHN&ART - Technology, Restoration and Arts Enhancement Center</b> is a research and development unit of the Polytechnic Institute of Tomar. TECHN&ART brings together researchers from multiple disciplinary areas with the mission of developing research strategies and methodologies in the field of <b>Safeguarding and Enhancement of Artistic and Cultural Heritage</b> in its various forms of expression. This work is carried out with a sustainable, holistic, and transdisciplinary approach, aiming to connect the present with the past.",
         //Legenda 'Missao e Objetivos'
         "mission-and-goals-caption" => "MISSION AND GOALS",
         //Legenda 'Eixos de Investigacao'
@@ -134,19 +135,19 @@ function ret_dic_en()
         //Título 'Eixos de Investigacao'
         "axes-page-heading" => "research axes",
         //Descricao / texto da pagina 'Eixos de investigacao', logo abaixo do subtitulo
-        "axes-page-p1-txt" => "The Center for Technology, Restoration, and Valorization of the Arts develops research strategies and methodologies within the scope of two thematic lines:",
+        "axes-page-p1-txt" => "The Technology, Restoration and Arts Enhancement Center develops research strategies and methodologies within the scope of two domains:",
         //alinea a)
         "axes-page-a-txt" => "Safeguard",
         //alinea b)
         "axes-page-b-txt" => "Enhancement of Artistic and Cultural Heritage",
         //paragrafo após o a e b
-        "axes-page-p2-txt" => "The thematic line of <b>Safeguarding</b> consists of two lines of action: <b>a1) Conservation and Restoration</b> and <b>a2) Characterization and Contextualization of Heritage</b>:",
+        "axes-page-p2-txt" => "The thematic line of <b>Safeguarding</b> consists of two fields: <b>a1) Conservation and Restoration</b> and <b>a2) Characterization and Contextualization of Heritage</b>:",
         //alinea a1)
         "axes-page-a-one-txt" => "<b>Conservation and Restoration –</b> this research line is based on the study of intervention in the conservation and restoration of movable and integrated artistic heritage. It encompasses discussions related to methodologies, materials, technology, and ethics. This line brings together conservators, restorers, and researchers who directly or indirectly participate in research, development, and intervention projects for the safeguarding of artistic and cultural heritage.",
         // alinea a2)
         "axes-page-a-two-txt" => "<b>Characterization and Contextualization of Heritage</b> - this research line is based on cultural, archaeological, historical, artistic, literary studies, as well as physical, chemical, and biological characterization of materials and their alteration and compatibility in terms of chemical and structural preservation. It considers the origin environment and preservation of both existing supports and new materials to be applied. This line brings together researchers from various backgrounds who study, contextualize, and characterize material, immaterial, and natural heritage.",
         //parágrafo após o a1 e a2 antes do b1 e b2
-        "axes-page-p3-txt" => "The thematic line of <b>Valorization of Artistic and Cultural Heritage</b> encompasses the lines of action: <b>b1) Didactics, Technology, and Communication</b> and <b>b2) Design and Innovation:</b>",
+        "axes-page-p3-txt" => "The thematic line of <b>Enhancement of Artistic and Cultural Heritage</b> encompasses the lines of action: <b>b1) Didactics, Technology, and Communication</b> and <b>b2) Design and Innovation:</b>",
         //alinea b1)
         "axes-page-b-one-txt" => "<b>Didactics, Technology, and Communication</b> - This research line focuses on the study of education, awareness, and dissemination of cultural and artistic heritage and its preservation at different levels. Within the framework of didactics, the goal is to achieve a symbiosis between heritage, heritage interpretation, and tourism in a sustainable manner. The aim is to provide active and integrated learning experiences through the interpretation of cultural heritage (both tangible and intangible) with high scientific, educational, heritage, and tourism value. Heritage management from the perspective of enjoyment will provide insights into contemporary social and cultural dynamics. Thus, this research line can be integrated into the interaction between contexts that promote learning through the exploration of didactic, technological, and communication connections. These methodologies and strategies include e-learning, mobile learning, learning objects, libraries and repositories of digital content, and gamification. It also encompasses immersive environments, augmented reality, virtual reality, information systems, multimedia, hypermedia, and apps. This line of action brings together researchers in the fields of cultural tourism, documentary film and video, design, and computer science.",
         //alinea b2)
@@ -159,7 +160,7 @@ function ret_dic_en()
         //Título 'Estrutura Organica'
         "org-struct-page-heading" => "organic structure",
         //Descricao / texto da pagina 'Estrutura Organica', logo abaixo do subtitulo
-        "org-struct-page-description" => "Techn&Art's activity is supported by the following governing, management and administration bodies:",
+        "org-struct-page-description" => "TECHN&ART's activity is supported by the following governing, management and administration bodies:",
         //Etiqueta 'Diretor'
         "org-struct-page-director-tag" => "Director",
         "director" => "<a href='/tecnart/integrado.php?integrado=29'>Hermínia Maria Pimenta Ferreira Sol</a>",
@@ -245,7 +246,7 @@ function ret_dic_en()
         //Descricao de 'Investigadores/as Integrados/as'
         "integrated-researchers-page-heading-desc" => "",
         //Titulo 'Investigadores/as Colaboradores/as'
-        "colaborative-researchers-page-heading" => "Collaborative Researchers",
+        "colaborative-researchers-page-heading" => "Collaborating Researchers",
         //Descricao de 'Investigadores/as Integrados/as'
         "colaborative-researchers-page-heading-desc" => "",
         //Titulo 'Investigadores/as Alunos/as'
@@ -349,12 +350,12 @@ function ret_dic_en()
 
         //::::::financiamento.php::::::
         "funding-title" => "Funding",
-        "funding-p1" => "Funding allocated to the Research Center for Technology, Restoration, and Valorization of Arts (TECHN&ART)",
+        "funding-p1" => "Funding allocated to the Technology, Restoration and Arts Enhancement Center (TECHN&ART)",
         "funding-table1-project" => "Project",
-        "funding-table1-project-name" => "R&D Unit <br>Center for Technology, Restoration, and Valorization of Arts (TECHN&ART)",
-        "funding-table1-investigator" => "Investigator/Coordinator",
+        "funding-table1-project-name" => "R&D Unit <br>Technology, Restoration and Arts Enhancement Center (TECHN&ART)",
+        "funding-table1-investigator" => "Researcher/Coordinator",
         "funding-table1-promoter" => "Promoter",
-        "funding-table1-date-celebration" => "Date of celebration/Acceptance Term",
+        "funding-table1-date-celebration" => "Date of Acceptance Term",
         "funding-table1-execution-period" => "Execution period",
         "funding-table1-start-date" => "Start date",
         "funding-table1-end-date" => "End date",
@@ -363,7 +364,7 @@ function ret_dic_en()
         "funding-p2" => "The overall funding of the research center corresponds to the sum of two components:",
         "funding-title-2" => "Base Funding",
         "funding-title-3" => "Programmatic Funding",
-        "funding-tables-universal-code" => "Universal Code",
+        "funding-tables-universal-code" => "Reference",
         "funding-tables-funding" => "Funding",
         "funding-tables-execution-period" => "Execution period",
 

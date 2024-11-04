@@ -21,11 +21,12 @@ function ret_dic_pt(){
         //Imagem com o logotipo da techn&art
         "header-site-logo" => "./assets/images/TechnArt5FundoTrans.png",
         //Drop-down 'Sobre o Techn&Art'
-        "about-technart-drop-down" => "Sobre o Techn&art",
+        "about-technart-drop-down" => "Sobre o TECHN&ART",
         "mission-and-goals-option" => "Missão e Objetivos",
         "research-axes-option" => "Eixos de Investigação",
         "org-struct-option" => "Estrutura Orgânica",
         "opportunities-option" => "Oportunidades",
+        "regulation-option" => "Regulamento",
         "funding-option" => "Financiamento",
         //Drop-down 'Projetos'
         "projects-tab" => "Projetos",
@@ -53,7 +54,7 @@ function ret_dic_pt(){
         //Etiqueta / texto 'Siga-nos',
         "follow-us-txt" => "Siga-nos",
         //Divisoria com 'projeto UD ...'
-        "project-ud-txt" => "Projeto UDP/05488/2020",
+        "project-ud-txt" => "Projeto UDI/05488/2020",
         //Etiqueta / texto com 'Instituto Pol...'
         "ipt-copyright-txt" => "©Instituto Politécnico de Tomar",
         //Etiqueta / texto com 'Todos os direitos reservados'
@@ -133,13 +134,13 @@ function ret_dic_pt(){
         //Título 'Eixos de Investigacao'
         "axes-page-heading" => "Eixos de Investigação",
         //Descricao / texto da pagina 'Eixos de investigacao', logo abaixo do subtitulo
-        "axes-page-p1-txt" => "O Centro de Tecnologia, Restauro e Valorização das Artes desenvolve estratégias e metodologias de investigação no âmbito de duas linhas temáticas:",
+        "axes-page-p1-txt" => "O Centro de Tecnologia, Restauro e Valorização das Artes desenvolve estratégias e metodologias de investigação no âmbito de dois domínios:",
         //alinea a)
         "axes-page-a-txt" => "Salvaguarda",
         //alinea b)
         "axes-page-b-txt" => "Valorização do Património Artístico e Cultural",
         //paragrafo após o a e b
-        "axes-page-p2-txt" => "A linha temática da <b>Salvaguarda</b> é constituída por duas linhas de ação: <b>a1) Conservação e Restauro</b> e <b>a2) Caraterização e Contextualização do Património</b>:",
+        "axes-page-p2-txt" => "A linha temática da <b>Salvaguarda</b> é constituída por duas áreas de ação: <b>a1) Conservação e Restauro</b> e <b>a2) Caraterização e Contextualização do Património</b>:",
         //alinea a1)
         "axes-page-a-one-txt" => "<b>Conservação e Restauro –</b> esta linha de investigação sustenta-se nos estudos de na intervenção de conservação e restauro no património artístico móvel e integrado, e onde as questões relacionadas com as metodologias, materiais, tecnologia e ética estão sistematicamente em discussão. Esta linha reúne conservadores restauradores e investigadores que direta ou indiretamente participam nos projetos de investigação, desenvolvimento e intervenção para a salvaguarda do património artístico e cultural;",
         // alinea a2)
@@ -158,7 +159,7 @@ function ret_dic_pt(){
         //Título 'Estrutura Organica'
         "org-struct-page-heading" => "Estrutura Orgânica",
         //Descricao / texto da pagina 'Estrutura Organica', logo abaixo do subtitulo
-        "org-struct-page-description" => "A atividade do Techn&Art é suportada pelos seguintes órgãos de direção, gestão e administração:",
+        "org-struct-page-description" => "A atividade do TECHN&ART é suportada pelos seguintes órgãos de direção, gestão e administração:",
         //Etiqueta 'Diretor'
         "org-struct-page-director-tag" => "Diretora",
         "director" => "<a href='/tecnart/integrado.php?integrado=29'>Hermínia Maria Pimenta Ferreira Sol</a>",
@@ -362,7 +363,7 @@ function ret_dic_pt(){
         "funding-p2" => "O financiamento global do centro de investigação corresponde à soma de duas parcelas:",
         "funding-title-2" => "Financiamento Base",
         "funding-title-3" => "Financiamento Programático",
-        "funding-tables-universal-code" => "Código universal",
+        "funding-tables-universal-code" => "Referência",
         "funding-tables-funding" => "Financiamento",
         "funding-tables-execution-period" => "Período de execução",
 

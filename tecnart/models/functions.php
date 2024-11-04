@@ -177,6 +177,7 @@ function template_header($title){
                                             <a href="estrutura.php">{$change_lang("org-struct-option")}</a>
                                             <a href="financiamento.php">{$change_lang("funding-option")}</a>
                                             <a href="oportunidades.php">{$change_lang("opportunities-option")}</a>
+                                            <a href="./assets/Regulamento.pdf" target="_blank">{$change_lang("regulation-option")}</a>
                                     </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -281,6 +282,7 @@ $change_lang =  function ($key) {
                                 <div class="widget_menu">
                                     <span><a target="_blank"href="https://www.facebook.com/Techn.Art.IPT/"><i id ="fateste" class="fab fa-facebook-f"></i>&nbsp</a></span>
                                     <span><a target="_blank" style="color: white; font-size: 19px;" href="https://www.youtube.com/channel/UC3w94LwkXczhZ12WYINYKzA"><i class="fab fa-youtube"></i></a></span>
+                                    <span><a target="_blank" style="color: white; font-size: 19px;" href="https://www.linkedin.com/company/techn-art-ipt"><i class="fab fa-linkedin"></i></a></span>
                                 </div>
                             </div> 
 

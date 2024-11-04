@@ -16,7 +16,7 @@ $investigadores = $stmt->fetch(PDO::FETCH_ASSOC);
 $id =  $_GET["integrado"];
 ?>
 
-<?= template_header('Integrado'); ?>
+<?= template_header('Integrado/a'); ?>
 
 <!-- product section -->
 <section>

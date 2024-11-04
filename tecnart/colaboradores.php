@@ -9,7 +9,7 @@ $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
-        FROM investigadores WHERE tipo = \"Colaborador\" ORDER BY nome";
+        FROM investigadores WHERE tipo = \"Colaborador\"  and ativo=true  ORDER BY nome";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 
-<?= template_header('Colaboradores'); ?>
+<?= template_header('Colaboradores/as'); ?>
 
 <!-- product section -->
 <section class="product_section layout_padding">

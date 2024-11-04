@@ -17,7 +17,7 @@ $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 
-      <?=template_header('Integrados');?>
+      <?=template_header('Integrados/as');?>
       
       <!-- product section -->
       <section class="product_section layout_padding">

@@ -5,7 +5,7 @@ include 'models/functions.php';
 <!DOCTYPE html>
 <html>
 
-<?= template_header('Eixos'); ?>
+<?= template_header('Financiamento'); ?>
 
 
 <!-- product section -->

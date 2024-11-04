@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && isset($_PO
 ?>
 <HTML>
 <head>
-  <title>Techn&Art Login</title>
+  <title>TECHN&ART   Login</title>
 </head>
 <BODY>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
