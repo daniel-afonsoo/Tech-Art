@@ -8,7 +8,7 @@ $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
-        FROM investigadores WHERE id=? and tipo = \"Colaborador\"";
+        FROM investigadores WHERE id=? and tipo = \"Colaborador\" and ativo=true";
 $stmt = $pdo->prepare($query);
 $stmt->bindParam(1, $_GET["colaborador"], PDO::PARAM_INT);
 $stmt->execute();

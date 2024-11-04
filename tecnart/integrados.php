@@ -8,7 +8,7 @@ $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
-        FROM investigadores WHERE tipo = \"Integrado\" ORDER BY nome";
+        FROM investigadores WHERE tipo = \"Integrado\" and ativo=true ORDER BY nome";
 $stmt = $pdo->prepare($query);
 $stmt->execute();
 $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
