@@ -55,7 +55,7 @@ function ret_dic_en()
         //Etiqueta / texto 'Siga-nos',
         "follow-us-txt" => "Follow Us",
         //Divisoria com 'projeto UD ...'
-        "project-ud-txt" => "Project UDI/05488/2020",
+        "project-ud-txt" => "Project UID/05488/2020",
         //Etiqueta / texto com 'Instituto Pol...'
         "ipt-copyright-txt" => "©Polytechnic University of Tomar",
         //Etiqueta / texto com 'Todos os direitos reservados'
