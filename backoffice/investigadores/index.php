@@ -5,9 +5,30 @@ require "../config/basedados.php";
 $find = "";
 
 
-$sql = "SELECT id, nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar FROM investigadores 
+
+//Alterações efetuadas aqui 
+
+//Se a URL for pagina.php?search=projeto1, então $_GET['search'] será "projeto1"
+//Se a URL não contiver o parâmetro search, então $_GET['search'] será nulo, e $search receberá uma string vazia
+//  " ?? '' " O operador "??" verifica se o parâmetro search está definido. Se sim, retorna o valor de ($_GET['search']).Se não, retorna uma string vazia ('')-->
+$search = $_GET['search'] ?? '';
+
+
+
+//Se $search for "projeto": A consulta SQL será: SELECT * FROM projetos WHERE nome LIKE '%projeto%';
+//Isso vai retornar todos os registros onde o campo nome contém a palavra "projeto", independentemente do que venha antes ou depois dela.Exemplos de resultados:
+//Projeto de melhoria , Novo Projeto , Projeto A ,etc
+$searchName =  '%' . $search . '%';
+
+$sql = "SELECT id, nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar FROM investigadores WHERE nome LIKE '$searchName'
 ORDER BY CASE WHEN tipo = 'Externo' THEN 1 ELSE 0 END, tipo DESC, nome;";
 $result = mysqli_query($conn, $sql);
+
+
+//Alterações efetuadas aqui 
+
+
+
 
 if (isset($_POST["anoRelatorio"])) {
 	$_SESSION["anoRelatorio"] = $_POST["anoRelatorio"];
@@ -81,6 +102,32 @@ if (@$_SESSION["anoRelatorio"] != "") {
 					<div class="col-sm-6">
 						<h2>Investigadores/as</h2>
 					</div>
+                    
+					
+					
+					<!--Alterações efetuadas aqui -->
+				    <div class="col-sm-6">
+                          <form method="GET" action="">
+                    <div class="input-group">
+
+                        <!-- Campo de pesquisa -->
+                           <input type="text" name="search" class="form-control" placeholder="Pesquisar">
+            
+                     <!-- Botão com a lupa dentro da caixa de pesquisa -->
+                    <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="submit">
+                            <i class="material-icons">search</i>
+                          </button>
+                          </div>
+                     </div>
+                           </form>
+                     </div>
+                 <!--Alterações efetuadas aqui -->
+
+
+
+
+
 					<?php if ($_SESSION["autenticado"] == 'administrador') { ?>
 						<div class="col-sm-6">
 							<a href="create.php" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Adicionar Novo Perfil</span></a>
