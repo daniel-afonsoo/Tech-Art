@@ -106,15 +106,21 @@ if (@$_SESSION["anoRelatorio"] != "") {
 					
 					
 					<!--Alterações efetuadas aqui -->
-				    <div class="col-sm-6">
+
+					<!-- passei de "col-sm-6" para "col text-center" o que permitiu centralizar a barra de pesquisa e ajustei a barra de pesquisa mais ao centro possivel
+					  atraves do "margin-left"-->
+				    <div class="col text-center " style="margin-left: -150px;">
+
                           <form method="GET" action="">
-                    <div class="input-group">
+							
+							   <!--aqui também usei um "margin-left" que permite à "lupinha" estar numa posição mais agradável ao interagir com a interface  -->
+                               <div class="input-group" style="margin-left:-80px;"  >
 
                         <!-- Campo de pesquisa -->
-                           <input type="text" name="search" class="form-control" placeholder="Pesquisar">
+                                     <input type="text" name="search" class="form-control" placeholder="Pesquisar">
             
                      <!-- Botão com a lupa dentro da caixa de pesquisa -->
-                    <div class="input-group-append">
+                     <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="submit">
                             <i class="material-icons">search</i>
                           </button>
@@ -122,17 +128,19 @@ if (@$_SESSION["anoRelatorio"] != "") {
                      </div>
                            </form>
                      </div>
+
                  <!--Alterações efetuadas aqui -->
-
-
-
-
-
-					<?php if ($_SESSION["autenticado"] == 'administrador') { ?>
-						<div class="col-sm-6">
+				 <?php if ($_SESSION["autenticado"] == 'administrador') { ?>
+					<!-- passei de "col-sm-6" para "col-auto" , o que fará com que o botão ocupe apenas o espaço necessário   -->
+						<div class="col-auto">
 							<a href="create.php" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Adicionar Novo Perfil</span></a>
 						</div>
 					<?php } ?>
+
+
+				
+
+
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
