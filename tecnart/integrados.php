@@ -2,16 +2,36 @@
 include 'config/dbconnection.php';
 include 'models/functions.php';
 
+//ligação à base de dados
 $pdo = pdo_connect_mysql();
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
+
+$perPage = 8;
+$currentPage = isset($_GET['page']) ? max((int)$_GET['page'],1) : 1;
+
+$offset = ($currentPage - 1) * $perPage;
+
 $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
-        FROM investigadores WHERE tipo = \"Integrado\" and ativo=true ORDER BY nome";
+        FROM investigadores WHERE tipo = \"Integrado\" ORDER BY nome
+        LIMIT :limit OFFSET :offset";
+
+
+
+//Consulta
 $stmt = $pdo->prepare($query);
+$stmt->bindValue(':limit',$perPage,PDO::PARAM_INT);
+$stmt->bindValue(':offset',$offset,PDO::PARAM_INT);
 $stmt->execute();
+
+//Resultado da nossa query
 $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$queryCount = "SELECT COUNT(*) FROM investigadores WHERE tipo = 'Integrado'";
+$totalRows = $pdo->query($queryCount)->fetchColumn();
+$totalPages = ceil($totalRows/$perPage);
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +76,38 @@ $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
                </div>
 
          <?php endforeach; ?>
-
       </div>
-      
-                      
+
+      <div class="pagination justify-content-center">
+            <?php
+            $adjacents = 3; // Quantidade de páginas adjacentes a serem mostradas
+            $startPage = max(1, $currentPage - $adjacents); // A primeira página visível
+            $endPage = min($totalPages, $currentPage + $adjacents); // A última página visível
+
+            // Exibir a página anterior
+            if ($currentPage > 1) {
+               echo '<a href="?page=' . ($currentPage - 1) . '" class="page-item"><span class="page-link">&laquo;</span></a>';
+            }
+
+            // Exibir as páginas antes da página atual
+            for ($i = $startPage; $i < $currentPage; $i++) {
+               echo '<a href="?page=' . $i . '" class="page-item"><span class="page-link">' . $i . '</span></a>';
+            }
+
+            // Exibir a página atual
+            echo '<a href="?page=' . $currentPage . '" class="page-item active"><span class="page-link">' . $currentPage . '</span></a>';
+
+            // Exibir as páginas depois da página atual
+            for ($i = $currentPage + 1; $i <= $endPage; $i++) {
+               echo '<a href="?page=' . $i . '" class="page-item"><span class="page-link">' . $i . '</span></a>';
+            }
+
+            // Exibir a próxima página
+            if ($currentPage < $totalPages) {
+               echo '<a href="?page=' . ($currentPage + 1) . '" class="page-item"><span class="page-link">&raquo;</span></a>';
+            }
+            ?>
+         </div>        
 <!--             <div class="row justify-content-center mt-3">
                
                <div  class="ml-4 imgList">
