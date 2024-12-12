@@ -299,20 +299,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                 </div>
-
+                <!--Modificações Efetuadas Aqui -->
                 <div class="form-group">
                     <label>Investigadores/as</label><br>
-
+                    <select id="investigadores" name="investigadores[]" class="form-control" multiple>
                     <?php
                     $sql = "SELECT id, nome, tipo FROM investigadores 
                         ORDER BY CASE WHEN tipo = 'Externo' THEN 1 ELSE 0 END, tipo, nome;";
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) { ?>
-                            <input type="checkbox" name="investigadores[]" value="<?= $row["id"] ?>">
-                            <label><?= $row["tipo"] . " - " .  $row["nome"] ?></label><br>
-                    <?php }
-                    } ?>
+                            <option value="<?= $row["id"] ?>"><?= $row["tipo"] . " - " .  $row["nome"] ?></option>
+                          <?php }
+                         } ?>
+                    </select>
+
+                    <!-- Carregar o arquivo CSS do Select2 -->
+                   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+                   <!-- Carregar o arquivo JavaScript do Select2 -->
+                   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+                  <!-- Script para Inicializar o Select2 -->
+                  <script>
+                    $(document).ready(function() {
+                    $('#investigadores').select2({
+                    placeholder: "Selecione os investigadores",
+                   allowClear: true,
+                    });
+                        });
+                  </script>
+                  <!--Modificações Efetuadas até Aqui -->          
 
                     <!-- Error -->
                     <div class="help-block with-errors"></div>

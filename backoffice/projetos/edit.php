@@ -350,8 +350,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
 
-                <div class="form-group">
+
+<!--Modificações Efetuadas Aqui -->
+<!--As checkboxes foram substituídas por um elemento <select> com o atributo multiple.
+A funcionalidade de múltipla seleção é mantida pelo uso de multiple 
+Cada opção da dropdown representa um investigador, permitindo uma interface mais compacta e organizada
+-->
+
+<div class="form-group">
                     <label>Investigadores/as</label><br>
+                    <select id="investigadores" name="investigadores[]" class="form-control" multiple>
                     <?php
                     $sql = "SELECT investigadores_id FROM investigadores_projetos WHERE projetos_id = " . $id;
                     $result = mysqli_query($conn, $sql);
@@ -364,20 +372,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sql = "SELECT id, nome, tipo FROM investigadores 
                             ORDER BY CASE WHEN tipo = 'Externo' THEN 1 ELSE 0 END, tipo, nome;";
                     $result = mysqli_query($conn, $sql);
+                    // Cria um menu suspenso que permite a seleção de múltiplos investigadores, mostrando aqueles que estão associados a um projeto específico como opções pré-selecionadas.
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
-                            if ($row["id"] == $_SESSION["autenticado"]) {
-                                echo "<input type='hidden' name='investigadores[]' value='" . $row["id"] . "'/>";
-                            } ?>
-                            <input type="checkbox" <?= in_array($row["id"], $selected) || $row["id"] == $_SESSION["autenticado"] ? "checked" : "" ?> <?= $row["id"] == $_SESSION["autenticado"] ? "disabled" : "" ?> name="investigadores[]" value="<?= $row["id"] ?>">
-                            <label><?= $row["tipo"] . " - " .  $row["nome"] ?></label><br>
-                    <?php }
-                    } ?>
-                    <!-- Error -->
+                            //"in_array($row['id'], $selected)":Esta função verifica se o ID do investigador está no array $selected.Se estiver no array, $isSelected recebe a string "selected" 
+                           // isso fará com que a opção apareça como selecionada no menu. Se não estiver, $isSelected recebe uma string vazia ""
+                            $isSelected = in_array($row['id'], $selected) ? "selected" : "";
+                            //echo "<option ...": Cria uma opção no menu, mostrando o nome do investigador e marcando-a como selecionada, se necessário
+                            echo "<option value='" . $row['id'] . "' $isSelected>" . $row['nome'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
 
-                </div>
+
+<!-- Carregar o arquivo CSS do Select2, que estiliza o componente de seleção. Isso faz com que o menu de seleção tenha um visual mais moderno e atraente, em vez do estilo padrão dos navegadores. -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!--Carrega o arquivo JavaScript do Select2, que fornece a funcionalidade interativa necessária para transformar o menu de seleção-->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!--Script para Inicializar o Select2-->
+<script>
+    $(document).ready(function() {
+        $('#investigadores').select2({
+            placeholder: "Selecione os investigadores",
+            allowClear: true,
+        });
+    });
+</script>
+<!--O Select2 transforma o menu de seleção num componente mais bonito e interativo.Proporciona uma interface mais amigável e responsiva em comparação com o menu de seleção padrão-->
+<!--O Select2 estiliza automaticamente a opção que é marcada como "selected" no HTML. Quando a opção é renderizada, o Select2 aplica estilos apropriados para indicar visualmente 
+qual a opção que está selecionada. Quando o user abre o menu, as opções selecionadas aparecerão destacadas, tornando claro quais investigadores estão associados ao projeto.-->
 
 
+<!--Modificações Efetuadas até Aqui -->
                 <div class="form-group">
                     <label>Fotografia</label>
                     <input accept="image/*" type="file" onchange="previewImg(this);" class="form-control" id="inputFotografia" name="fotografia" value=<?php echo $fotografia; ?>>
