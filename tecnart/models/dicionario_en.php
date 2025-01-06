@@ -304,6 +304,7 @@ function ret_dic_en()
         "new-admissions-regulations" => "The candidate should also read the TECHN&ART",
         "new-admissions-regulations-link" => "general regulations document.",
         "new-admissions-regulations-fill" => "Fill out Form",
+        "new-admissions-regulations-file" => "Regulations.pdf",
 
         //:::admiissao.php
         //Título

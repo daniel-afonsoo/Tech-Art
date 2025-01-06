@@ -303,6 +303,7 @@ function ret_dic_pt(){
         "new-admissions-regulations" => "O/A candidato deverá também consultar o",
         "new-admissions-regulations-link" => "regulamento geral do TECHN&ART.",
         "new-admissions-regulations-fill" => "Preencher Formulário",
+        "new-admissions-regulations-file" => "Regulamento.pdf",
 
         //:::admissao.php
         //Título

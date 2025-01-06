@@ -29,7 +29,7 @@ include 'models/functions.php';
                             <?= change_lang("new-admissions-p2") ?><br>
                         </p>
                         <p><?= change_lang("new-admissions-regulations") ?>
-                            <a href="./assets/Regulamento.pdf" target="_blank">
+                            <a href="./assets/<?= change_lang("new-admissions-regulations-file") ?>" target="_blank">
                                 <?= change_lang("new-admissions-regulations-link") ?>
                             </a>
                         </p>
