@@ -39,8 +39,7 @@ $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
 
     <div class="totall">
         <div class="barraesquerda">
-
-            <h3 class="heading_h3" style="font-size: 28px; margin-bottom: 20px; padding-top: 60px; padding-right: 10px; padding-left: 45px;  text-transform: uppercase; word-wrap: break-word;">
+            <h3 class="heading_h3_projeto">
                 <?= $projetos['nome'] ?>
             </h3>
             <div style="font-size: 15px; color:#060633; padding-left: 45px; padding-right: 10px; padding-bottom: 50px; padding-right:20px;">
@@ -256,7 +255,6 @@ $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
 <!-- end product section -->
 
 <?= template_footer(); ?>
-
 <script>
     $(function() {
         $('button#showit').on('click', function() {
@@ -288,7 +286,8 @@ $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
         }); */
 
     });
+
+ 
 </script>
-</body>
 
 </html>
