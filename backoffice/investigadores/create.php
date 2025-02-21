@@ -17,10 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //transferir a imagem para a pasta de assets
         move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $target_file);
 
-        $sql = "INSERT INTO investigadores (nome, email, ciencia_id, sobre, sobre_en, tipo, fotografia, areasdeinteresse,areasdeinteresse_en, orcid, scholar, research_gate, scopus_id, password) " .
+        $sql = "INSERT INTO investigadores (nome, email, ciencia_id, sobre, sobre_en, tipo, fotografia, areasdeinteresse,areasdeinteresse_en, orcid, scholar, research_gate, scopus_id, password,ativo) " .
             "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssssssssssssss', $nome, $email, $ciencia_id, $sobre, $sobre_en, $tipo, $fotografia, $areasdeinteresse, $areasdeinteresse_en, $orcid, $scholar, $research_gate, $scopus_id, $password);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssss', $nome, $email, $ciencia_id, $sobre, $sobre_en, $tipo, $fotografia, $areasdeinteresse, $areasdeinteresse_en, $orcid, $scholar, $research_gate, $scopus_id, $password,$ativo);
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $ciencia_id = $_POST["ciencia_id"];
@@ -34,6 +34,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $scholar = $_POST["scholar"];
         $research_gate = $_POST["research_gate"];
         $scopus_id = $_POST["scopus_id"];
+
+        //Se isset($_POST["estado"]) for true (o campo foi enviado) e $_POST["estado"] == "1" também for true (o valor é 1, ou seja, "Ativo"), então a expressão inteira será true 
+        //,logo, $ativo receberá o valor 1 
+        //Caso contrário (se o botão "Inativo" foi selecionado ou o campo não foi enviado), $ativo receberá 0.
+
+        //$_POST["estado"]: Este é o valor que será enviado pelo formulário. Quando o botão de rádio com o name="estado" é selecionado, o valor enviado será o valor definido no value 
+        //do botão de rádio.
+        //Neste caso o valor é "1" para o botão "Ativo" e "0" para o botão "Inativo".
+
+
+        $ativo = isset($_POST["estado"]) && $_POST["estado"] == "1" ? 1 : 0;
         if ($_POST["password"] == null || $_POST["password"] == '') {
             $_POST["password"] = substr(str_shuffle(strtolower(sha1(rand() . time()))), 0, $PASSWORD_LENGTH);
         }
@@ -206,6 +217,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="form-group removeExterno">
                     <label for="scopus_id">ScopusID: </label>
                     <input placeholder="ScopusID" name="scopus_id" type="text" class="form-control" id="scopus_id">
+                </div>
+
+                <!--Aqui, ambos os botões têm o name="estado". Isso significa que, quando o formulário for enviado, o valor de $_POST['estado'] será "1" se "Ativo" for selecionado, 
+                ou "0" se "Inativo" for selecionado.-->
+                <div class="form-group estadoInvestigador">
+                    <label>Estado Investigador: </label><br>
+                    <input type="radio" name="estado" value="1" checked> Ativo
+                    <input type="radio" name="estado" value="0"> Inativo
                 </div>
                 <div class="form-group">
                     <label>Fotografia</label>

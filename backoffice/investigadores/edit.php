@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scholar = $_POST["scholar"];
     $research_gate = $_POST["research_gate"];
     $scopus_id = $_POST["scopus_id"];
+    $ativo=$_POST["ativo"];
 
 
     $sql = "UPDATE investigadores set nome = ?, email = ?, ciencia_id = ?, sobre = ?, sobre_en = ?, areasdeinteresse = ?, areasdeinteresse_en = ?, tipo = ?, orcid = ?, scholar = ?, research_gate=?, scopus_id=?";
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . mysqli_error($conn);
     }
 } else {
-    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en from investigadores WHERE id = ?";
+    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en,ativo from investigadores WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     $id = $_GET["id"];
@@ -71,6 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scopus_id = $row["scopus_id"];
     $sobre_en = $row["sobre_en"];
     $areasdeinteresse_en = $row["areasdeinteresse_en"];
+    $ativo=$row["ativo"];
+
 }
 
 
@@ -239,7 +242,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="help-block with-errors"></div>
                 </div>
                 <img id="preview" src="<?php echo $filesDir . $fotografia; ?>" width='100px' height='100px' class="mb-3" />
-
+                <div class="form-group estadoInvestigador">
+                    <label>Estado Investigador: </label>
+                    <input type="text" pattern="[0-1]" maxlength="1" class="form-control" name="estado_id" id="estado_id" value="<?= $ativo ?>">
+                </div>
 
 
                 <div class="form-group">
