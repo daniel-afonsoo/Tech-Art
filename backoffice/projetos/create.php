@@ -2,18 +2,15 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-//$mainDir = "../assets/projetos/";
 $mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\projetos\\";
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];
-    //transferir a imagem para a pasta de assets
     move_uploaded_file($_FILES["fotografia"]["tmp_name"], $mainDir . $target_file);
 
-    //adicionar novo projeto na base de dados
-    $sql = "INSERT INTO projetos (nome, nome_en, descricao, descricao_en, sobreprojeto, sobreprojeto_en, referencia, referencia_en, areapreferencial, areapreferencial_en, financiamento, financiamento_en, ambito, ambito_en, fotografia, concluido, site, site_en, facebook, facebook_en) " .
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO projetos (nome, nome_en, descricao, descricao_en, sobreprojeto, sobreprojeto_en, referencia, referencia_en, areapreferencial, areapreferencial_en, financiamento, financiamento_en, ambito, ambito_en, fotografia, concluido, site, site_en, facebook, facebook_en) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'sssssssssssssssissss', $nome, $nome_en, $descricao, $descricao_en, $sobreprojeto, $sobreprojeto_en, $referencia, $referencia_en, $areapreferencial, $areapreferencial_en, $financiamento, $financiamento_en, $ambito, $ambito_en, $fotografia, $concluido, $site, $site_en, $facebook, $facebook_en);
 
@@ -25,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $areapreferencial = $_POST["areapreferencial"];
     $financiamento = $_POST["financiamento"];
     $ambito = $_POST["ambito"];
-    $investigadores = [];
+    $investigadores = $_POST["investigadores"] ?? [];
+    $investigador_principal = $_POST["investigador_principal"] ?? null;
     $concluido = isset($_POST['concluido']) ? 1 : 0;
     $site = $_POST["site"];
     $facebook = $_POST["facebook"];
@@ -39,31 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $site_en = $_POST["site_en"];
     $facebook_en = $_POST["facebook_en"];
 
-    if (isset($_POST["investigadores"])) {
-        $investigadores = $_POST["investigadores"];
-    }
     if (mysqli_stmt_execute($stmt)) {
-        if (count($investigadores) == 0) {
-            header('Location: index.php');
-            return;
+        $projeto_id = mysqli_insert_id($conn);
+        if (count($investigadores) > 0) {
+            foreach ($investigadores as $id) {
+                $isPrincipal = ($id == $investigador_principal) ? 1 : 0;
+                $sqlinsert = "INSERT INTO investigadores_projetos (investigadores_id, projetos_id, investigador_principal) VALUES (?, ?, ?)";
+                $stmt_insert = mysqli_prepare($conn, $sqlinsert);
+                mysqli_stmt_bind_param($stmt_insert, "iii", $id, $projeto_id, $isPrincipal);
+                mysqli_stmt_execute($stmt_insert);
+            }
         }
-        $sqlinsert = "";
-        foreach ($investigadores as $id) {
-            $sqlinsert = $sqlinsert . "($id,last_insert_id()),";
-        }
-        $sqlinsert = rtrim($sqlinsert, ",");
-        $sql = "INSERT INTO investigadores_projetos (investigadores_id,projetos_id) values" . $sqlinsert;
-        if (mysqli_query($conn, $sql)) {
-            header('Location: index.php');
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
+        header('Location: index.php');
         exit;
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Erro: " . mysqli_error($conn);
     }
 }
 ?>
+
 
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -299,20 +291,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                 </div>
-                <!--Modificações Efetuadas Aqui -->
+
+                
+<!--Modificações Efetuadas Aqui -->
                 <div class="form-group">
-                    <label>Investigadores/as</label><br>
-                    <select id="investigadores" name="investigadores[]" class="form-control" multiple>
-                    <?php
-                    $sql = "SELECT id, nome, tipo FROM investigadores 
-                        ORDER BY CASE WHEN tipo = 'Externo' THEN 1 ELSE 0 END, tipo, nome;";
-                    $result = mysqli_query($conn, $sql);
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) { ?>
-                            <option value="<?= $row["id"] ?>"><?= $row["tipo"] . " - " .  $row["nome"] ?></option>
-                          <?php }
-                         } ?>
-                    </select>
+
+    <label>Investigadores/as</label><br>
+    <select id="investigadores" name="investigadores[]" class="form-control" multiple>
+    <?php
+    $sql = "SELECT id, nome FROM investigadores ORDER BY nome;";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<option value='" . $row["id"] . "'>" . $row["nome"] . "</option>";
+        }
+    }
+    ?>
+    </select>
+</div>
+
+<!-- Div para criar separação -->
+<div class="separador"></div>
+
+<div class="form-group">
+    <label>Investigador Principal</label>
+    <select id="investigador_principal" name="investigador_principal" class="form-control">
+        <option value="">Selecione o investigador principal</option>
+        <?php
+        $sql = "SELECT id, nome FROM investigadores ORDER BY nome;";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>";
+        }
+        ?>
+    </select>
+</div>
+
+<!-- Estilo apenas para a separação -->
+<style>
+    .separador {
+        margin-top: 20px; /* Adiciona espaçamento extra */
+    }
+</style>
+
 
                     <!-- Carregar o arquivo CSS do Select2 -->
                    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -358,20 +379,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <!--Criar o CKEditor 5-->
 <script src="../ckeditor5/build/ckeditor.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.ck_replace').each(function() {
-            ClassicEditor.create(this, {
-                licenseKey: '',
-                simpleUpload: {
-                    uploadUrl: '../ckeditor5/upload_image.php'
-                }
-            }).then(editor => {
-                window.editor = editor;
-            });
-        });
-    });
-</script>
+
 
 <?php
 mysqli_close($conn);
