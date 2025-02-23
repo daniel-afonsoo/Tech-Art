@@ -1,64 +1,79 @@
 <?php
 require "../verifica.php";
 require "../config/basedados.php";
+
 //Se o utilizador não é um administrador ou o proprio que quer editar
 if ($_SESSION["autenticado"] != 'administrador' && $_SESSION["autenticado"] != $_GET["id"]) {
     header("Location: index.php");
 }
-//$filesDir = "../assets/investigadores/";
+
 $filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\investigadores\\";
 
-
+// Se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
     $nome = $_POST["nome"];
     $email = $_POST["email"];
     $ciencia_id = $_POST["ciencia_id"];
     $sobre = $_POST["sobre"];
     $sobre_en = $_POST["sobre_en"];
     $tipo = $_POST["tipo"];
-    $id = $_POST["id"];
     $areasdeinteresse = $_POST["areasdeinteresse"];
     $areasdeinteresse_en = $_POST["areasdeinteresse_en"];
     $orcid = $_POST["orcid"];
     $scholar = $_POST["scholar"];
     $research_gate = $_POST["research_gate"];
     $scopus_id = $_POST["scopus_id"];
-    $ativo=$_POST["ativo"];
+    $ativo = isset($_POST["estado_id"]) ? intval($_POST["estado_id"]) : 0; // Garante que é um número
 
+    // Criar a query base
+    $sql = "UPDATE investigadores SET 
+        nome = ?, email = ?, ciencia_id = ?, sobre = ?, sobre_en = ?, 
+        areasdeinteresse = ?, areasdeinteresse_en = ?, tipo = ?, 
+        orcid = ?, scholar = ?, research_gate = ?, scopus_id = ?, ativo = ?";
 
-    $sql = "UPDATE investigadores set nome = ?, email = ?, ciencia_id = ?, sobre = ?, sobre_en = ?, areasdeinteresse = ?, areasdeinteresse_en = ?, tipo = ?, orcid = ?, scholar = ?, research_gate=?, scopus_id=?";
-    $params = [$nome, $email, $ciencia_id, $sobre, $sobre_en,  $areasdeinteresse, $areasdeinteresse_en, $tipo, $orcid, $scholar, $research_gate, $scopus_id];
-    $fotografia_exists = isset($_FILES["fotografia"]) && $_FILES["fotografia"]["size"] != 0;
-    if ($fotografia_exists) {
+    $params = [$nome, $email, $ciencia_id, $sobre, $sobre_en, $areasdeinteresse, $areasdeinteresse_en, $tipo, $orcid, $scholar, $research_gate, $scopus_id, $ativo];
 
+    // Verifica se foi carregada uma nova imagem
+    if (isset($_FILES["fotografia"]) && $_FILES["fotografia"]["size"] != 0) {
         $fotografia = uniqid() . '_' . $_FILES["fotografia"]["name"];
-        $sql .= ", fotografia = ? ";
-        $params[] = $fotografia;
         move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $fotografia);
+        
+        $sql .= ", fotografia = ?";
+        $params[] = $fotografia;
     }
 
+    // Adiciona a condição WHERE para atualizar o investigador correto
     $sql .= " WHERE id = ?";
     $params[] = $id;
-    $stmt = mysqli_prepare($conn, $sql);
-    $param_types = str_repeat('s', count($params) - 1) . 'i';
 
+    // Prepara a query
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Gera a string dos tipos de parâmetros
+    $param_types = str_repeat('s', count($params) - 2) . 'ii'; // Todos são strings menos ativo e id que são inteiros
+
+    // Faz o bind dos parâmetros
     mysqli_stmt_bind_param($stmt, $param_types, ...$params);
 
+    // Executa a query e verifica se houve erro
     if (mysqli_stmt_execute($stmt)) {
         header('Location: index.php');
         exit;
     } else {
-        echo "Error: " . $sql . mysqli_error($conn);
+        echo "Erro ao atualizar investigador: " . mysqli_error($conn);
     }
 } else {
-    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en,ativo from investigadores WHERE id = ?";
+    // Carregar os dados do investigador
+    $id = $_GET["id"];
+    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en, ativo FROM investigadores WHERE id = ?";
+    
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
-    $id = $_GET["id"];
-
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
+
     $nome = $row["nome"];
     $email = $row["email"];
     $ciencia_id = $row["ciencia_id"];
@@ -72,13 +87,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scopus_id = $row["scopus_id"];
     $sobre_en = $row["sobre_en"];
     $areasdeinteresse_en = $row["areasdeinteresse_en"];
-    $ativo=$row["ativo"];
-
+    $ativo = $row["ativo"];
 }
 
-
-
+// Fechar conexão
+if ($conn && $conn instanceof mysqli) {
+    mysqli_close($conn);
+}
 ?>
+
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </link>
@@ -361,8 +378,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         handleSelectChange.call(tipoSelect);
     });
 </script>
-<?php
-mysqli_close($conn);
-?>
-
 
