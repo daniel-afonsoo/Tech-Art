@@ -1,25 +1,23 @@
 <?php
 require "../verifica.php";
 require "../config/basedados.php";
-require "bloqueador.php";
 
-//$mainDir = "../assets/projetos/";
 $mainDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\projetos\\";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
     $nome = $_POST["nome"];
     $descricao = $_POST["descricao"];
     $sobreprojeto = $_POST["sobreprojeto"];
     $referencia = $_POST["referencia"];
-    $id = $_POST["id"];
     $areapreferencial = $_POST["areapreferencial"];
     $financiamento = $_POST["financiamento"];
     $ambito = $_POST["ambito"];
     $concluido = isset($_POST['concluido']) ? 1 : 0;
     $site = $_POST["site"];
     $facebook = $_POST["facebook"];
-    $investigadores = [];
+    $investigadores = $_POST["investigadores"] ?? [];
+    $investigador_principal = $_POST["investigador_principal"] ?? null;
     $nome_en = $_POST["nome_en"];
     $descricao_en = $_POST["descricao_en"];
     $sobreprojeto_en = $_POST["sobreprojeto_en"];
@@ -29,54 +27,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ambito_en = $_POST["ambito_en"];
     $site_en = $_POST["site_en"];
     $facebook_en = $_POST["facebook_en"];
-    if (isset($_POST["investigadores"])) {
-        $investigadores = $_POST["investigadores"];
-    }
-    $fotografia_exists = isset($_FILES["fotografia"]) && $_FILES["fotografia"]["size"] != 0;
 
-    $sql = "UPDATE projetos SET nome = ?, descricao = ?, sobreprojeto = ?, referencia = ?, areapreferencial = ?, financiamento = ?, ambito = ?, site = ?, facebook = ?, nome_en = ?, descricao_en = ?, sobreprojeto_en = ?, referencia_en = ?, areapreferencial_en = ?, financiamento_en = ?, ambito_en = ?, site_en = ?, facebook_en = ? ";
-    $params = [$nome, $descricao, $sobreprojeto, $referencia, $areapreferencial, $financiamento, $ambito, $site, $facebook, $nome_en, $descricao_en, $sobreprojeto_en, $referencia_en, $areapreferencial_en, $financiamento_en, $ambito_en, $site_en, $facebook_en];
-
-    // Check if the 'fotografia' file exists and update the SQL query and parameters accordingly
-    if ($fotografia_exists) {
-        $fotografia = uniqid() . '_' . $_FILES["fotografia"]["name"];;
-        $sql .= ", fotografia = ? ";
-        $params[] = $fotografia;
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $mainDir  . $fotografia);
-    }
-
-    $sql .= ", concluido = ? WHERE id = ?";
-    array_push($params, $concluido, $id);
+    $sql = "UPDATE projetos SET nome = ?, descricao = ?, sobreprojeto = ?, referencia = ?, areapreferencial = ?, financiamento = ?, ambito = ?, site = ?, facebook = ?, nome_en = ?, descricao_en = ?, sobreprojeto_en = ?, referencia_en = ?, areapreferencial_en = ?, financiamento_en = ?, ambito_en = ?, site_en = ?, facebook_en = ?, concluido = ? WHERE id = ?";
+    
     $stmt = mysqli_prepare($conn, $sql);
-    $param_types = str_repeat('s', count($params) - 2) . 'ii';
-
-    mysqli_stmt_bind_param($stmt, $param_types, ...$params);
-
+    mysqli_stmt_bind_param($stmt, 'sssssssssssssssisssi', 
+    $nome, $descricao, $sobreprojeto, $referencia, 
+    $areapreferencial, $financiamento, $ambito, $site, $facebook, 
+    $nome_en, $descricao_en, $sobreprojeto_en, $referencia_en, 
+    $areapreferencial_en, $financiamento_en, $ambito_en, 
+    $site_en, $facebook_en, $concluido, $id
+);
 
     if (mysqli_stmt_execute($stmt)) {
-        if (count($investigadores) == 0) {
-            header('Location: index.php');
-            return;
+        $sql = "DELETE FROM investigadores_projetos WHERE projetos_id = ?";
+        $stmt_delete = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt_delete, "i", $id);
+        mysqli_stmt_execute($stmt_delete);
+
+        if (count($investigadores) > 0) {
+            foreach ($investigadores as $investigadorid) {
+                $isPrincipal = ($investigadorid == $investigador_principal) ? 1 : 0;
+                $sqlinsert = "INSERT INTO investigadores_projetos (investigadores_id, projetos_id, investigador_principal) VALUES (?, ?, ?)";
+                $stmt_insert = mysqli_prepare($conn, $sqlinsert);
+                mysqli_stmt_bind_param($stmt_insert, "iii", $investigadorid, $id, $isPrincipal);
+                mysqli_stmt_execute($stmt_insert);
+            }
         }
-        $sqlinsert = "";
-        foreach ($investigadores as $investigadorid) {
-            $sqlinsert = $sqlinsert . "($investigadorid,$id),";
-        }
-        $sqlinsert = rtrim($sqlinsert, ",");
-        $sql = "DELETE FROM investigadores_projetos WHERE projetos_id = " . $id;
-        mysqli_query($conn, $sql);
-        $sql = "INSERT INTO investigadores_projetos (investigadores_id,projetos_id) values" . $sqlinsert;
-        print_r($sql);
-        if (mysqli_query($conn, $sql)) {
-            header('Location: index.php');
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
+        header('Location: index.php');
         exit;
     } else {
-        echo "Error: " . $sql . mysqli_error($conn);
+        echo "Erro ao atualizar projeto: " . mysqli_error($conn);
     }
-} else {
+}
+
+
+
+else {
 
     $sql = "SELECT * from projetos where id = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -108,6 +95,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $facebook_en = $row["facebook_en"];
 }
 
+// Buscar o investigador principal do projeto
+$sql = "SELECT investigadores_id FROM investigadores_projetos WHERE projetos_id = ? AND investigador_principal = 1";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, 'i', $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row = mysqli_fetch_assoc($result);
+$investigador_principal_selecionado = $row['investigadores_id'] ?? null;
 
 
 
@@ -385,6 +380,23 @@ Cada opção da dropdown representa um investigador, permitindo uma interface ma
                     ?>
                 </select>
             </div>
+
+                       <!--Investigador Principal-->
+            <div class="form-group">
+              <label>Investigador Principal</label>
+              <select id="investigador_principal" name="investigador_principal" class="form-control">
+              <option value="">Selecione o investigador principal</option>
+            <?php
+               $sql = "SELECT id, nome FROM investigadores ORDER BY nome;";
+               $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($result)) {
+            // Verifica se o investigador é o principal e adiciona "selected" na opção correta
+            $selected = ($row['id'] == $investigador_principal_selecionado) ? "selected" : "";
+            echo "<option value='" . $row['id'] . "' $selected>" . $row['nome'] . "</option>";
+            }
+            ?>
+          </select>
+     </div>
 
 
 <!-- Carregar o arquivo CSS do Select2, que estiliza o componente de seleção. Isso faz com que o menu de seleção tenha um visual mais moderno e atraente, em vez do estilo padrão dos navegadores. -->

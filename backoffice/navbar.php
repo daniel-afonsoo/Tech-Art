@@ -54,6 +54,7 @@
     }
     ?>
     <li class="navLi"><a href="../investigadores">Investigadores</a></li>
+    <li class="navLi"><a href="../conselho_consultivo">Conselho Consultivo</a></li>
     <li class="navLi"><a href="../projetos">Projetos</a></li>
     <li class="navLi"><a href="../noticias">Notícias</a></li>
     <li class="navLi"><a href="../oportunidades">Oportunidades</a></li>
