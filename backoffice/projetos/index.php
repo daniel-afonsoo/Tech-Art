@@ -2,7 +2,36 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-$sql = "SELECT id, nome, referencia, areapreferencial, financiamento,fotografia, concluido FROM projetos ORDER BY nome";
+
+
+//Alterações efetuadas aqui 
+
+//Se a URL for pagina.php?search=projeto1, então $_GET['search'] será "projeto1"
+//Se a URL não contiver o parâmetro search, então $_GET['search'] será nulo, e $search receberá uma string vazia
+//  " ?? '' " O operador "??" verifica se o parâmetro search está definido. Se sim, retorna o valor de ($_GET['search']).Se não, retorna uma string vazia ('')-->
+$search = $_GET['search'] ?? '';
+
+
+
+//Se $search for "projeto": A consulta SQL será: SELECT * FROM projetos WHERE nome LIKE '%projeto%';
+//Isso vai retornar todos os registros onde o campo nome contém a palavra "projeto", independentemente do que venha antes ou depois dela.Exemplos de resultados:
+//Projeto de melhoria , Novo Projeto , Projeto A ,etc
+$searchName =  '%' . $search . '%';
+
+// Consulta SQL 
+$sql = "SELECT id, nome, referencia, areapreferencial, financiamento, fotografia, concluido 
+        FROM projetos 
+        WHERE nome LIKE '$searchName' 
+        ORDER BY nome";
+
+
+
+
+
+//Alterações efetuadas aqui 
+
+
+
 $result = mysqli_query($conn, $sql);
 
 ?>
@@ -30,7 +59,37 @@ $result = mysqli_query($conn, $sql);
 						<div class="col-sm-6">
 							<h2>Projetos</h2>
 						</div>
-						<div class="col-sm-6">
+                        
+						
+						
+				    <!--Alterações efetuadas aqui -->
+
+				   
+                       <!-- passei de "col-sm-6" para "col text-center" o que permitiu centralizar a barra de pesquisa e ajustei a barra de pesquisa mais ao centro possivel
+					  atraves do "margin-left"-->
+				    <div class="col text-center " style="margin-left: -150px;">
+
+
+                          <form method="GET" action="">
+                          <!--aqui também usei um "margin-left" que permite à "lupinha" estar numa posição mais agradável ao interagir com a interface  -->
+						  <div class="input-group" style="margin-left:-80px;"  >
+
+                        <!-- Campo de pesquisa -->
+                           <input type="text" name="search" class="form-control" placeholder="Pesquisar">
+            
+                     <!-- Botão com a lupa dentro da caixa de pesquisa -->
+                    <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="submit">
+                            <i class="material-icons">search</i>
+                          </button>
+                          </div>
+                     </div>
+                           </form>
+                     </div>
+                 <!--Alterações efetuadas aqui -->
+				 
+						<!-- passei de "col-sm-6" para "col-auto" , o que fará com que o botão ocupe apenas o espaço necessário   -->
+						<div class="col-auto">
 							<?php 
 							if ($_SESSION["autenticado"] == 'administrador') {
 							?>
