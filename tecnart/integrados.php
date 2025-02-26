@@ -2,10 +2,12 @@
 include 'config/dbconnection.php';
 include 'models/functions.php';
 
+//ligação à base de dados
 $pdo = pdo_connect_mysql();
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 $perPage = 8;
+
 
 // Determina a página atual com base no parâmetro 'page' no URL
 $currentPage = isset($_GET['page']) ? max((int)$_GET['page'],1) : 1;
@@ -24,10 +26,12 @@ if(!empty($searchTerm)){
 }
 
 //A query principal
+
 $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
+
         FROM investigadores WHERE $whereClause ORDER BY nome
         LIMIT :limit OFFSET :offset";
 
@@ -49,8 +53,12 @@ $stmt->bindValue(':limit',$perPage,PDO::PARAM_INT);
 $stmt->bindValue(':offset',$offset,PDO::PARAM_INT);
 
 // Executa a query e armazena os resultados
+
 $stmt->execute();
+
+//Resultado da nossa query
 $investigadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 // Prepara a query para contar o número total de resultados
@@ -66,6 +74,7 @@ $totalRows = $stmtCount->fetchColumn();
 
 //Número total de páginas que precisamos para dividir todos os Integrados (8 por página).
 $totalPages = ceil($totalRows/$perPage);
+
 
 ?>
 
@@ -134,7 +143,6 @@ $totalPages = ceil($totalRows/$perPage);
                </div>
 
          <?php endforeach; ?>
-
       </div>
 
       <div class="pagination justify-content-center">
@@ -145,11 +153,14 @@ $totalPages = ceil($totalRows/$perPage);
 
             // Exibir a página anterior
             if ($currentPage > 1) {
+
                echo '<a href="?page=' . ($currentPage - 1) . '&query=' . urlencode($searchTerm) . '" class="page-item"><span class="page-link">&laquo;</span></a>';
+
             }
 
             // Exibir as páginas antes da página atual
             for ($i = $startPage; $i < $currentPage; $i++) {
+
                echo '<a href="?page=' . $i . '&query=' . urlencode($searchTerm) . '" class="page-item"><span class="page-link">' . $i . '</span></a>';
             }
 
@@ -159,16 +170,19 @@ $totalPages = ceil($totalRows/$perPage);
             // Exibir as páginas depois da página atual
             for ($i = $currentPage + 1; $i <= $endPage; $i++) {
                echo '<a href="?page=' . $i . '&query=' . urlencode($searchTerm) . '" class="page-item"><span class="page-link">' . $i . '</span></a>';
+
             }
 
             // Exibir a próxima página
             if ($currentPage < $totalPages) {
+
                echo '<a href="?page=' . ($currentPage + 1) . '&query=' . urlencode($searchTerm) . '" class="page-item"><span class="page-link">&raquo;</span></a>';
             }
 
 
             ?>
          </div>        
+
 
 <!--             <div class="row justify-content-center mt-3">
                

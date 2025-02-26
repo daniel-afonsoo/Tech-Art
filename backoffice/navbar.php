@@ -54,14 +54,17 @@
     }
     ?>
     <li class="navLi"><a href="../investigadores">Investigadores</a></li>
+    <li class="navLi"><a href="../conselho_consultivo">Conselho Consultivo</a></li>
     <li class="navLi"><a href="../projetos">Projetos</a></li>
     <li class="navLi"><a href="../noticias">Notícias</a></li>
     <li class="navLi"><a href="../oportunidades">Oportunidades</a></li>
+    <li class="navLi"><a href="../procedimentos">Procedimentos</a></li>
     <?php
     // Utilizador tem permissão para aceder ao administradores
     if ($_SESSION["autenticado"] == "administrador") {
         echo "<li class='navLi'><a href='../admissoes'>Admissões</a></li>";
     }
     ?>
+    <li class="navLi"><a href="../documentos">Documentos</a></li>
     <li class="navLi"><a class="leftnav" href="../sair.php">Sair</a></li>
 </ul>
