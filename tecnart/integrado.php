@@ -22,7 +22,7 @@ $id =  $_GET["integrado"];
 <section>
     <div class="totall">
         <div class="barraesquerda">
-            <h3 class="heading_h3" style="font-size: 38px; margin-bottom: 20px; padding-top: 60px; padding-right: 10px; padding-left: 60px; word-wrap: break-word;">
+            <h3 class="heading_h3">
                 <?= $investigadores['nome'] ?>
             </h3>
             <div class="canvasEmail" style="height:150px; padding-right: 10px;">
