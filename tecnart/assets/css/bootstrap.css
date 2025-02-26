@@ -4891,6 +4891,59 @@ input[type="button"].btn-block {
   border-color: #dee2e6;
 }
 
+.pagination {
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #333F50 !important;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+
+
+.page-link:focus {
+  z-index: 2;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #ffffff !important;
+  background-color: #333F50 !important;
+  border-color: #333F50 !important;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
@@ -4921,6 +4974,66 @@ input[type="button"].btn-block {
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
+}
+
+.example-search-input {
+  border: 1px solid #83868b!important; /* Borda geral */
+  border-right: none !important; /* Remove a borda direita */
+  border-radius: 0.25rem 0 0 0.25rem !important; /* Borda arredondada apenas à esquerda */
+  color: #333F50 !important; /* Cor do texto */
+  background-color: #fff !important; /* Fundo */
+  padding: 10px 15px; /* Ajusta o padding para alinhar melhor */
+  height: 38px; /* Ajuste a altura para garantir que tenha a mesma altura que o botão */
+
+}
+
+.example-search-input:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.08rem #333F50 !important; /* Sombra azul ao focar */
+  border-color: #333F50 !important; /* Cor da borda ao focar */
+}
+
+.example-search-button {
+  border: 1px solid #dee2e6 !important; /* Borda geral */
+  border-left: none !important; /* Remove a borda esquerda */
+  border-radius: 0 0.25rem 0.25rem 0 !important; /* Borda arredondada apenas à direita */
+  color: #333F50 !important; /* Cor do texto */
+  background-color: #333F50 !important; /* Fundo */
+  box-shadow: none !important; /* Remove a sombra extra */
+  padding: 10px 15px; /* Adiciona preenchimento para o botão */
+  height: 38px;
+  cursor: pointer; /* Cursor de clique */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transição suave para transformação e sombra */
+}
+
+/* Estilo quando o botão está em foco (ao clicar) */
+.example-search-button:focus {
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.1rem #333F50 !important; /* Sombra azul ao focar */
+  border-color: #333F50 !important;
+}
+
+/* Estilo ao passar o mouse sobre o botão */
+.example-search-button:hover {
+  background-color: #333F50 !important; /* Mantém a cor original */
+  color: #fff !important; /* Cor do texto ao passar o mouse */
+}
+
+/* Efeito de ondinha ao clicar (quando pressionado) */
+.example-search-button:active {
+  transform: scale(0.98); /* Simula um clique comprimido */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Cria uma sombra leve para dar a sensação de pressão */
+}
+
+/* Estilo do ícone da lupa */
+.example-search-button i {
+  color: #fff !important; /* Cor branca para o ícone da lupa */
+  transition: color 0.3s ease; /* Transição suave para a cor do ícone */
+}
+
+/* Estilo ao passar o mouse sobre o botão (afeta o ícone) */
+.example-search-button:hover i {
+  color: #fff !important; /* Mantém a cor do ícone */
 }
 
 .badge {
