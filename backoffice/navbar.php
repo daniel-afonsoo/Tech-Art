@@ -64,5 +64,6 @@
         echo "<li class='navLi'><a href='../admissoes'>Admissões</a></li>";
     }
     ?>
+    <li class="navLi"><a href="../documentos">Documentos</a></li>
     <li class="navLi"><a class="leftnav" href="../sair.php">Sair</a></li>
 </ul>

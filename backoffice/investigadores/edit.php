@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scholar = $_POST["scholar"];
     $research_gate = $_POST["research_gate"];
     $scopus_id = $_POST["scopus_id"];
+    $ativo=$_POST["ativo"];
 
 
     $sql = "UPDATE investigadores set nome = ?, email = ?, ciencia_id = ?, sobre = ?, sobre_en = ?, areasdeinteresse = ?, areasdeinteresse_en = ?, tipo = ?, orcid = ?, scholar = ?, research_gate=?, scopus_id=?";
@@ -50,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . mysqli_error($conn);
     }
 } else {
-    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en from investigadores WHERE id = ?";
+    $sql = "SELECT nome, email, ciencia_id, sobre, tipo, fotografia, areasdeinteresse, orcid, scholar, research_gate, scopus_id, sobre_en, areasdeinteresse_en,ativo from investigadores WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     $id = $_GET["id"];
@@ -71,6 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $scopus_id = $row["scopus_id"];
     $sobre_en = $row["sobre_en"];
     $areasdeinteresse_en = $row["areasdeinteresse_en"];
+    $ativo=$row["ativo"];
+
 }
 
 
@@ -149,7 +152,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col halfCol removeExterno">
                         <div class="form-group">
                             <label>Sobre</label>
-                            <textarea type="text" minlength="1" required data-error="Por favor introduza uma descrição sobre si" class="form-control" id="inputSobre" placeholder="Sobre" name="sobre"><?php echo $sobre; ?></textarea>
+                            <!--Mudanças Efetuadas Aqui-->
+                            <!--A class do Sobre passa a class="form-control ck_replace" para incluir o CKEditor-->
+                            <textarea type="text" minlength="1" required data-error="Por favor introduza uma descrição sobre si" class="form-control ck_replace" id="inputSobre" placeholder="Sobre" name="sobre"><?php echo $sobre; ?></textarea>
                             <!-- Error -->
                             <div class="help-block with-errors"></div>
                         </div>
@@ -157,7 +162,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col halfCol removeExterno">
                         <div class="form-group">
                             <label>Sobre (Inglês)</label>
-                            <textarea type="text" class="form-control" id="inputSobreEn" placeholder="Sobre (Inglês)" name="sobre_en"><?php echo $sobre_en; ?></textarea>
+                            <!--Mudanças Efetuadas Aqui-->
+                            <!--A class do Sobre(Inglês) passa a class="form-control ck_replace" para incluir o CKEditor-->
+                            <textarea type="text" class="form-control ck_replace" id="inputSobreEn" placeholder="Sobre (Inglês)" name="sobre_en"><?php echo $sobre_en; ?></textarea>
                             <!-- Error -->
                             <div class="help-block with-errors"></div>
                         </div>
@@ -168,7 +175,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col removeExterno">
                         <div class="form-group">
                             <label>Áreas de interesse</label>
-                            <textarea type="text" minlength="1" required data-error="Por favor introduza as suas áreas de interesse" class="form-control" id="inputAreasdeInteresse" placeholder="Áreas de interesse" name="areasdeinteresse"><?php echo $areasdeinteresse; ?></textarea>
+                            <!--Mudanças Efetuadas Aqui-->
+                            <!--A class do Áreas de interesse passa a class="form-control ck_replace" para incluir o CKEditor-->
+                            <textarea type="text" minlength="1" required data-error="Por favor introduza as suas áreas de interesse" class="form-control ck_replace" id="inputAreasdeInteresse" placeholder="Áreas de interesse" name="areasdeinteresse"><?php echo $areasdeinteresse; ?></textarea>
                             <!-- Error -->
                             <div class="help-block with-errors"></div>
                         </div>
@@ -176,7 +185,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="col removeExterno">
                         <div class="form-group">
                             <label>Áreas de interesse (Inglês)</label>
-                            <textarea type="text" class="form-control" id="inputAreasdeInteresseEn" placeholder="Áreas de interesse (Inglês)" name="areasdeinteresse_en"><?php echo $areasdeinteresse_en; ?></textarea>
+                            <!--Mudanças Efetuadas Aqui-->
+                            <!--A class do Áreas de interesse passa a class="form-control ck_replace" para incluir o CKEditor-->
+                            <textarea type="text" class="form-control ck_replace" id="inputAreasdeInteresseEn" placeholder="Áreas de interesse (Inglês)" name="areasdeinteresse_en"><?php echo $areasdeinteresse_en; ?></textarea>
                             <!-- Error -->
                             <div class="help-block with-errors"></div>
                         </div>
@@ -231,7 +242,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="help-block with-errors"></div>
                 </div>
                 <img id="preview" src="<?php echo $filesDir . $fotografia; ?>" width='100px' height='100px' class="mb-3" />
-
+                <div class="form-group estadoInvestigador">
+                    <label>Estado Investigador: </label>
+                    <input type="text" pattern="[0-1]" maxlength="1" class="form-control" name="estado_id" id="estado_id" value="<?= $ativo ?>">
+                </div>
 
 
                 <div class="form-group">
@@ -245,6 +259,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
+
+<!-- Novas Funcionalidades-->
+<!--Criar o CKEditor 5-->
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.ck_replace').each(function() {
+            ClassicEditor.create(this, {
+                licenseKey: '',
+                simpleUpload: {
+                    uploadUrl: '../ckeditor5/upload_image.php'
+                }
+            }).then(editor => {
+                window.editor = editor;
+            });
+        });
+    });
+
+
+    window.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let lastChecked;
+
+        function handleCheck(event) {
+            if (event.shiftKey) {
+                let start = Array.from(checkboxes).indexOf(this);
+                let end = Array.from(checkboxes).indexOf(lastChecked);
+                if (start > end) {
+                    [start, end] = [end, start];
+                }
+                checkboxes.forEach((checkbox, index) => {
+                    if (index >= start && index <= end) {
+                        checkbox.checked = this.checked;
+                    }
+                });
+            }
+
+            lastChecked = this;
+        }
+
+        checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    });
+</script>
+<!--Mudanças até aqui-->
+
+
 
 <script>
     // Função para lidar com a alteração do elemento 'select' com o id tipo
@@ -304,3 +364,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 mysqli_close($conn);
 ?>
+
+
