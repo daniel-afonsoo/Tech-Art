@@ -1,33 +1,40 @@
 <?php
 require "../verifica.php";
 require "../config/basedados.php";
-//Se o utilizador não é um administrado
+
+// Se o usuário não for administrador, redireciona para a página inicial
 if ($_SESSION["autenticado"] != "administrador") {
-    //não tem permissão para criar um novo investigador
     header("Location: index.php");
     exit;
 }
-//$filesDir = "../assets/investigadores/";
+
+// Diretório onde serão salvas as imagens dos investigadores
 $filesDir = "C:\\HostingSpaces\\juvenalpaulino\\techneart.ipt.pt_JNfbKjaR\\data\\techneart\\assets\\investigadores\\";
 
+// Se o diretório não existir, cria a pasta
+if (!file_exists($filesDir)) {
+    mkdir($filesDir, 0777, true);
+}
+
+// Se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['password'] == $_POST['repeatPassword']) {
 
-        $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];
-        //transferir a imagem para a pasta de assets
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $target_file);
+        // Definir um nome único para a imagem
+        $target_file = uniqid() . '_' . basename($_FILES["fotografia"]["name"]);
 
-        $sql = "INSERT INTO investigadores (nome, email, ciencia_id, sobre, sobre_en, tipo, fotografia, areasdeinteresse,areasdeinteresse_en, orcid, scholar, research_gate, scopus_id, password,ativo) " .
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, 'ssssssssssssss', $nome, $email, $ciencia_id, $sobre, $sobre_en, $tipo, $fotografia, $areasdeinteresse, $areasdeinteresse_en, $orcid, $scholar, $research_gate, $scopus_id, $password,$ativo);
+        // Mover a imagem para a pasta
+        if (!move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $target_file)) {
+            die("Erro ao mover o arquivo de imagem. Verifique as permissões da pasta.");
+        }
+
+        // Definir os valores dos campos
         $nome = $_POST["nome"];
         $email = $_POST["email"];
         $ciencia_id = $_POST["ciencia_id"];
         $sobre = $_POST["sobre"];
         $sobre_en = $_POST["sobre_en"];
         $tipo = $_POST["tipo"];
-        $fotografia = $target_file;
         $areasdeinteresse = $_POST["areasdeinteresse"];
         $areasdeinteresse_en = $_POST["areasdeinteresse_en"];
         $orcid = $_POST["orcid"];
@@ -35,31 +42,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $research_gate = $_POST["research_gate"];
         $scopus_id = $_POST["scopus_id"];
 
-        //Se isset($_POST["estado"]) for true (o campo foi enviado) e $_POST["estado"] == "1" também for true (o valor é 1, ou seja, "Ativo"), então a expressão inteira será true 
-        //,logo, $ativo receberá o valor 1 
-        //Caso contrário (se o botão "Inativo" foi selecionado ou o campo não foi enviado), $ativo receberá 0.
-
-        //$_POST["estado"]: Este é o valor que será enviado pelo formulário. Quando o botão de rádio com o name="estado" é selecionado, o valor enviado será o valor definido no value 
-        //do botão de rádio.
-        //Neste caso o valor é "1" para o botão "Ativo" e "0" para o botão "Inativo".
-
-
+        // Verifica se o investigador está ativo ou inativo
         $ativo = isset($_POST["estado"]) && $_POST["estado"] == "1" ? 1 : 0;
-        if ($_POST["password"] == null || $_POST["password"] == '') {
-            $_POST["password"] = substr(str_shuffle(strtolower(sha1(rand() . time()))), 0, $PASSWORD_LENGTH);
+
+        // Se a senha não foi definida, gera uma aleatória
+        if (empty($_POST["password"])) {
+            $_POST["password"] = substr(str_shuffle(strtolower(sha1(rand() . time()))), 0, 10);
         }
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+        // Query corrigida com o número correto de colunas e valores
+        $sql = "INSERT INTO investigadores (nome, email, ciencia_id, sobre, sobre_en, tipo, fotografia, areasdeinteresse, areasdeinteresse_en, orcid, scholar, research_gate, scopus_id, password, ativo) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Prepara a query
+        $stmt = mysqli_prepare($conn, $sql);
+        
+        // Faz o bind dos parâmetros
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssssi', 
+            $nome, $email, $ciencia_id, $sobre, $sobre_en, $tipo, 
+            $target_file, $areasdeinteresse, $areasdeinteresse_en, 
+            $orcid, $scholar, $research_gate, $scopus_id, $password, $ativo
+        );
+
+        // Executa a query e verifica se houve erro
         if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_close($stmt); // Fecha a query corretamente
+            
+            // **Verifica se a conexão ainda está ativa antes de fechar**
+            if ($conn && $conn instanceof mysqli) {
+                mysqli_close($conn);
+            }
+            
             header('Location: index.php');
             exit;
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Erro ao inserir investigador: " . mysqli_error($conn);
         }
     } else {
-        echo "Error: Passwords não são iguais";
+        echo "Erro: As senhas não coincidem.";
     }
 }
+
+// **Verifica se a conexão ainda está ativa antes de fechar**
+if ($conn && $conn instanceof mysqli) {
+    mysqli_close($conn);
+}
 ?>
+
+
+
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </link>
@@ -303,6 +335,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>
 
 
-<?php
-mysqli_close($conn);
-?>
