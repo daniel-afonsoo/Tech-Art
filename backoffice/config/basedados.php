@@ -2,8 +2,8 @@
 require 'credentials.php';
 
 $servername = "127.0.0.1";
-$username = USERNAME;
-$password = PASSWORD;
+$username = 'root';
+$password = '';
 $dbname = "technart";
 $charset = "utf8mb4";
 
