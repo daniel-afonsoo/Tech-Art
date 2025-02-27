@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@100;200;300&display=swap');
+
+
 * {
   box-sizing: border-box;
 }
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Merriweather Sans', sans-serif !important;
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
 }
 
 header {
-  background-color: #333F50;
+  background-color: #000033;
 }
 
 .layout_padding {
@@ -175,7 +178,7 @@ a:focus {
     color: #ffffff;
     text-align: center;
     text-transform: uppercase;
-    
+    font-family: 'Merriweather Sans', sans-serif !important;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     font-weight: 300;
@@ -183,6 +186,14 @@ a:focus {
     margin-top: 25px;
     
 }
+
+.custom_nav-container .navbar-nav .nav-item .dropdown-content a {
+  text-align: left;
+  padding-left: 20px; 
+  padding-right: 10px;
+  white-space: nowrap; 
+}
+
 
 .custom_nav-container .navbar-nav .nav-item .nav-link svg {
   width: 17px;
@@ -205,6 +216,22 @@ a:focus {
   padding: 0;
   border: none;
   color: #ffffff;
+}
+
+.btn-custom {
+  display: inline-block;
+  text-align: left;
+  margin-top: 30px;
+  border-radius: 0 !important;
+  padding: 8px 16px !important;
+  font-weight: bold !important;
+  background-color: #ffffff !important; /* Mantém a cor do Bootstrap */
+  font-family: 'Merriweather Sans', sans-serif !important;
+  color:  #002169!important;
+  border: none !important;
+}
+.btn-custom:hover {
+  background-color: #cadff5 !important;
 }
 
 .custom_nav-container .nav_search-btn:hover {
@@ -965,17 +992,25 @@ a:focus {
 .heading_container.heading_center h3 {
   position: relative;
   margin-bottom: 15px;
-  font-size: 2.5rem;
-  font-family: 'Quicksand', sans-serif;
+  margin-left: -750px;
+  font-size: 32px;
+  color: #002169;
+  font-family: 'Merriweather Sans', sans-serif !important;
+  font-weight: 300 !important;
 }
 
 .heading_container2.heading_center2 h3 {
   position: relative;
   margin-bottom: 15px;
-  font-size: 2.5rem;
-  font-family: 'Quicksand', sans-serif;
+  font-size: 32px;
+  color: #002169;
+  font-family: 'Merriweather Sans', sans-serif !important;
+  font-weight: 300 !important;
   display: inline-block;
 }
+
+
+
 
 .heading_container3 h3{
   position: relative;
@@ -983,8 +1018,36 @@ a:focus {
   display: inline-block;
   font-family: 'Merriweather Sans', sans-serif !important; 
   font-size: 33px;  
-  color:#333f50; 
+  color:#002169; 
 
+}
+
+.container-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-noticias,
+.btn-projetos {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #002169;
+  border: 2px solid #000000;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  font-family: 'Merriweather', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+}
+
+.btn-noticias:hover,
+.btn-projetos:hover {
+  color: #ffffff !important; 
+  background-color: #000033; 
+  border-color: #000000;
 }
 
 .heading_h3 {
@@ -1010,6 +1073,46 @@ a:focus {
   white-space: normal;
   padding: 60px 10px 20px 45px; /* top, right, bottom, left */
 }
+
+.noticia-title {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.noticia-description {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.noticia-title {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+
+.slider-title {
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.slider-description {
+  font-weight: 100px;
+}
+
+.slider-description,
+.slider-title {
+  font-family: 'Merriweather', sans-serif, !important;
+  color:white;
+}
+
+
+
 
 
 .heading2_h5 {
@@ -1058,7 +1161,7 @@ li.nav-item ul li {
 }
 
 li.nav-item ul li a {
-    color: #212529;
+    color: #292321;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0.2px;
@@ -1081,20 +1184,40 @@ li.nav-item ul li a {
 
 /** footer **/
 
-
 footer {
-    background: #333F50;
-    padding: 90px 0 70px;
+  background: #000033;
+  padding: 50px 0;
+  color: white;
+}
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: center;
+}
+.footer-section {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+}
+.footer-logo {
+  max-height: 80px;
+  width: auto;
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
+.social-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-.logo_footer {
-    margin-bottom: 30px;
-}
 
-.logo-tech_footer{
-  max-width:320px;
-  width: 100%;
-}
+
 
 .information_f p {
     margin-bottom: 1.2rem;
@@ -1214,7 +1337,7 @@ form input[type="submit"]:focus {
 /** cpy **/
 
 .cpy_ {
-    background: #333F50;
+    background: #002169;
     text-align: center;
     
 }
@@ -1687,7 +1810,7 @@ form input[type="submit"]:focus {
                           }
                           
                           .dropdown-content a {
-                            color: black;
+                            color: #000033;
                             padding: 12px 16px;
                             text-decoration: none;
                             display: block;
@@ -1695,7 +1818,7 @@ form input[type="submit"]:focus {
                             font-size:13px;
                           }
                           
-                          .dropdown-content a:hover {background-color: #333F50; color:#ffffff;}
+                          .dropdown-content a:hover {background-color: #002169; color:#ffffff;}
                           
                           .dropdown:hover .dropdown-content {
                             display: block;
@@ -1743,7 +1866,7 @@ form input[type="submit"]:focus {
                               transform: translate(-50%, -50%);
                               z-index: 10;
                               color: #ffffff;
-                              font-family: 'PT Sans', sans-serif;
+                              font-family: 'Merriweather Sans', sans-serif !important;
                               text-transform: uppercase;
                               font-size: 21px;
                               text-align: center;
@@ -2030,6 +2153,7 @@ form input[type="submit"]:focus {
                           .show {
                             display: inLine !important;
                           }
+                          
 
 .translationOption {
   color: #ffffff;

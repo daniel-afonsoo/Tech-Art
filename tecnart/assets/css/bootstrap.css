@@ -4932,8 +4932,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #ffffff !important;
-  background-color: #333F50 !important;
-  border-color: #333F50 !important;
+  background-color: #002169 !important;
+  border-color: #002169 !important;
 }
 
 .page-item.disabled .page-link {
@@ -4977,63 +4977,63 @@ input[type="button"].btn-block {
 }
 
 .example-search-input {
-  border: 1px solid #83868b!important; /* Borda geral */
-  border-right: none !important; /* Remove a borda direita */
-  border-radius: 0.25rem 0 0 0.25rem !important; /* Borda arredondada apenas à esquerda */
-  color: #333F50 !important; /* Cor do texto */
-  background-color: #fff !important; /* Fundo */
-  padding: 10px 15px; /* Ajusta o padding para alinhar melhor */
-  height: 38px; /* Ajuste a altura para garantir que tenha a mesma altura que o botão */
+  border: 1px solid #83868b!important; 
+  border-right: none !important; 
+  border-radius: 0.25rem 0 0 0.25rem !important; 
+  color: #002169 !important; 
+  background-color: #fff !important; 
+  padding: 10px 15px; 
+  height: 38px; 
 
 }
 
 .example-search-input:focus {
   outline: 0 !important;
-  box-shadow: 0 0 0 0.08rem #333F50 !important; /* Sombra azul ao focar */
-  border-color: #333F50 !important; /* Cor da borda ao focar */
+  box-shadow: 0 0 0 0.08rem #002169 !important; 
+  border-color: #002169 !important; 
 }
 
 .example-search-button {
-  border: 1px solid #dee2e6 !important; /* Borda geral */
-  border-left: none !important; /* Remove a borda esquerda */
-  border-radius: 0 0.25rem 0.25rem 0 !important; /* Borda arredondada apenas à direita */
-  color: #333F50 !important; /* Cor do texto */
-  background-color: #333F50 !important; /* Fundo */
-  box-shadow: none !important; /* Remove a sombra extra */
-  padding: 10px 15px; /* Adiciona preenchimento para o botão */
+  border: 1px solid #dee2e6 !important; 
+  border-left: none !important;
+  border-radius: 0 0.25rem 0.25rem 0 !important; 
+  color: #002169 !important; 
+  background-color: #002169 !important;
+  box-shadow: none !important; 
+  padding: 10px 15px; 
   height: 38px;
-  cursor: pointer; /* Cursor de clique */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transição suave para transformação e sombra */
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
-/* Estilo quando o botão está em foco (ao clicar) */
+
 .example-search-button:focus {
   outline: 0 !important;
-  box-shadow: 0 0 0 0.1rem #333F50 !important; /* Sombra azul ao focar */
+  box-shadow: 0 0 0 0.1rem #333F50 !important; 
   border-color: #333F50 !important;
 }
 
-/* Estilo ao passar o mouse sobre o botão */
+
 .example-search-button:hover {
-  background-color: #333F50 !important; /* Mantém a cor original */
-  color: #fff !important; /* Cor do texto ao passar o mouse */
+  background-color: #002169 !important; 
+  color: #fff !important; 
 }
 
-/* Efeito de ondinha ao clicar (quando pressionado) */
+
 .example-search-button:active {
-  transform: scale(0.98); /* Simula um clique comprimido */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Cria uma sombra leve para dar a sensação de pressão */
+  transform: scale(0.98); 
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); 
 }
 
-/* Estilo do ícone da lupa */
+
 .example-search-button i {
-  color: #fff !important; /* Cor branca para o ícone da lupa */
-  transition: color 0.3s ease; /* Transição suave para a cor do ícone */
+  color: #fff !important; 
+  transition: color 0.3s ease; 
 }
 
-/* Estilo ao passar o mouse sobre o botão (afeta o ícone) */
+
 .example-search-button:hover i {
-  color: #fff !important; /* Mantém a cor do ícone */
+  color: #fff !important; 
 }
 
 .badge {
