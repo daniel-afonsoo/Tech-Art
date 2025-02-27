@@ -22,7 +22,7 @@ function ret_dic_en()
         //Imagem com o logotipo da techn&art
         "header-site-logo" => "./assets/images/techneart-h-neg-en.svg",
         //Drop-down 'Sobre o Techn&Art'
-        "about-technart-drop-down" => "About TECHN&ART",
+        "about-technart-drop-down" => "ABOUT",
         "mission-and-goals-option" => "Mission and Goals",
         "research-axes-option" => "Research Axes",
         "org-struct-option" => "Organic Structure",

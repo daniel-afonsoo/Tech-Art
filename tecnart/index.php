@@ -16,13 +16,13 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
       <div class="row no-gutters slider-text justify-content-start" style="position: relative; height: 100%; max-width:100%;" data-scrollax-parent="true">
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
-               <h1 class="mb-4">
+               <h1 class="slider-title">
                   <?= change_lang("index-first-slide"); ?>
                </h1>
-               <span class="subheading">
+               <span class="slider-description">
                   <?= change_lang("index-first-slide-desc"); ?>
                </span>
-               <div><a href="sobre.php" class="btn btn-primary px-4 py-3 mt-3 btn_no_left">
+               <div><a href="sobre.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>
                   </a></div>
             </div>
@@ -37,13 +37,13 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
       <div class="row no-gutters slider-text justify-content-start" style="position: relative; height: 100%; max-width:100%;" data-scrollax-parent="true">
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
-               <h1 class="mb-4">
+               <h1 class="slider-title">
                   <?= change_lang("index-second-slide"); ?>
                </h1>
-               <span class="subheading">
+               <span class="slider-description">
                   <?= change_lang("index-second-slide-desc"); ?>
                </span>
-               <div><a href="integrados.php" class="btn btn-primary px-4 py-3 mt-3 btn_no_left">
+               <div><a href="integrados.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>
                   </a></div>
             </div>
@@ -57,13 +57,13 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
       <div class="row no-gutters slider-text justify-content-start" style="position: relative; height: 100%; max-width:100%;" data-scrollax-parent="true">
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
-               <h1 class="mb-4">
+               <h1 class="slider-title">
                   <?= change_lang("index-third-slide-slider"); ?>
                </h1>
-               <span class="subheading">
+               <span class="slider-description">
                   <?= change_lang("index-third-slide-slider-desc"); ?>
                </span>
-               <div><a href="projetos_em_curso.php" class="btn btn-primary px-4 py-3 mt-3 btn_no_left">
+               <div><a href="projetos_em_curso.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>
                   </a></div>
             </div>
@@ -194,7 +194,7 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
                         <div style="z-index: 1;" class="image_default">
                            <img class="img-fluid" src="../backoffice/assets/noticias/<?= $noticia['imagem'] ?>" alt="">
                            <div class="text-block">
-                              <h5 style="font-size: 20px; text-transform: uppercase; font-weight: 600;">
+                              <h5 class="noticia-title">
                                  <?php
                                  //Limitar o título a 35 caracteres e cortar pelo último espaço
                                  $titulo = trim($noticia['titulo']);
@@ -204,7 +204,7 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
                                  echo ($titulo !=  trim($noticia['titulo'])) ? $titulo . "..." : $titulo;
                                  ?>
                               </h5>
-                              <h6 style="font-size: 14px; font-weight: 100;">
+                              <h6 style="noticia-description">
                                  <?php
                                  //Adicionar espaços antes das etiquetas html,
                                  $espacos = str_replace('<', ' <', $noticia['conteudo']);

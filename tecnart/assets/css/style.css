@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Merriweather Sans', sans-serif !important;
   color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
@@ -178,7 +178,7 @@ a:focus {
     color: #ffffff;
     text-align: center;
     text-transform: uppercase;
-    
+    font-family: 'Merriweather Sans', sans-serif !important;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
     font-weight: 300;
@@ -186,6 +186,14 @@ a:focus {
     margin-top: 25px;
     
 }
+
+.custom_nav-container .navbar-nav .nav-item .dropdown-content a {
+  text-align: left;
+  padding-left: 20px; 
+  padding-right: 10px;
+  white-space: nowrap; 
+}
+
 
 .custom_nav-container .navbar-nav .nav-item .nav-link svg {
   width: 17px;
@@ -208,6 +216,22 @@ a:focus {
   padding: 0;
   border: none;
   color: #ffffff;
+}
+
+.btn-custom {
+  display: inline-block;
+  text-align: left;
+  margin-top: 30px;
+  border-radius: 0 !important;
+  padding: 8px 16px !important;
+  font-weight: bold !important;
+  background-color: #ffffff !important; /* Mantém a cor do Bootstrap */
+  font-family: 'Merriweather Sans', sans-serif !important;
+  color:  #002169!important;
+  border: none !important;
+}
+.btn-custom:hover {
+  background-color: #cadff5 !important;
 }
 
 .custom_nav-container .nav_search-btn:hover {
@@ -994,7 +1018,7 @@ a:focus {
   display: inline-block;
   font-family: 'Merriweather Sans', sans-serif !important; 
   font-size: 33px;  
-  color:#333f50; 
+  color:#002169; 
 
 }
 
@@ -1006,7 +1030,7 @@ a:focus {
 .btn-noticias,
 .btn-projetos {
   display: inline-block;
-  padding: 5px 25px;
+  padding: 10px 20px;
   background-color: #002169;
   border: 2px solid #000000;
   color: #ffffff;
@@ -1014,7 +1038,8 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   font-family: 'Merriweather', sans-serif;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 15px;
   text-align: center;
 }
 
@@ -1048,6 +1073,46 @@ a:focus {
   white-space: normal;
   padding: 60px 10px 20px 45px; /* top, right, bottom, left */
 }
+
+.noticia-title {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.noticia-description {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.noticia-title {
+  font-family: 'Merriweather', sans-serif;
+  font-size: 21px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+
+.slider-title {
+  text-transform: uppercase;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.slider-description {
+  font-weight: 100px;
+}
+
+.slider-description,
+.slider-title {
+  font-family: 'Merriweather', sans-serif, !important;
+  color:white;
+}
+
+
+
 
 
 .heading2_h5 {
@@ -1801,7 +1866,7 @@ form input[type="submit"]:focus {
                               transform: translate(-50%, -50%);
                               z-index: 10;
                               color: #ffffff;
-                              font-family: 'PT Sans', sans-serif;
+                              font-family: 'Merriweather Sans', sans-serif !important;
                               text-transform: uppercase;
                               font-size: 21px;
                               text-align: center;
@@ -2088,6 +2153,7 @@ form input[type="submit"]:focus {
                           .show {
                             display: inLine !important;
                           }
+                          
 
 .translationOption {
   color: #ffffff;
