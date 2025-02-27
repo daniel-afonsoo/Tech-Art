@@ -248,72 +248,60 @@ $change_lang =  function ($key) {
     echo <<<EOT
                 <!-- footer start -->
                 <footer>
-                <div class="container">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
-                            <div class="logo_footer me-4" id="logo4">
+                    <div class="container-fluid">
+                        <div class="footer-content d-flex flex-wrap justify-content-between">
+                            <!-- Logo Tech&Art -->
+                            <div class="footer-section">
                                 <a href="#">
-                                    <img class="logo-tech_footer" src={$change_lang("footer-site-logo")} alt="Tech&Art Logo">
+                                    <img class="footer-logo" src={$change_lang("footer-site-logo")} alt="Tech&Art Logo">
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
-                            <div class="logo_footer me-4">
+                            <!-- IPT Logo -->
+                            <div class="footer-section">
                                 <a target="_blank" href="https://www.ipt.pt/">
-                                    <img height="80" src="./assets/images/ipt.svg" alt="IPT" style="margin-right: 20px;">
+                                    <img class="footer-logo" src="./assets/images/ipt.svg" alt="IPT">
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
-                            <div class="logo_footer me-4">
+                            <!-- FCT Logo -->
+                            <div class="footer-section">
                                 <a target="_blank" href="https://www.fct.pt/">
-                                    <img height="80" src="./assets/images/fct.svg" alt="FCT" style="margin-left: 20px;">
+                                    <img class="footer-logo" src="./assets/images/fct.svg" alt="FCT">
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
-                            <div class="widget_menu">
-                                <ul class="list-unstyled mb-0">
-                                    <li><span style="color: white; text-align: justify;">{$change_lang("address-txt-1")}</span></li>
-                                    <li><span style="color: white; text-align: justify;">{$change_lang("address-txt-2")}</span></li>
-                                    <li><span style="color: white; text-align: justify;">2300-313 Tomar - Portugal</span></li>
+                            <!-- Ciência Vitae Logo -->
+                            <div class="footer-section">
+                                <a target="_blank" href="https://www.cienciavitae.pt/">
+                                    <img class="footer-logo" src="./assets/images/cienciavitae.svg" alt="Ciência Vitae">
+                                </a>
+                            </div>
+                            <!-- Endereço -->
+                            <div class="footer-section">
+                                <ul class="list-unstyled">
+                                    <li><span>{$change_lang("address-txt-1")}</span></li>
+                                    <li><span>{$change_lang("address-txt-2")}</span></li>
+                                    <li><span>2300-313 Tomar - Portugal</span></li>
+                                    <li><span>sec.techneart@ipt.pt</span></li>
                                 </ul>
                             </div>
-                            <div class="widget_menu mt-2">
-                                <ul class="list-unstyled mb-0">
-                                    <li><span style="color: white;">sec.techneart@ipt.pt</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 text-center text-md-end">
-                            <div class="widget_menu">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <span style="color: white;"><strong>{$change_lang("follow-us-txt")}</strong></span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="widget_menu mt-2">
-                                <span class="me-3">
+                            <!-- Redes Sociais -->
+                            <div class="footer-section text-center">
+                                <span><strong>{$change_lang("follow-us-txt")}</strong></span>
+                                <div class="social-container mt-2 d-flex justify-content-center flex-wrap gap-3">
                                     <a target="_blank" href="https://www.facebook.com/Techn.Art.IPT/">
-                                        <img src="./assets/images/facebook.svg" alt="Facebook" width="30" height="30">
+                                        <img src="./assets/images/facebook.svg" alt="Facebook" class="social-icon">
                                     </a>
-                                </span>
-                                <span class="me-3">
                                     <a target="_blank" href="https://www.youtube.com/channel/UC3w94LwkXczhZ12WYINYKzA">
-                                        <img src="./assets/images/youtube.svg" alt="YouTube" width="30" height="30">
+                                        <img src="./assets/images/youtube.svg" alt="YouTube" class="social-icon">
                                     </a>
-                                </span>
-                                <span>
                                     <a target="_blank" href="https://www.linkedin.com/company/techn-art-ipt">
-                                        <img src="./assets/images/linkedin.svg" alt="LinkedIn" width="30" height="30">
+                                        <img src="./assets/images/linkedin.svg" alt="LinkedIn" class="social-icon">
                                     </a>
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </footer>
+
                 <!-- footer end -->
                 <div class="cpy_">
                 <p class="mx-auto" style="font-size: 13px; padding-bottom: 20px;">

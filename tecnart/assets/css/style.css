@@ -1119,20 +1119,40 @@ li.nav-item ul li a {
 
 /** footer **/
 
-
 footer {
-    background: #000033;
-    padding: 90px 0 70px;
+  background: #000033;
+  padding: 50px 0;
+  color: white;
+}
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: center;
+}
+.footer-section {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+}
+.footer-logo {
+  max-height: 80px;
+  width: auto;
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
+.social-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
-.logo_footer {
-    margin-bottom: 30px;
-}
 
-.logo-tech_footer{
-  max-width:320px;
-  width: 100%;
-}
+
 
 .information_f p {
     margin-bottom: 1.2rem;
