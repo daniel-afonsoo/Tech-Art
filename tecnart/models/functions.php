@@ -249,57 +249,66 @@ $change_lang =  function ($key) {
                 <!-- footer start -->
                 <footer>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                        <div class="logo_footer" >
-                        <a target="_blank"href="https://www.ipt.pt/"><img height="100" src="./assets/images/IPT_i_1-vertical-branco-img-para-fundo-escuro.png" alt="#" /></a>
-                    </div>
-                        <div class="logo_footer" id="logo4">
-                        <a href="#"><img class="logo-tech_footer" src={$change_lang("footer-site-logo")} alt="#" /></a>
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+                            <div class="logo_footer me-4" id="logo4">
+                                <a href="#">
+                                    <img class="logo-tech_footer" src={$change_lang("footer-site-logo")} alt="Tech&Art Logo">
+                                </a>
+                            </div>
                         </div>
-                        
-                    </div>
-                        <div class="col-md-8">
-                            <div class="row center_footer">
-                            <div class="col-md-7 center_footer">
-                            <div class="row">
-                                <div class="col-md-6 center_footer">
-                                    <div class="widget_menu">
-                                        <ul>
-                                        <li><a style="color: white;">{$change_lang("address-txt-1")}</a></li>
-                                        <li><a style="color: white;">{$change_lang("address-txt-2")}</a></li>
-                                        <li><a style="color: white;">2300-313 Tomar - Portugal</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+                            <div class="logo_footer me-4">
+                                <a target="_blank" href="https://www.ipt.pt/">
+                                    <img height="80" src="./assets/images/ipt.svg" alt="IPT" style="margin-right: 20px;">
+                                </a>
                             </div>
-                                <div class="widget_menu">
-                                    <br><ul><li><a style="color: white;">sec.techneart@ipt.pt</a></li></ul>
-                                </div>
-                                <div class="widget_menu">
-                                    <br><ul><li><a style="color: white;"><strong>{$change_lang("follow-us-txt")}</strong></a></li></ul>
-                                </div>
-                                <div class="widget_menu">
-                                    <span><a target="_blank"href="https://www.facebook.com/Techn.Art.IPT/"><i id ="fateste" class="fab fa-facebook-f"></i>&nbsp</a></span>
-                                    <span><a target="_blank" style="color: white; font-size: 19px;" href="https://www.youtube.com/channel/UC3w94LwkXczhZ12WYINYKzA"><i class="fab fa-youtube"></i></a></span>
-                                    <span><a target="_blank" style="color: white; font-size: 19px;" href="https://www.linkedin.com/company/techn-art-ipt"><i class="fab fa-linkedin"></i></a></span>
-                                </div>
-                            </div> 
-
-                            <div class="col-md-5 center_footer">
-                            <!-- adicionar margin-left ao logotipo do ipt de forma aos logatipos ficaram alinhados-->
-                            
-                                
-                                <div class="logo_footer">
-                                    <a target="_blank"href="https://www.cienciavitae.pt/"><img height="80" src="./assets/images/cienciavitaeFundoTrans.png" alt="#" /></a>
-                                </div>
-                                <div class="logo_footer">
-                                    <a target="_blank"href="https://www.fct.pt/"><img height="80" src="./assets/images/2022_FCT_Logo_A_horizontal_branco.png" alt="#" /></a>
-                                </div>
-                                <div class="information_f">
-                                    <p style="color: white; font-size: 13px;">{$change_lang("project-ud-txt")}</p>
-                                </div>
+                        </div>
+                        <div class="col-6 col-md-2 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+                            <div class="logo_footer me-4">
+                                <a target="_blank" href="https://www.fct.pt/">
+                                    <img height="80" src="./assets/images/fct.svg" alt="FCT" style="margin-left: 20px;">
+                                </a>
                             </div>
+                        </div>
+                        <div class="col-12 col-md-3 text-center mb-3 mb-md-0">
+                            <div class="widget_menu">
+                                <ul class="list-unstyled mb-0">
+                                    <li><span style="color: white; text-align: justify;">{$change_lang("address-txt-1")}</span></li>
+                                    <li><span style="color: white; text-align: justify;">{$change_lang("address-txt-2")}</span></li>
+                                    <li><span style="color: white; text-align: justify;">2300-313 Tomar - Portugal</span></li>
+                                </ul>
+                            </div>
+                            <div class="widget_menu mt-2">
+                                <ul class="list-unstyled mb-0">
+                                    <li><span style="color: white;">sec.techneart@ipt.pt</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 text-center text-md-end">
+                            <div class="widget_menu">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <span style="color: white;"><strong>{$change_lang("follow-us-txt")}</strong></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="widget_menu mt-2">
+                                <span class="me-3">
+                                    <a target="_blank" href="https://www.facebook.com/Techn.Art.IPT/">
+                                        <img src="./assets/images/facebook.svg" alt="Facebook" width="30" height="30">
+                                    </a>
+                                </span>
+                                <span class="me-3">
+                                    <a target="_blank" href="https://www.youtube.com/channel/UC3w94LwkXczhZ12WYINYKzA">
+                                        <img src="./assets/images/youtube.svg" alt="YouTube" width="30" height="30">
+                                    </a>
+                                </span>
+                                <span>
+                                    <a target="_blank" href="https://www.linkedin.com/company/techn-art-ipt">
+                                        <img src="./assets/images/linkedin.svg" alt="LinkedIn" width="30" height="30">
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -308,7 +317,7 @@ $change_lang =  function ($key) {
                 <!-- footer end -->
                 <div class="cpy_">
                 <p class="mx-auto" style="font-size: 13px; padding-bottom: 20px;">
-                {$change_lang("ipt-copyright-txt")} | {$change_lang("all-rights-reserved-txt")} | 
+                {$change_lang("Finance-txt")} {$change_lang("ipt-copyright-txt")} | {$change_lang("all-rights-reserved-txt")} |
                 <a style="font-size: 13px;" href="copyright.php">{$change_lang("copyright-title")}</a> 
                 <br></p>
                 </div>

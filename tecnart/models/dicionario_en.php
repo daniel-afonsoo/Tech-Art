@@ -20,7 +20,7 @@ function ret_dic_en()
         //::::::CABEÇALHO PRINCIPAL::::::
 
         //Imagem com o logotipo da techn&art
-        "header-site-logo" => "./assets/images/TechnArt11FundoTrans.png",
+        "header-site-logo" => "./assets/images/techneart-h-neg-en.svg",
         //Drop-down 'Sobre o Techn&Art'
         "about-technart-drop-down" => "About TECHN&ART",
         "mission-and-goals-option" => "Mission and Goals",
@@ -54,10 +54,12 @@ function ret_dic_en()
         "address-txt-2" => "Estrada da Serra",
         //Etiqueta / texto 'Siga-nos',
         "follow-us-txt" => "Follow Us",
+        //Etiqueta / texto com Financiado por fund
+        "Finance-txt" => "Funded by national funds through FCT - Foundation for Science and Technology, I.P., within the scope of the Strategic Project with reference UID/05488/2020 <br>",
         //Divisoria com 'projeto UD ...'
-        "project-ud-txt" => "Project UID/05488/2020",
+      "project-ud-txt" => "Project UID/05488/2020",
         //Etiqueta / texto com 'Instituto Pol...'
-        "ipt-copyright-txt" => "©Polytechnic University of Tomar",
+        "ipt-copyright-txt" => "©2024 TECHN&ART - IPT",
         //Etiqueta / texto com 'Todos os direitos reservados'
         "all-rights-reserved-txt" => "All rights reserved",
 
