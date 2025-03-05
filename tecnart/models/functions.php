@@ -476,6 +476,19 @@ function alert_redirect($msg, $redirect)
   exit();
 }
 
+
+function normalizeString($string) {
+  // Converte para minúsculas
+  $string = mb_strtolower($string, 'UTF-8');
+  // Normaliza e vai remover os acentos
+  if (class_exists('Normalizer')) {
+      $string = Normalizer::normalize($string, Normalizer::FORM_D);
+      $string = preg_replace('/\p{Mn}/u', '', $string);
+  }
+  return $string;
+}
+
+
 function show_error($error)
 {
   echo '<div class="w-100">
