@@ -48,7 +48,7 @@ include 'models/functions.php';
                     foreach ($groupedPublicacoes[$year][$site] as $existingPublication) {
                         $existingNormalized = normalizeString($existingPublication);
                         similar_text($existingNormalized, $currentNormalized, $percent);
-                        if ($percent > 60) { 
+                        if ($percent > 70) { 
                             $isDuplicate = true;
                             break;
                         }
