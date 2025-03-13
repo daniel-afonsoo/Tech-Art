@@ -30,22 +30,32 @@ include 'models/functions.php';
 
                 $groupedPublicacoes = array();
                 foreach ($publicacoes as $publicacao) {
-                    $year = $publicacao['publication_year'];
-                    if ($year == null) {
-                        $year = change_lang("year-unknown");
-                    }
-
+                    
+                    $year = $publicacao['publication_year'] ?? change_lang("year-unknown");
                     $site = $publicacao[$valorSiteName];
-
+                
+                  
                     if (!isset($groupedPublicacoes[$year])) {
                         $groupedPublicacoes[$year] = array();
                     }
-
                     if (!isset($groupedPublicacoes[$year][$site])) {
                         $groupedPublicacoes[$year][$site] = array();
                     }
-
-                    $groupedPublicacoes[$year][$site][] = $publicacao['dados'];
+                    
+                    /* Detetar publicações que tenham uma parcença superior 60%*/
+                    $isDuplicate = false;
+                    $currentNormalized = normalizeString($publicacao['dados']);
+                    foreach ($groupedPublicacoes[$year][$site] as $existingPublication) {
+                        $existingNormalized = normalizeString($existingPublication);
+                        similar_text($existingNormalized, $currentNormalized, $percent);
+                        if ($percent > 60) { 
+                            $isDuplicate = true;
+                            break;
+                        }
+                    }
+                    if (!$isDuplicate) {
+                        $groupedPublicacoes[$year][$site][] = $publicacao['dados'];
+                    }
                 }
                 ?>
                 <script src="../backoffice/assets/js/citation-js-0.6.8.js"></script>
