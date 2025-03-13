@@ -239,6 +239,9 @@ function ret_dic_pt(){
         "team-steakholders-tab-title-class" => "Equipa e intervenientes",
         //Subtitulo separador 'equipa e intervenientes'
         "team-steakholders-tab-subtitle-class" => "Subtitulo ",
+
+        //Titulo investigador principal
+        "team-principal-res-tab-title-class" => "Investigador principal",
         //
 
         //::::::integrados.php/colaboradores.php/alunos.php::::::
