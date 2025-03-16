@@ -1,9 +1,13 @@
 <?php
+require_once 'config/dbconnection.php';
 session_start();
 
 if(!isset($_SESSION["lang"])){
   $_SESSION["lang"] = "pt";
 }
+
+
+
 
 $_SESSION["basename"] = $_SERVER['PHP_SELF'];
 
@@ -500,3 +504,18 @@ function show_error($error)
   </div>
 </div>';
 }
+
+//função para ir buscar os textos à base de dados
+function get_text($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM textos_site WHERE nome = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+?>
