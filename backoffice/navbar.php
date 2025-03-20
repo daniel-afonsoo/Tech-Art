@@ -8,7 +8,7 @@
         padding: 0;
         overflow: hidden;
         background-color: #435d7d;
-        font-size: 20px;
+        font-size: 12px;
         font-family: 'Varela Round';
     }
 
@@ -66,5 +66,8 @@
     }
     ?>
     <li class="navLi"><a href="../documentos">Documentos</a></li>
+    <li class="navLi"><a href="../missao">Missão e Objetivos</a></li>
+    <li class="navLi"><a href="../eixos_de_investigação">Eixos de Investigação</a></li>
+    <li class="navLi"><a href="../estrutura_organica">Estrutura Orgânica</a></li>
     <li class="navLi"><a class="leftnav" href="../sair.php">Sair</a></li>
 </ul>
