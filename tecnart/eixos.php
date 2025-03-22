@@ -27,23 +27,23 @@ include 'models/functions.php';
                     </div>
                     <div class="flex-right">
 
-                        <p><?= get_text("axes-page-p1-txt") ?></p>
+                        <p><?= get_text_eixos("axes-page-p1-txt") ?></p>
 
-                        <p class="text-uppercase"><b>a) <?= get_text("axes-page-a-txt") ?></b></p>
-                        <p class="text-uppercase"><b>b) <?= get_text("axes-page-b-txt") ?></b></p>
+                        <p class="text-uppercase"><b>a) <?= get_text_eixos("axes-page-a-txt") ?></b></p>
+                        <p class="text-uppercase"><b>b) <?= get_text_eixos("axes-page-b-txt") ?></b></p>
                         <br><br>
-                        <p><?= get_text("axes-page-p2-txt") ?></p>
+                        <p><?= get_text_eixos("axes-page-p2-txt") ?></p>
 
 
-                        <p><b>a1) </b><?= get_text("axes-page-a-one-txt") ?></p>
-                        <p><b>a2) </b><?= get_text("axes-page-a-two-txt") ?></p>
+                        <p><b>a1) </b><?= get_text_eixos("axes-page-a-one-txt") ?></p>
+                        <p><b>a2) </b><?= get_text_eixos("axes-page-a-two-txt") ?></p>
                         <br>
-                        <p><?= get_text("axes-page-p3-txt") ?></p>
-                        <p><b>b1) </b><?= get_text("axes-page-b-one-txt") ?></p>
+                        <p><?= get_text_eixos("axes-page-p3-txt") ?></p>
+                        <p><b>b1) </b><?= get_text_eixos("axes-page-b-one-txt") ?></p>
 
-                        <p><b>b2) </b><?= get_text("axes-page-b-two-txt") ?></p>
+                        <p><b>b2) </b><?= get_text_eixos("axes-page-b-two-txt") ?></p>
 
-                        <p><?= get_text("bottom-text") ?></p>
+                        <p><?= get_text_eixos("bottom-text") ?></p>
 
                     </div>
                 </div>               

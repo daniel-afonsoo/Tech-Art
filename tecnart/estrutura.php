@@ -40,24 +40,24 @@ $pdo = pdo_connect_mysql();
                         </figure>
                     </div>
                     <div class="flex-right">
-                        <?= get_text("org-struct-page-description") ?><br><br>
+                        <?= get_text_estrutura("org-struct-page-description") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-director-tag") ?></b><br><?= get_text("director") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-director-tag") ?></b><br><?= get_text_estrutura("director") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-deputy-director-tag") ?></b><br><?= get_text("deputy-director") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-deputy-director-tag") ?></b><br><?= get_text_estrutura("deputy-director") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-executive-secretary-tag") ?></b><br><?= get_text("executive-secretary") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-executive-secretary-tag") ?></b><br><?= get_text_estrutura("executive-secretary") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-board-tag") ?><br> </b><?= get_text("board-composed") ?><br>
-                        <?= get_text("board-member1") ?><br>
-                        <?= get_text("board-member2") ?><br>
-                        <?= get_text("board-member3") ?><br>
-                        <?= get_text("board-member4") ?><br>
-                        <?= get_text("board-member5") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-board-tag") ?><br> </b><?= get_text_estrutura("board-composed") ?><br>
+                        <?= get_text_estrutura("board-member1") ?><br>
+                        <?= get_text_estrutura("board-member2") ?><br>
+                        <?= get_text_estrutura("board-member3") ?><br>
+                        <?= get_text_estrutura("board-member4") ?><br>
+                        <?= get_text_estrutura("board-member5") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= get_text("all-integrated-members") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= get_text_estrutura("all-integrated-members") ?><br><br>
 
-                        <b><?= get_text("org-struct-page-advisory-council-tag") ?><br></b>
+                        <b><?= get_text_estrutura("org-struct-page-advisory-council-tag") ?><br></b>
                         <section class="product_section layout_padding">
                             <div style="padding-top: 20px;">
                                 <div class="container">
