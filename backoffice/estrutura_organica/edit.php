@@ -8,51 +8,29 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-// Caminho onde a imagem será salva
-$filesDir = "../assets/estrutura_organica/";
-
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id         = $_POST["id"];
-    $titulo     = $_POST["titulo"];
-    $subtitulo  = $_POST["subtitulo"];
-    $cargo      = $_POST["cargo"];
-    $nome       = $_POST["nome"];
-    $oldFoto    = $_POST["old_fotografia"] ?? '';
+    $chave     = $_POST["chave"];
+    $texto_pt  = $_POST["texto_pt"];
+    $texto_en     = $_POST["texto_en"];
 
     // Limpa tags HTML indesejadas
-    $titulo     = strip_tags($titulo);
-    $subtitulo  = strip_tags($subtitulo);
-    $cargo      = strip_tags($cargo);
-    $nome       = strip_tags($nome);
-
-    // Verifica se foi carregada uma nova imagem
-    if (isset($_FILES["fotografia"]) && $_FILES["fotografia"]["size"] > 0) {
-        $newFileName = uniqid() . '_' . $_FILES["fotografia"]["name"];
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $newFileName);
-        $fotografia = $newFileName;
-
-    } else {
-        // Mantém a foto antiga
-        $fotografia = $oldFoto;
-    }
-
+    $texto_en    = strip_tags($texto_en);
+    $texto_pt  = strip_tags($texto_pt);
+   
     // Atualiza os dados na base de dados
     $sql = "UPDATE estrutura_organica
-               SET titulo     = ?,
-                   subtitulo  = ?,
-                   cargo      = ?,
-                   nome       = ?,
-                   fotografia = ?
+               SET texto_pt     = ?,
+                   texto_en = ?,
+                   chave     = ?
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param(
-        $stmt, 'sssssi', 
-        $titulo, 
-        $subtitulo, 
-        $cargo, 
-        $nome, 
-        $fotografia,
+        $stmt, 'sssi', 
+        $texto_pt, 
+        $texto_en, 
+        $chave,
         $id
     );
 
@@ -65,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT titulo, subtitulo, cargo, nome, fotografia 
+    $sql = "SELECT chave,texto_pt,texto_en
               FROM estrutura_organica
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -74,11 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $titulo     = $row["titulo"];
-    $subtitulo  = $row["subtitulo"];
-    $cargo      = $row["cargo"];
-    $nome       = $row["nome"];
-    $fotografia = $row["fotografia"]; 
+    $chave     = $row["chave"];
+    $texto_en  = $row["texto_en"];
+    $texto_pt     = $row["texto_pt"];
 }
 
 // Fechar conexão
@@ -113,71 +89,42 @@ if ($conn && $conn instanceof mysqli) {
 
             <form action="edit.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-                <input type="hidden" name="old_fotografia" value="<?= htmlspecialchars($fotografia) ?>">
 
-                <!-- Título -->
+                <!-- Chave -->
                 <div class="form-group">
-                    <label>Título</label>
+                    <label>Chave</label>
                     <input 
                         type="text" 
                         required 
                         maxlength="255" 
-                        name="titulo" 
+                        name="chave" 
                         class="form-control" 
-                        value="<?= htmlspecialchars($titulo) ?>">
+                        value="<?= htmlspecialchars($chave) ?>">
                 </div>
 
-                <!-- Subtítulo -->
-                <div class="form-group">
-                    <label>Subtítulo</label>
+                
+
+              
+               <div class="form-group">
+                    <label>Texto(Portugues)</label>
                     <input 
                         type="text" 
                         maxlength="255" 
-                        name="subtitulo" 
+                        name="texto_pt" 
                         class="form-control" 
-                        value="<?= htmlspecialchars($subtitulo) ?>">
+                        value="<?= htmlspecialchars($texto_pt) ?>">
                 </div>
 
-                <!-- Cargo -->
+
+              
                 <div class="form-group">
-                    <label>Cargo</label>
+                    <label>Texto(Ingles)</label>
                     <input 
                         type="text" 
                         maxlength="255" 
-                        name="cargo" 
+                        name="texto_en" 
                         class="form-control" 
-                        value="<?= htmlspecialchars($cargo) ?>">
-                </div>
-
-                <!-- Nome -->
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input 
-                        type="text" 
-                        required
-                        maxlength="255" 
-                        name="nome" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($nome) ?>">
-                </div>
-
-                <!-- Fotografia -->
-                <div class="form-group">
-                    <label>Fotografia</label>
-                    <?php if (!empty($fotografia) && file_exists($filesDir . $fotografia)): ?>
-                        <img 
-                            src="<?= $filesDir . htmlspecialchars($fotografia) ?>" 
-                            alt="Fotografia" 
-                            class="img-preview"
-                        >
-                    <?php else: ?>
-                        <p class="text-muted">Nenhuma imagem encontrada.</p>
-                    <?php endif; ?>
-
-                    <input type="file" name="fotografia" class="form-control">
-                    <small class="form-text text-muted">
-                        Se quiser alterar a fotografia, carregue uma nova imagem.
-                    </small>
+                        value="<?= htmlspecialchars($texto_en) ?>">
                 </div>
 
                 <!-- Botões -->
