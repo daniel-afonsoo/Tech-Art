@@ -1,9 +1,13 @@
 <?php
+require_once 'config/dbconnection.php';
 session_start();
 
 if(!isset($_SESSION["lang"])){
   $_SESSION["lang"] = "pt";
 }
+
+
+
 
 $_SESSION["basename"] = $_SERVER['PHP_SELF'];
 
@@ -500,3 +504,44 @@ function show_error($error)
   </div>
 </div>';
 }
+
+//função para ir buscar os textos da tabela missão
+function get_text_missao($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM missao WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar os textos da tabela estrutura
+function get_text_estrutura($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar os textos da tabela eixos
+function get_text_eixos($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM eixos WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+?>

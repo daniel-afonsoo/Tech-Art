@@ -23,7 +23,7 @@ $pdo = pdo_connect_mysql();
 <?= template_header('Estrutura'); ?>
 
 <!-- product section -->
-<section class="product_section layout_padding">
+<section class="product_section layout  _padding">
     <div style="padding-top: 50px; padding-bottom: 30px;">
         <div class="container">
             <div class="heading_container3">
@@ -40,24 +40,24 @@ $pdo = pdo_connect_mysql();
                         </figure>
                     </div>
                     <div class="flex-right">
-                        <?= change_lang("org-struct-page-description") ?><br><br>
+                        <?= get_text_estrutura("org-struct-page-description") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-director-tag") ?></b><br><?= change_lang("director") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-director-tag") ?></b><br><?= get_text_estrutura("director") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-deputy-director-tag") ?></b><br><?= change_lang("deputy-director") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-deputy-director-tag") ?></b><br><?= get_text_estrutura("deputy-director") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-executive-secretary-tag") ?></b><br><?= change_lang("executive-secretary") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-executive-secretary-tag") ?></b><br><?= get_text_estrutura("executive-secretary") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-board-tag") ?><br> </b><?= change_lang("board-composed") ?><br>
-                        <?= change_lang("board-member1") ?><br>
-                        <?= change_lang("board-member2") ?><br>
-                        <?= change_lang("board-member3") ?><br>
-                        <?= change_lang("board-member4") ?><br>
-                        <?= change_lang("board-member5") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-board-tag") ?><br> </b><?= get_text_estrutura("board-composed") ?><br>
+                        <?= get_text_estrutura("board-member1") ?><br>
+                        <?= get_text_estrutura("board-member2") ?><br>
+                        <?= get_text_estrutura("board-member3") ?><br>
+                        <?= get_text_estrutura("board-member4") ?><br>
+                        <?= get_text_estrutura("board-member5") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= change_lang("all-integrated-members") ?><br><br>
+                        <b><?= get_text_estrutura("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= get_text_estrutura("all-integrated-members") ?><br><br>
 
-                        <b><?= change_lang("org-struct-page-advisory-council-tag") ?><br></b>
+                        <b><?= get_text_estrutura("org-struct-page-advisory-council-tag") ?><br></b>
                         <section class="product_section layout_padding">
                             <div style="padding-top: 20px;">
                                 <div class="container">
