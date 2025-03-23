@@ -544,4 +544,33 @@ function get_text_eixos($key) {
   return $stmt->fetchColumn() ?: 'Texto não encontrado';
 }
 
+
+//função para ir buscar o titulo do slide no carrosel
+
+function get_titulo_carrosel($key){
+  $pdo = pdo_connect_mysql();
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'titulo_en' : 'titulo_pt';
+
+  $stmt = $pdo->prepare("SELECT $language FROM carrosel WHERE chave = ?");
+
+  $stmt -> execute([$key]);
+
+  return $stmt->fetchcolumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar o subtitulo do slide no carrosel
+
+function get_subtitulo_carrosel($key){
+  $pdo = pdo_connect_mysql();
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'subtitulo_en' : 'subtitulo_pt';
+
+  $stmt = $pdo->prepare("SELECT $language FROM carrosel WHERE chave = ?");
+
+  $stmt -> execute([$key]);
+
+  return $stmt->fetchcolumn() ?: 'Texto não encontrado';
+}
+
 ?>
