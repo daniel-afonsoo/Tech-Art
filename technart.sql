@@ -1332,7 +1332,32 @@ INSERT INTO eixos (chave, texto_pt, texto_en) VALUES
 
 
 
+/* Criação da tabela carrosel*/
+CREATE TABLE carrosel (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    chave VARCHAR(255) NOT NULL,
+    titulo_pt VARCHAR(255) NOT NULL,
+    titulo_en VARCHAR(255) NOT NULL,
+    subtitulo_pt TEXT,
+    subtitulo_en TEXT,
+    imagem VARCHAR(255)
+);
 
+INSERT INTO carrosel (chave, titulo_pt, titulo_en, subtitulo_pt, subtitulo_en, imagem) VALUES
+('index-first-slide', 'Sobre o TECHN&ART', 'About TECHN&ART', 
+ 'Centro de investigação e desenvolvimento nos domínios da Salvaguarda do Património e da sua Valorização, experimental e aplicada.', 
+ 'Research and development center in the fields of Heritage Safeguarding and its experimental and applied enhancement.', 
+ NULL),
+
+('index-second-slide', 'Tecnologia e interdisciplinaridade ao serviço do Património', 'Technology and interdisciplinarity in the service of Heritage', 
+ 'O TECHN&ART une investigadores/as das mais diversas áreas disciplinares presentes no Instituto Politécnico de Tomar, das TIC às artes, das ciências sociais às ciências naturais', 
+ 'TECHN&ART brings together researchers from various disciplinary fields at the Polytechnic Institute of Tomar, from ICT to arts, from social sciences to natural sciences', 
+ NULL),
+
+('index-third-slide-slider', 'Investigação e desenvolvimento em rede', 'Research and development in network', 
+ 'O TECHN&ART acolhe e coordena projetos de I&D numa ampla rede de parceiros nacionais e internacionais, na linha da frente da salvaguarda e valorização patrimoniais.', 
+ 'TECHN&ART hosts and coordinates R&D projects within a broad network of national and international partners, at the forefront of heritage safeguarding and enhancement.', 
+ NULL);
 
 
 
