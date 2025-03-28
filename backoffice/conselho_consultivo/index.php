@@ -134,7 +134,7 @@ if (@$_SESSION["anoRelatorio"] != "") {
 								if ($_SESSION["autenticado"] == 'administrador') {
 									echo "<a href='remove.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-danger'><span>Apagar</span></a><br>";
 								}
-								echo "<a href='resetpassword.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-warning'><span>Alterar Password</span></a><br>";
+		
 				
 								echo "</td>";
 								echo "</tr>";
