@@ -4,7 +4,7 @@ require "../config/basedados.php";
 
 
 
-$search    = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 $perPage   = 10;
 $searchSQL = '%' . $search . '%';
 $page      = isset($_GET['page']) ? (int)$_GET['page'] : 1;

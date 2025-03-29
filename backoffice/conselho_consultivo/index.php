@@ -6,7 +6,7 @@ $find = "";
 
 
 
-$search = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 $perPage = 10;
 $searchName =  '%' . $search . '%';
 
