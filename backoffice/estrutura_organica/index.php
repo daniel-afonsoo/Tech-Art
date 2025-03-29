@@ -3,7 +3,9 @@ require "../verifica.php";
 require "../config/basedados.php";
 
 // Filtro de pesquisa
-$search   = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+
 $perPage  = 10;
 $page     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start    = ($page - 1) * $perPage;

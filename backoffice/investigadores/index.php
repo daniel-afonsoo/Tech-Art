@@ -6,12 +6,8 @@ $find = "";
 
 
 
-//Alterações efetuadas aqui 
 
-//Se a URL for pagina.php?search=projeto1, então $_GET['search'] será "projeto1"
-//Se a URL não contiver o parâmetro search, então $_GET['search'] será nulo, e $search receberá uma string vazia
-//  " ?? '' " O operador "??" verifica se o parâmetro search está definido. Se sim, retorna o valor de ($_GET['search']).Se não, retorna uma string vazia ('')-->
-$search = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 
 
 
