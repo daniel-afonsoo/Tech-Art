@@ -6,7 +6,7 @@ include 'models/functions.php';
 $pdo = pdo_connect_mysql();
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
-$perPage = 8;
+$perPage = 9;
 
 
 // Determina a página atual com base no parâmetro 'page' no URL
