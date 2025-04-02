@@ -2,6 +2,36 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
+
+
+
+// Diretoria onde as imagens serão guardadas 
+$mainDir = "../assets/carousel/";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $titulo    = $_POST["titulo"]    ?? '';
+    $subtitulo = $_POST["subtitulo"] ?? '';
+
+    // Prepara a variável que vai para a Base de Dados
+    $nomeImagem = "";
+
+    // Verifica se há upload de imagem
+    if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] === UPLOAD_ERR_OK) {
+        $tempName     = $_FILES["imagem"]["tmp_name"];
+        $originalName = uniqid() . '_' . $_FILES["imagem"]["name"];
+
+        
+        $nomeImagem = $mainDir . $originalName;
+
+        // Move o ficheiro para a pasta
+        move_uploaded_file($tempName, $nomeImagem);
+    }
+
+    // Insere na tabela 'carousel'
+    $sql = "INSERT INTO carousel (titulo, subtitulo, imagem) VALUES (?,?,?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, 'sss', $titulo, $subtitulo, $nomeImagem);
+
 // Verifica se o utilizador tem permissão
 if ($_SESSION["autenticado"] != 'administrador') {
     header("Location: index.php");
@@ -46,6 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $imagem
     );
 
+
     if (mysqli_stmt_execute($stmt)) {
         header("Location: index.php");
         exit;
@@ -54,8 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
+
+
 // Fechar conexão
 mysqli_close($conn);
+
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +113,7 @@ mysqli_close($conn);
         .btn-danger  { background: red;  border: none; }
         .btn-success { background: green; border: none; }
         .btn-warning { background: orange; border: none; }
+
     </style>
 </head>
 <body>

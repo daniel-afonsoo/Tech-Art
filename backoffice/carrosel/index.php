@@ -4,7 +4,9 @@ require "../config/basedados.php";
 
 
 
+
 $search = isset($_GET['search']) ? $_GET['search'] : '';
+
 $perPage   = 10;
 $searchSQL = '%' . $search . '%';
 $page      = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -17,7 +19,7 @@ $sql = "SELECT id,chave,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
         LIMIT $start, $perPage";
 $result = mysqli_query($conn, $sql);
 
-// Conta total de registos para paginação
+
 $totalSql    = "SELECT COUNT(*) FROM carousel WHERE chave LIKE '$searchSQL'";
 $totalResult = mysqli_query($conn, $totalSql);
 $totalRows   = mysqli_fetch_row($totalResult)[0];
@@ -117,6 +119,7 @@ $totalPages  = ceil($totalRows / $perPage);
                 </tr>
             </thead>
             <tbody id="tableBody">
+
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <tr>
             <td><?= htmlspecialchars($row['chave']) ?></td>

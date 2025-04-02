@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
     if (mysqli_stmt_execute($stmt)) {
+
         // Apagar a imagem do servidor (se existir)
         $imgPath = "../assets/carousel/" . $imagem;
 
@@ -27,23 +28,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 } else {
+
     // GET => Exibir o formulário de confirmação
     $id = $_GET["id"] ?? 0;
 
     $sql  = "SELECT id, chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
              FROM carousel
              WHERE id = ?";
+
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
+
         $titulo_pt    = $row["titulo_pt"];
         $subtitulo_pt = $row["subtitulo_pt"];
         $titulo_en    = $row["titulo_en"];
         $subtitulo_en = $row["subtitulo_en"];
         $imagem       = $row["imagem"];
+
     } else {
         echo "Slide não encontrado.";
         exit;
@@ -70,8 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         .btn-primary { background: blue; border: none; }
         .btn-danger  { background: red;  border: none; }
-        .btn-success { background: green; border: none; }
-        .btn-warning { background: orange; border: none; }
+        .btn-success { background: green;border: none; }
+        .btn-warning { background: orange;border: none; }
+
         img.fotografia {
             max-width: 200px;
             max-height: 200px;
@@ -122,6 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="form-group">
             <label>Subtítulo (EN)</label>
             <textarea class="form-control" rows="3" readonly><?= htmlspecialchars($subtitulo_en) ?></textarea>
+
         </div>
 
         <!-- Imagem -->

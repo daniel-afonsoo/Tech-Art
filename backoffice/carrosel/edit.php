@@ -7,6 +7,7 @@ $mainDir = "../assets/carousel/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Dados do formulário
+
     $id            = $_POST["id"];
     $chave         = $_POST["chave"]         ?? '';
     $titulo_pt     = $_POST["titulo_pt"]     ?? '';
@@ -50,6 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $id
     );
 
+
     if (mysqli_stmt_execute($stmt)) {
         header("Location: index.php");
         exit;
@@ -61,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Se for GET, buscar dados do slide para exibir
     $id = $_GET["id"] ?? 0;
 
+
     $sql = "SELECT id, chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
             FROM carousel
             WHERE id = ?";
@@ -70,12 +73,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
+
         $chave         = $row["chave"];
         $titulo_pt     = $row["titulo_pt"];
         $subtitulo_pt  = $row["subtitulo_pt"];
         $titulo_en     = $row["titulo_en"];
         $subtitulo_en  = $row["subtitulo_en"];
         $imagem        = $row["imagem"];
+
     } else {
         echo "Slide não encontrado!";
         exit;
@@ -121,7 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- ID e imagem antiga (hidden) -->
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <input type="hidden" name="old_imagem" value="<?= htmlspecialchars($imagem) ?>">
-
         <!-- Chave -->
         <div class="form-group">
             <label for="chave">Chave</label>
@@ -164,6 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="form-group">
             <label for="subtitulo_en">Subtítulo (EN)</label>
             <textarea name="subtitulo_en" id="subtitulo_en" class="form-control" rows="3"><?= htmlspecialchars($subtitulo_en) ?></textarea>
+
         </div>
 
         <!-- Imagem -->
