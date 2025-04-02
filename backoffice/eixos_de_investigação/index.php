@@ -10,10 +10,10 @@ $searchName = '%' . $search . '%';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $perPage;
 
-$sql = "SELECT id, chave, texto_pt,texto_en FROM eixos_investigacao WHERE chave LIKE '$searchName' LIMIT $start, $perPage";
+$sql = "SELECT id, texto_pt, texto_en,titulo_pt,titulo_en FROM eixos LIMIT $start, $perPage";
 $result = mysqli_query($conn, $sql);
 
-$totalSql = "SELECT COUNT(*) FROM eixos_investigacao WHERE chave LIKE '$searchName'";
+$totalSql = "SELECT COUNT(*) FROM eixos WHERE id=1";
 $totalResult = mysqli_query($conn, $totalSql);
 $totalRows = mysqli_fetch_row($totalResult)[0];
 $totalPages = ceil($totalRows / $perPage);
@@ -93,18 +93,22 @@ $totalPages = ceil($totalRows / $perPage);
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Chave</th>
+                    <th>ID</th>
                     <th>Texto (PT)</th>
                     <th>Texto (EN)</th>
+                    <th>Titulo (PT)</th>
+                    <th>Titulo (EN)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><?= $row['chave'] ?></td>
+                        <td><?= $row['id'] ?></td>
                         <td><textarea class="form-control" readonly><?= $row['texto_pt'] ?></textarea></td>
                         <td> <textarea class="form-control" readonly><?= $row['texto_en'] ?></textarea> </td>
+                        <td><textarea class="form-control" readonly><?= $row['titulo_pt'] ?></textarea></td>
+                        <td> <textarea class="form-control" readonly><?= $row['titulo_en'] ?></textarea> </td>
                         <td style="min-width:200px;">
                             <a href="edit.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-primary">Alterar</a>
                             <a href="delete.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-danger">Apagar</a>

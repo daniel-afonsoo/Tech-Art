@@ -5,32 +5,9 @@ require "../config/basedados.php";
 
 
 
-// Diretoria onde as imagens serão guardadas 
-$mainDir = "../assets/carousel/";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $titulo    = $_POST["titulo"]    ?? '';
-    $subtitulo = $_POST["subtitulo"] ?? '';
 
-    // Prepara a variável que vai para a Base de Dados
-    $nomeImagem = "";
-
-    // Verifica se há upload de imagem
-    if (isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] === UPLOAD_ERR_OK) {
-        $tempName     = $_FILES["imagem"]["tmp_name"];
-        $originalName = uniqid() . '_' . $_FILES["imagem"]["name"];
-
-        
-        $nomeImagem = $mainDir . $originalName;
-
-        // Move o ficheiro para a pasta
-        move_uploaded_file($tempName, $nomeImagem);
-    }
-
-    // Insere na tabela 'carousel'
-    $sql = "INSERT INTO carousel (titulo, subtitulo, imagem) VALUES (?,?,?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', $titulo, $subtitulo, $nomeImagem);
+    
 
 // Verifica se o utilizador tem permissão
 if ($_SESSION["autenticado"] != 'administrador') {
@@ -62,13 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Monta a query de inserção (6 colunas = 6 placeholders)
-    $sql = "INSERT INTO carousel 
-                (chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem) 
+    $sql = "INSERT INTO carrosel 
+                (id, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem) 
             VALUES (?,?,?,?,?,?)";
 
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'ssssss',
-        $chave,
+        $id,
         $titulo_pt,
         $subtitulo_pt,
         $titulo_en,
@@ -113,7 +90,7 @@ mysqli_close($conn);
         .btn-danger  { background: red;  border: none; }
         .btn-success { background: green; border: none; }
         .btn-warning { background: orange; border: none; }
-
+       
     </style>
 </head>
 <body>
@@ -125,8 +102,8 @@ mysqli_close($conn);
     <form action="add.php" method="POST" enctype="multipart/form-data" class="mt-4">
         <!-- Chave -->
         <div class="form-group">
-            <label for="chave">Chave</label>
-            <input type="text" name="chave" id="chave" class="form-control" required>
+            <label for="chave">ID</label>
+            <input type="text" name="id" id="id" class="form-control" required>
         </div>
 
         <!-- Título (PT) -->
@@ -166,4 +143,4 @@ mysqli_close($conn);
 </div>
 </body>
 </html>
-
+ 

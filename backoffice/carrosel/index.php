@@ -13,14 +13,13 @@ $page      = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start     = ($page - 1) * $perPage;
 
 // Consulta principal com pesquisa no campo 'titulo'
-$sql = "SELECT id,chave,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
-        FROM carousel
-        WHERE chave LIKE '$searchSQL'
+$sql = "SELECT id,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
+        FROM carrosel
         LIMIT $start, $perPage";
 $result = mysqli_query($conn, $sql);
 
 
-$totalSql    = "SELECT COUNT(*) FROM carousel WHERE chave LIKE '$searchSQL'";
+$totalSql    = "SELECT COUNT(*) FROM carrosel WHERE id LIKE '$searchSQL'";
 $totalResult = mysqli_query($conn, $totalSql);
 $totalRows   = mysqli_fetch_row($totalResult)[0];
 $totalPages  = ceil($totalRows / $perPage);
@@ -109,7 +108,7 @@ $totalPages  = ceil($totalRows / $perPage);
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Chave</th>
+                    <th>ID</th>
                     <th>Título_PT</th>
                     <th>Título_EN</th>
                     <th>Subtítulo_PT</th>
@@ -122,7 +121,7 @@ $totalPages  = ceil($totalRows / $perPage);
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <tr>
-            <td><?= htmlspecialchars($row['chave']) ?></td>
+            <td><?= htmlspecialchars($row['id']) ?></td>
             <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
             <td><?= htmlspecialchars($row['titulo_en']) ?></td>
             <td><?= htmlspecialchars($row['subtitulo_pt']) ?></td>

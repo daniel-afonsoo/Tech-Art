@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Monta a query de inserção
-    $sql = "INSERT INTO estrutura_organica (chave,texto_pt, texto_en) 
+    $sql = "INSERT INTO estrutura (chave,texto_pt, texto_en) 
             VALUES (?,?,?)";
 
     

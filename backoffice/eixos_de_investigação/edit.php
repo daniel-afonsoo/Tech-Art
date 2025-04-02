@@ -12,7 +12,7 @@ if ($_SESSION["autenticado"] != 'administrador') {
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id        = $_POST["id"];
-    $chave      = $_POST["chave"];
+    
 
     // Remove todas as tags HTML para salvar texto puro
     $texto_pt  = strip_tags($_POST["texto_pt"]);
@@ -20,20 +20,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Remove todas as tags HTML para salvar texto puro
     $texto_en = strip_tags($_POST["texto_en"]);
 
+    
+    $titulo_pt  = strip_tags($_POST["titulo_pt"]);
+
+    
+    $titulo_en = strip_tags($_POST["titulo_en"]);
+
+
 
     // Atualiza os dados na base de dados
-    $sql = "UPDATE eixos_investigacao
-               SET chave = ?, 
+    $sql = "UPDATE eixos
+               SET 
                    texto_pt = ?, 
-                   texto_en = ? 
+                   texto_en = ?,
+                   titulo_pt = ?,
+                   titulo_en = ? 
                   
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssi', 
-                           $chave, 
+    mysqli_stmt_bind_param($stmt, 'ssssi', 
                            $texto_pt,
-                           $texto_en,  
-                           $id);
+                           $texto_en,
+                           $titulo_pt,
+                           $titulo_en,
+                           $id    
+                           );
 
     if (mysqli_stmt_execute($stmt)) {
         header('Location: index.php');
@@ -44,16 +55,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados do texto para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT chave, texto_pt,texto_en FROM eixos_investigacao WHERE id = ?";
+    $sql = "SELECT id, texto_pt,texto_en,titulo_pt,titulo_en FROM eixos WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $nome       = $row["chave"];
+    $id     = $row["id"];
     $texto_pt   = $row["texto_pt"];
     $texto_en   = $row["texto_en"];
+    $titulo_pt   = $row["titulo_pt"];
+    $titulo_en   = $row["titulo_en"];
 }
 
 // Fechar a conexão
@@ -94,14 +107,14 @@ if ($conn && $conn instanceof mysqli) {
 
                 
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input 
                         type="text" 
                         required 
                         maxlength="255" 
-                        name="chave" 
+                        name="id" 
                         class="form-control" 
-                        value="<?= htmlspecialchars($nome) ?>">
+                        value="<?= htmlspecialchars($id) ?>">
                 </div>
 
                
@@ -119,6 +132,22 @@ if ($conn && $conn instanceof mysqli) {
                         name="texto_en" 
                         class="form-control ck_replace"
                         rows="6"><?= htmlspecialchars($texto_en) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Título (Português)</label>
+                    <textarea 
+                        name="titulo_pt" 
+                        class="form-control ck_replace"
+                        rows="6"><?= htmlspecialchars($titulo_pt) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Título (Inglês)</label>
+                    <textarea 
+                        name="titulo_en" 
+                        class="form-control ck_replace"
+                        rows="6"><?= htmlspecialchars($titulo_en) ?></textarea>
                 </div>
                 
                 <div class="form-group mt-4">

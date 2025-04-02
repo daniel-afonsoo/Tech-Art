@@ -13,7 +13,7 @@ $searchQ  = '%' . $search . '%';
 
 
 $sql = "SELECT id, chave , texto_pt, texto_en
-          FROM estrutura_organica
+          FROM estrutura
          WHERE chave LIKE ?
          LIMIT $start, $perPage";
 
@@ -24,7 +24,7 @@ $result = mysqli_stmt_get_result($stmt);
 
 // Query para contar total de registros (para paginação)
 $totalSql = "SELECT COUNT(*) 
-               FROM estrutura_organica
+               FROM estrutura
               WHERE chave LIKE ?";
 $stmtTotal = mysqli_prepare($conn, $totalSql);
 mysqli_stmt_bind_param($stmtTotal, 's', $searchQ);

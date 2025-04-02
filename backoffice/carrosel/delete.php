@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $imagem = $_POST["imagem"] ?? '';
 
     // Apaga o registo 
-    $sql  = "DELETE FROM carousel WHERE id = ?";
+    $sql  = "DELETE FROM carrosel WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
@@ -32,8 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // GET => Exibir o formulário de confirmação
     $id = $_GET["id"] ?? 0;
 
-    $sql  = "SELECT id, chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
-             FROM carousel
+    $sql  = "SELECT id, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
+             FROM carrosel
              WHERE id = ?";
 
     $stmt = mysqli_prepare($conn, $sql);

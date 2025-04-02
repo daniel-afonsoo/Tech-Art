@@ -25,16 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     
     $id = $_GET["id"];
-    $sql  = "SELECT chave, texto_pt, texto_en FROM missao WHERE id = ?";
+    $sql  = "SELECT id, texto_pt, texto_en,titulo_en,titulo_pt FROM missao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $chave       = $row["chave"];
+        $id      = $row["id"];
         $texto_pt   = $row["texto_pt"];
         $texto_en   = $row["texto_en"];
+        $titulo_pt   = $row["titulo_pt"];
+        $titulo_en   = $row["titulo_en"];
     } else {
         echo "Registo não encontrado.";
         mysqli_close($conn);
@@ -84,9 +86,9 @@ mysqli_close($conn);
 
                 <!-- Chave -->
                 <div class="form-group">
-                    <label>Chave</label>
-                    <input type="text" readonly name="chave" class="form-control" 
-                           value="<?= htmlspecialchars($chave) ?>">
+                    <label>ID</label>
+                    <input type="text" readonly name="id" class="form-control" 
+                           value="<?= htmlspecialchars($id) ?>">
                     <div class="help-block with-errors"></div>
                 </div>
 
@@ -103,6 +105,24 @@ mysqli_close($conn);
                         <div class="form-group">
                             <label>Texto (Inglês)</label>
                             <textarea readonly class="form-control" name="texto_en" rows="4"><?= htmlspecialchars($texto_en) ?></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Texto (Português) e Texto (Inglês) -->
+                 <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Titulo(Português)</label>
+                            <textarea readonly class="form-control" name="titulo_pt" rows="4"><?= htmlspecialchars($titulo_pt) ?></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Titulo(Inglês)</label>
+                            <textarea readonly class="form-control" name="titulo_en" rows="4"><?= htmlspecialchars($titulo_en) ?></textarea>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
