@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $texto_pt  = strip_tags($texto_pt);
    
     // Atualiza os dados na base de dados
-    $sql = "UPDATE estrutura_organica
+    $sql = "UPDATE estrutura
                SET texto_pt     = ?,
                    texto_en = ?,
                    chave     = ?
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Carregar os dados para exibir no formulário
     $id = $_GET["id"];
     $sql = "SELECT chave,texto_pt,texto_en
-              FROM estrutura_organica
+              FROM estrutura
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);

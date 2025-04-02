@@ -5,7 +5,7 @@ require "../config/basedados.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $chave     = $_POST["chave"];
+    $id     = $_POST["id"];
     
     // Remove todas as tags HTML para guardar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);
@@ -13,14 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Remove todas as tags HTML para guardar só texto puro
     $texto_en = strip_tags($_POST["texto_en"]);
 
+    // Remove todas as tags HTML para guardar só texto puro
+    $titulo_pt = strip_tags($_POST["titulo_pt"]);
+
+    // Remove todas as tags HTML para guardar só texto puro
+    $titulo_en = strip_tags($_POST["titulo_en"]);
+
+
 
     // Montar a query de inserção
-    $sql = "INSERT INTO eixos_investigacao (chave, texto_pt, texto_en) 
-            VALUES (?,?,?)";
+    $sql = "INSERT INTO eixos (id, texto_pt, texto_en,titulo_pt,titulo_en) 
+            VALUES (?,?,?,?,?)";
 
     
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', $chave, $texto_pt, $texto_en);
+    mysqli_stmt_bind_param($stmt, 'sssss', $id, $texto_pt, $texto_en, $titulo_pt, $titulo_en);
 
    
     if (mysqli_stmt_execute($stmt)) {
@@ -88,10 +95,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input type="text"
                            class="form-control"
-                           name="chave"
+                           name="id"
                            required
                            data-error="Por favor adicione um nome"
                            maxlength="200">
@@ -111,6 +118,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>Texto (English)</label>
                     <textarea class="form-control ck_replace"
                               name="texto_en"
+                              rows="5"></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+
+                 
+                <div class="form-group">
+                    <label>Título (Português)</label>
+                    <textarea class="form-control ck_replace"
+                              name="titulo_pt"
+                              rows="5"></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Título (English)</label>
+                    <textarea class="form-control ck_replace"
+                              name="titulo_en"
                               rows="5"></textarea>
                     <div class="help-block with-errors"></div>
                 </div>

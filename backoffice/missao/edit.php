@@ -12,23 +12,26 @@ if ($_SESSION["autenticado"] != 'administrador') {
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id        = $_POST["id"];
-    $chave     = $_POST["chave"];
     // Remove todas as tags HTML para salvar texto puro
     $texto_pt  = strip_tags($_POST["texto_pt"]);
     $texto_en  = strip_tags($_POST["texto_en"]);
+    $titulo_pt = strip_tags($_POST["titulo_pt"]);
+    $titulo_en = strip_tags($_POST["titulo_en"]);
     
 
     // Atualiza os dados na base de dados
     $sql = "UPDATE missao
-               SET chave = ?, 
-                   texto_pt = ?, 
-                   texto_en = ?
+               SET texto_pt = ?, 
+                   texto_en = ?,
+                   titulo_pt = ?, 
+                   titulo_en = ?
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssi', 
-                           $chave, 
+    mysqli_stmt_bind_param($stmt, 'ssssi', 
                            $texto_pt, 
-                           $texto_en,  
+                           $texto_en,
+                           $titulo_pt,
+                           $titulo_en,  
                            $id);
 
     if (mysqli_stmt_execute($stmt)) {
@@ -40,16 +43,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados do texto para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT chave, texto_pt, texto_en FROM missao WHERE id = ?";
+    $sql = "SELECT id, texto_pt, texto_en,titulo_en,titulo_pt FROM missao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $chave       = $row["chave"];
+    $id     = $row["id"];
     $texto_pt   = $row["texto_pt"];
-    $texto_en   = $row["texto_en"]; 
+    $texto_en   = $row["texto_en"];
+    $titulo_pt   = $row["titulo_pt"];
+    $titulo_en   = $row["titulo_en"]; 
 }
 
 // Fechar conexão
@@ -76,13 +81,13 @@ if ($conn && $conn instanceof mysqli) {
             <form role="form" action="edit.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input type="text" 
                            required 
                            maxlength="255" 
-                           name="chave" 
+                           name="id" 
                            class="form-control" 
-                           value="<?= htmlspecialchars($chave) ?>">
+                           value="<?= htmlspecialchars($id) ?>">
                 </div>
 
                 <div class="form-group">
@@ -93,6 +98,16 @@ if ($conn && $conn instanceof mysqli) {
                 <div class="form-group">
                     <label>Texto (Inglês)</label>
                     <textarea name="texto_en" class="form-control ck_replace"><?= htmlspecialchars($texto_en) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Titulo(Português)</label>
+                    <textarea name="titulo_pt" class="form-control ck_replace"><?= htmlspecialchars($titulo_pt) ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Titulo (Inglês)</label>
+                    <textarea name="titulo_en" class="form-control ck_replace"><?= htmlspecialchars($titulo_en) ?></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Gravar</button>

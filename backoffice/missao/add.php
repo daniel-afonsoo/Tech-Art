@@ -11,14 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $texto_pt = strip_tags($_POST["texto_pt"]);
     $texto_en = strip_tags($_POST["texto_en"]);
 
+    $titulo_pt = strip_tags($_POST["titulo_pt"]);
+    $titulo_en = strip_tags($_POST["titulo_en"]);
+
 
     // Monta a query de inserção
-    $sql = "INSERT INTO missao (chave,texto_pt, texto_en) 
-            VALUES (?,?,?)";
+    $sql = "INSERT INTO missao (id,texto_pt, texto_en,titulo_pt,titulo_en) 
+            VALUES (?,?,?,?,?)";
 
     // Prepara a instrução
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', $chave, $texto_pt, $texto_en);
+    mysqli_stmt_bind_param($stmt, 'issss', $id, $texto_pt, $texto_en, $titulo_pt, $titulo_en);
 
     // Executa
     if (mysqli_stmt_execute($stmt)) {
@@ -79,10 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <!-- Chave -->
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input type="text"
                            class="form-control"
-                           name="chave"
+                           name="id"
                            required
                            data-error="Por favor adicione uma chave"
                            maxlength="200">
@@ -105,6 +108,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label>Texto (Inglês)</label>
                             <textarea class="form-control ck_replace"
                                       name="texto_en"
+                                      rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Texto (Português) e Texto (Inglês) -->
+                 <div class="row">
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Titulo (Português)</label>
+                            <textarea class="form-control ck_replace"
+                                      name="titulo_pt"
+                                      rows="5"></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Titulo (Inglês)</label>
+                            <textarea class="form-control ck_replace"
+                                      name="titulo_en"
                                       rows="5"></textarea>
                         </div>
                     </div>

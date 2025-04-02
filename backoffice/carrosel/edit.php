@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Dados do formulário
 
     $id            = $_POST["id"];
-    $chave         = $_POST["chave"]         ?? '';
     $titulo_pt     = $_POST["titulo_pt"]     ?? '';
     $subtitulo_pt  = $_POST["subtitulo_pt"]  ?? '';
     $titulo_en     = $_POST["titulo_en"]     ?? '';
@@ -32,17 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Atualiza o registro 
-    $sql = "UPDATE carousel
-               SET chave         = ?,
-                   titulo_pt     = ?,
+    $sql = "UPDATE carrosel
+               SET titulo_pt     = ?,
                    subtitulo_pt  = ?,
                    titulo_en     = ?,
                    subtitulo_en  = ?,
                    imagem        = ?
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssssi',
-        $chave,
+    mysqli_stmt_bind_param($stmt, 'sssssi',
         $titulo_pt,
         $subtitulo_pt,
         $titulo_en,
@@ -64,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = $_GET["id"] ?? 0;
 
 
-    $sql = "SELECT id, chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
-            FROM carousel
+    $sql = "SELECT id,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
+            FROM carrosel
             WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
@@ -73,8 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-
-        $chave         = $row["chave"];
+        $id           = $row["id"];
         $titulo_pt     = $row["titulo_pt"];
         $subtitulo_pt  = $row["subtitulo_pt"];
         $titulo_en     = $row["titulo_en"];
@@ -126,15 +122,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- ID e imagem antiga (hidden) -->
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <input type="hidden" name="old_imagem" value="<?= htmlspecialchars($imagem) ?>">
-        <!-- Chave -->
         <div class="form-group">
-            <label for="chave">Chave</label>
+            <label for="chave">ID</label>
             <input type="text"
-                   name="chave"
-                   id="chave"
+                   name="id"
+                   id="id"
                    class="form-control"
                    required
-                   value="<?= htmlspecialchars($chave) ?>">
+                   value="<?= htmlspecialchars($id) ?>">
         </div>
 
         <!-- Título (PT) -->

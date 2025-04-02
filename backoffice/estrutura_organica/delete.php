@@ -11,7 +11,7 @@ if ($_SESSION["autenticado"] != 'administrador') {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id         = $_POST["id"];
-    $sql  = "DELETE FROM estrutura_organica WHERE id = ?";
+    $sql  = "DELETE FROM estrutura WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_GET["id"];
 
     $sql  = "SELECT chave,texto_en,texto_pt
-               FROM estrutura_organica 
+               FROM estrutura
               WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
