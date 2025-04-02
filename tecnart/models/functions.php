@@ -1,9 +1,13 @@
 <?php
+require_once 'config/dbconnection.php';
 session_start();
 
 if(!isset($_SESSION["lang"])){
   $_SESSION["lang"] = "pt";
 }
+
+
+
 
 $_SESSION["basename"] = $_SERVER['PHP_SELF'];
 
@@ -476,6 +480,19 @@ function alert_redirect($msg, $redirect)
   exit();
 }
 
+
+function normalizeString($string) {
+  // Converte para minúsculas
+  $string = mb_strtolower($string, 'UTF-8');
+  // Normaliza e vai remover os acentos
+  if (class_exists('Normalizer')) {
+      $string = Normalizer::normalize($string, Normalizer::FORM_D);
+      $string = preg_replace('/\p{Mn}/u', '', $string);
+  }
+  return $string;
+}
+
+
 function show_error($error)
 {
   echo '<div class="w-100">
@@ -487,3 +504,73 @@ function show_error($error)
   </div>
 </div>';
 }
+
+//função para ir buscar os textos da tabela missão
+function get_text_missao($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM missao WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar os textos da tabela estrutura
+function get_text_estrutura($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar os textos da tabela eixos
+function get_text_eixos($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM eixos WHERE chave = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+
+//função para ir buscar o titulo do slide no carrosel
+
+function get_titulo_carrosel($key){
+  $pdo = pdo_connect_mysql();
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'titulo_en' : 'titulo_pt';
+
+  $stmt = $pdo->prepare("SELECT $language FROM carrosel WHERE chave = ?");
+
+  $stmt -> execute([$key]);
+
+  return $stmt->fetchcolumn() ?: 'Texto não encontrado';
+}
+
+//função para ir buscar o subtitulo do slide no carrosel
+
+function get_subtitulo_carrosel($key){
+  $pdo = pdo_connect_mysql();
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'subtitulo_en' : 'subtitulo_pt';
+
+  $stmt = $pdo->prepare("SELECT $language FROM carrosel WHERE chave = ?");
+
+  $stmt -> execute([$key]);
+
+  return $stmt->fetchcolumn() ?: 'Texto não encontrado';
+}
+
+?>

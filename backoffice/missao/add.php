@@ -2,38 +2,23 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-//  Caminho no servidor onde as imagens serão salvas
-$mainDir = "../assets/missao/";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome     = $_POST["nome"];
+    $chave     = $_POST["chave"];
+
     // Remove todas as tags HTML para salvar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);
     $texto_en = strip_tags($_POST["texto_en"]);
 
-    // Verifica se foi enviado algum arquivo de imagem
-    if (
-        isset($_FILES["fotografia"]) &&
-        $_FILES["fotografia"]["error"] === UPLOAD_ERR_OK &&
-        $_FILES["fotografia"]["size"] > 0
-    ) {
-        // Gera um nome único para o arquivo (ex.: 6412abc_arquivo.jpg)
-        $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];
-
-        // Move o arquivo para a diretoria definida
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $mainDir . $target_file);
-    } else {
-        // Caso nenhum arquivo tenha sido enviado, deixa o campo vazio
-        $target_file = "";
-    }
 
     // Monta a query de inserção
-    $sql = "INSERT INTO textos_site (nome, texto_pt, texto_en, fotografia) 
-            VALUES (?,?,?,?)";
+    $sql = "INSERT INTO missao (chave,texto_pt, texto_en) 
+            VALUES (?,?,?)";
 
     // Prepara a instrução
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssss', $nome, $texto_pt, $texto_en, $target_file);
+    mysqli_stmt_bind_param($stmt, 'sss', $chave, $texto_pt, $texto_en);
 
     // Executa
     if (mysqli_stmt_execute($stmt)) {
@@ -58,21 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script src="../ckeditor5/build/ckeditor.js"></script>
 
-    <script type="text/javascript">
-        function previewImg(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview').setAttribute('src', e.target.result);
-                    document.getElementById('preview').style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                document.getElementById('preview').setAttribute('src', '');
-                document.getElementById('preview').style.display = 'none';
-            }
-        }
-    </script>
 
     <style>
         .container {
@@ -107,14 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="card-body">
             <form role="form" data-toggle="validator" action="add.php" method="post" enctype="multipart/form-data">
                 
-                <!-- Nome -->
+                <!-- Chave -->
                 <div class="form-group">
-                    <label>Nome</label>
+                    <label>Chave</label>
                     <input type="text"
                            class="form-control"
-                           name="nome"
+                           name="chave"
                            required
-                           data-error="Por favor adicione um nome"
+                           data-error="Por favor adicione uma chave"
                            maxlength="200">
                     <div class="help-block with-errors"></div>
                 </div>
@@ -139,19 +109,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
                 </div>
-
-                <!-- Fotografia -->
-                <div class="form-group">
-                    <label>Fotografia</label>
-                    <input type="file"
-                           accept="image/*"
-                           onchange="previewImg(this);"
-                           class="form-control"
-                           name="fotografia">
-                </div>
-                <!-- Preview da imagem selecionada -->
-                <img id="preview" style="display: none;" width="100" height="100" class="mb-3" />
-
                 <!-- Botões -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Criar</button>

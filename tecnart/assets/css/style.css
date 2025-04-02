@@ -1053,7 +1053,7 @@ a:focus {
 .heading_h3 {
   font-family: 'Merriweather Sans', sans-serif !important;
   font-size: clamp(20px, 2vw, 32px); 
-  color: #333f50;
+  color: #002169;
   max-width: 100%;
   display: block;
   word-wrap: break-word;
@@ -1062,10 +1062,24 @@ a:focus {
   padding: 60px 10px 20px 60px; /* top, right, bottom, left */
 }
 
+.heading_h4 {
+  font-family: 'Merriweather Sans', sans-serif !important;
+  font-size: clamp(20px, 2vw, 25px); 
+  color: #002169;
+  max-width: 100%;
+  display: block;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  text-transform: none !important;
+  margin-left: 60px;
+
+}
+
 .heading_h3_projeto {
   font-family: 'Merriweather Sans', sans-serif !important;
   font-size: clamp(20px, 2vw, 32px);
-  color: #333f50;
+  color: #002169;
   max-width: 100%;
   display: block;
   word-wrap: break-word;
@@ -1110,9 +1124,6 @@ a:focus {
   font-family: 'Merriweather', sans-serif, !important;
   color:white;
 }
-
-
-
 
 
 .heading2_h5 {
@@ -1998,6 +2009,7 @@ form input[type="submit"]:focus {
                           }
 
                           .totall {
+                            min-height: calc(100vh - 100px);
                             width: 100%;
                             height: auto;
                             display: flex;
@@ -2088,18 +2100,18 @@ form input[type="submit"]:focus {
                             height: 40px;
                             display: table-cell;
                             vertical-align: middle;
-                            border-color: #333f50;
+                            border-color: #002169;
                             padding: 0px 0px 0px;
 
                           }
 
                           .divbotao:hover{
                             color: #ffffff;
-                            background-color: #333f50;
+                            background-color: #002169;
                           }
 
                           .innerButton{
-                            font-family: 'Montserrat', sans-serif; 
+                            font-family: 'Merriweather Sans', sans-serif;
                             font-size: 16px;
                             text-transform: uppercase; 
                             font-weight: 400;

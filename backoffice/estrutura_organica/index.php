@@ -3,16 +3,18 @@ require "../verifica.php";
 require "../config/basedados.php";
 
 // Filtro de pesquisa
-$search   = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+
 $perPage  = 10;
 $page     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start    = ($page - 1) * $perPage;
 $searchQ  = '%' . $search . '%';
 
 
-$sql = "SELECT id, titulo, subtitulo, cargo, nome, fotografia 
+$sql = "SELECT id, chave , texto_pt, texto_en
           FROM estrutura_organica
-         WHERE nome LIKE ?
+         WHERE chave LIKE ?
          LIMIT $start, $perPage";
 
 $stmt = mysqli_prepare($conn, $sql);
@@ -23,7 +25,7 @@ $result = mysqli_stmt_get_result($stmt);
 // Query para contar total de registros (para paginação)
 $totalSql = "SELECT COUNT(*) 
                FROM estrutura_organica
-              WHERE nome LIKE ?";
+              WHERE chave LIKE ?";
 $stmtTotal = mysqli_prepare($conn, $totalSql);
 mysqli_stmt_bind_param($stmtTotal, 's', $searchQ);
 mysqli_stmt_execute($stmtTotal);
@@ -100,30 +102,18 @@ mysqli_close($conn);
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Subtítulo</th>
-                    <th>Cargo</th>
-                    <th>Nome</th>
-                    <th>Fotografia</th>
+                    <th>Chave</th>
+                    <th>Texto (PT)</th>
+                    <th>Texto (EN)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['titulo']) ?></td>
-                        <td><?= htmlspecialchars($row['subtitulo']) ?></td>
-                        <td><?= htmlspecialchars($row['cargo']) ?></td>
-                        <td><?= htmlspecialchars($row['nome']) ?></td>
-                        <td>
-                            <?php if (!empty($row['fotografia'])): ?>
-                                <img src="../assets/fotos_equipa/<?= htmlspecialchars($row['fotografia']) ?>" 
-                                     alt="Fotografia" 
-                                     class="fotografia">
-                            <?php else: ?>
-                                <span>Sem imagem</span>
-                            <?php endif; ?>
-                        </td>
+                        <td><?= htmlspecialchars($row['chave']) ?></td>
+                        <td><?= htmlspecialchars($row['texto_pt']) ?></td>
+                        <td><?= htmlspecialchars($row['texto_en']) ?></td>
                         <td style="min-width:180px;">
                             <a href="edit.php?id=<?= $row['id'] ?>" 
                                class="btn btn-primary mb-1">

@@ -8,43 +8,31 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-// Caminho onde a imagem será salva
-$filesDir = "../assets/eixos_investigacao/";
 
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id        = $_POST["id"];
-    $nome      = $_POST["nome"];
+    $chave      = $_POST["chave"];
 
     // Remove todas as tags HTML para salvar texto puro
     $texto_pt  = strip_tags($_POST["texto_pt"]);
 
-    // Foto antiga
-    $oldFoto   = $_POST["old_fotografia"] ?? '';
+    // Remove todas as tags HTML para salvar texto puro
+    $texto_en = strip_tags($_POST["texto_en"]);
 
-    // Verifica se foi carregada uma nova imagem
-    if (isset($_FILES["fotografia"]) && $_FILES["fotografia"]["size"] != 0) {
-        $newFileName = uniqid() . '_' . $_FILES["fotografia"]["name"];
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $filesDir . $newFileName);
-        $fotografia = $newFileName;
-
-        
-    } else {
-        // Mantém a antiga foto
-        $fotografia = $oldFoto;
-    }
 
     // Atualiza os dados na base de dados
     $sql = "UPDATE eixos_investigacao
-               SET nome = ?, 
+               SET chave = ?, 
                    texto_pt = ?, 
-                   fotografia = ?
+                   texto_en = ? 
+                  
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'sssi', 
-                           $nome, 
-                           $texto_pt,  
-                           $fotografia,
+                           $chave, 
+                           $texto_pt,
+                           $texto_en,  
                            $id);
 
     if (mysqli_stmt_execute($stmt)) {
@@ -56,16 +44,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados do texto para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT nome, texto_pt, fotografia FROM eixos_investigacao WHERE id = ?";
+    $sql = "SELECT chave, texto_pt,texto_en FROM eixos_investigacao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $nome       = $row["nome"];
+    $nome       = $row["chave"];
     $texto_pt   = $row["texto_pt"];
-    $fotografia = $row["fotografia"]; 
+    $texto_en   = $row["texto_en"];
 }
 
 // Fechar a conexão
@@ -106,12 +94,12 @@ if ($conn && $conn instanceof mysqli) {
 
                 
                 <div class="form-group">
-                    <label>Nome</label>
+                    <label>Chave</label>
                     <input 
                         type="text" 
                         required 
                         maxlength="255" 
-                        name="nome" 
+                        name="chave" 
                         class="form-control" 
                         value="<?= htmlspecialchars($nome) ?>">
                 </div>
@@ -125,25 +113,13 @@ if ($conn && $conn instanceof mysqli) {
                         rows="6"><?= htmlspecialchars($texto_pt) ?></textarea>
                 </div>
 
-         
                 <div class="form-group">
-                    <label>Fotografia</label>
-                    <?php if (!empty($fotografia) && file_exists($filesDir . $fotografia)): ?>
-                        <img 
-                            src="<?= $filesDir . htmlspecialchars($fotografia) ?>" 
-                            alt="Fotografia" 
-                            class="img-preview"
-                        >
-                    <?php else: ?>
-                        <p class="text-muted">Nenhuma imagem encontrada.</p>
-                    <?php endif; ?>
-
-                    <input type="file" name="fotografia" class="form-control">
-                    <small class="form-text text-muted">
-                        Se quiser alterar a fotografia, carregue uma nova imagem.
-                    </small>
+                    <label>Texto (Inglês)</label>
+                    <textarea 
+                        name="texto_en" 
+                        class="form-control ck_replace"
+                        rows="6"><?= htmlspecialchars($texto_en) ?></textarea>
                 </div>
-
                 
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary btn-block mb-2">

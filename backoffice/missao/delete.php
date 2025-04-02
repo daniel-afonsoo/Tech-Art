@@ -7,24 +7,16 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-
-$filesDir = "../assets/missao/";
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id         = $_POST["id"];
-    $fotografia = $_POST["fotografia"];
+    
 
     
-    $sql  = "DELETE FROM textos_site WHERE id = ?";
+    $sql  = "DELETE FROM missao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
     if (mysqli_stmt_execute($stmt)) {
-        
-        if ($fotografia && file_exists($filesDir . $fotografia)) {
-            unlink($filesDir . $fotografia);
-        }
-       
         header("Location: index.php");
         exit;
     } else {
@@ -33,18 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     
     $id = $_GET["id"];
-
-    $sql  = "SELECT nome, texto_pt, texto_en, fotografia FROM textos_site WHERE id = ?";
+    $sql  = "SELECT chave, texto_pt, texto_en FROM missao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $nome       = $row["nome"];
+        $chave       = $row["chave"];
         $texto_pt   = $row["texto_pt"];
         $texto_en   = $row["texto_en"];
-        $fotografia = $row["fotografia"];
     } else {
         echo "Registo não encontrado.";
         mysqli_close($conn);
@@ -92,11 +82,11 @@ mysqli_close($conn);
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
                 <input type="hidden" name="fotografia" value="<?= htmlspecialchars($fotografia) ?>">
 
-                <!-- Nome -->
+                <!-- Chave -->
                 <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" readonly name="nome" class="form-control" 
-                           value="<?= htmlspecialchars($nome) ?>">
+                    <label>Chave</label>
+                    <input type="text" readonly name="chave" class="form-control" 
+                           value="<?= htmlspecialchars($chave) ?>">
                     <div class="help-block with-errors"></div>
                 </div>
 
@@ -116,17 +106,6 @@ mysqli_close($conn);
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Fotografia Preview -->
-                <div class="form-group">
-                    <label>Fotografia</label><br>
-                    <?php if ($fotografia && file_exists($filesDir . $fotografia)): ?>
-                        <img src="<?= $filesDir . $fotografia ?>" alt="Fotografia" 
-                             style="max-width: 200px; max-height: 200px;">
-                    <?php else: ?>
-                        <p>Imagem não encontrada.</p>
-                    <?php endif; ?>
                 </div>
 
                 <!-- Botões -->

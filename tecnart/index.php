@@ -17,10 +17,10 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
                <h1 class="slider-title">
-                  <?= change_lang("index-first-slide"); ?>
+                  <?= get_titulo_carrosel("index-first-slide"); ?>
                </h1>
                <span class="slider-description">
-                  <?= change_lang("index-first-slide-desc"); ?>
+                  <?= get_subtitulo_carrosel("index-first-slide"); ?>
                </span>
                <div><a href="sobre.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>
@@ -38,10 +38,10 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
                <h1 class="slider-title">
-                  <?= change_lang("index-second-slide"); ?>
+                  <?= get_titulo_carrosel("index-second-slide"); ?>
                </h1>
                <span class="slider-description">
-                  <?= change_lang("index-second-slide-desc"); ?>
+                  <?= get_subtitulo_carrosel("index-second-slide"); ?>
                </span>
                <div><a href="integrados.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>
@@ -58,10 +58,10 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
          <div class="align-text-slider">
             <div class="col-md-7 mobile_adjust ftco-animate mb-md-5">
                <h1 class="slider-title">
-                  <?= change_lang("index-third-slide-slider"); ?>
+                  <?= get_titulo_carrosel("index-third-slide-slider"); ?>
                </h1>
                <span class="slider-description">
-                  <?= change_lang("index-third-slide-slider-desc"); ?>
+                  <?= get_subtitulo_carrosel("index-third-slide-slider"); ?>
                </span>
                <div><a href="projetos_em_curso.php" class="btn btn-custom">
                      <?= change_lang("know-more-btn-txt-slider") ?>

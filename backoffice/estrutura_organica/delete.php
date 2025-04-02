@@ -8,20 +8,14 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-// Caminho onde a imagem está salva
-$filesDir = "../assets/estrutura_organica/";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id         = $_POST["id"];
-    $fotografia = $_POST["fotografia"];
     $sql  = "DELETE FROM estrutura_organica WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
     if (mysqli_stmt_execute($stmt)) {
-        if ($fotografia && file_exists($filesDir . $fotografia)) {
-            unlink($filesDir . $fotografia);
-        }
         header("Location: index.php");
         exit;
     } else {
@@ -30,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     $id = $_GET["id"];
 
-    $sql  = "SELECT titulo, subtitulo, cargo, nome, fotografia 
+    $sql  = "SELECT chave,texto_en,texto_pt
                FROM estrutura_organica 
               WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -39,11 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $titulo     = $row["titulo"];
-        $subtitulo  = $row["subtitulo"];
-        $cargo      = $row["cargo"];
-        $nome       = $row["nome"];
-        $fotografia = $row["fotografia"];
+        $chave     = $row["chave"];
+        $texto_pt  = $row["texto_pt"];
+        $texto_en     = $row["texto_en"];
     } else {
         echo "Registro não encontrado.";
         mysqli_close($conn);
@@ -72,41 +64,22 @@ mysqli_close($conn);
                 <input type="hidden" name="fotografia" value="<?= htmlspecialchars($fotografia) ?>">
 
                 <div class="form-group">
-                    <label>Título</label>
+                    <label>Chave</label>
                     <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($titulo) ?>">
+                           value="<?= htmlspecialchars($chave) ?>">
                 </div>
 
                 <div class="form-group">
-                    <label>Subtítulo</label>
+                    <label>Texto(PT)</label>
                     <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($subtitulo) ?>">
+                           value="<?= htmlspecialchars($texto_pt) ?>">
                 </div>
 
                 <div class="form-group">
-                    <label>Cargo</label>
+                    <label>Texto(EN)</label>
                     <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($cargo) ?>">
+                           value="<?= htmlspecialchars($texto_en) ?>">
                 </div>
-
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($nome) ?>">
-                </div>
-
-                <!-- Fotografia -->
-                <div class="form-group">
-                    <label>Fotografia</label><br>
-                    <?php if ($fotografia && file_exists($filesDir . $fotografia)): ?>
-                        <img src="<?= $filesDir . htmlspecialchars($fotografia) ?>" 
-                             alt="Fotografia" 
-                             style="max-width: 200px; max-height: 200px;">
-                    <?php else: ?>
-                        <p>Imagem não encontrada.</p>
-                    <?php endif; ?>
-                </div>
-
                 <!-- Botões -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Confirmar</button>

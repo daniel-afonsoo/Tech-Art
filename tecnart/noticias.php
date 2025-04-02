@@ -7,7 +7,7 @@ $pdo = pdo_connect_mysql();
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 //Paginação
-$perPage = 8;
+$perPage = 9;
 $currentPage = isset($_GET['page']) ? max((int)$_GET['page'],1) : 1;
 
 //A partir de qual noticia deve ser mostrado (só mostra apartir do número que estiver armazenado no offset)

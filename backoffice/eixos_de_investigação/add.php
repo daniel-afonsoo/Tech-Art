@@ -2,39 +2,25 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-//  Caminho no servidor onde as imagens serão salvas
-$mainDir = "../assets/eixos_investigacao/";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $nome     = $_POST["nome"];
+    $chave     = $_POST["chave"];
     
     // Remove todas as tags HTML para guardar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);
 
-    // Verifica se foi enviado algum arquivo de imagem
-    if (
-        isset($_FILES["fotografia"]) &&
-        $_FILES["fotografia"]["error"] === UPLOAD_ERR_OK &&
-        $_FILES["fotografia"]["size"] > 0
-    ) {
-        // Gera um nome único para o arquivo (ex.: 6412abc_arquivo.jpg)
-        $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];
+    // Remove todas as tags HTML para guardar só texto puro
+    $texto_en = strip_tags($_POST["texto_en"]);
 
-        // Move o arquivo para a diretoria definida
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $mainDir . $target_file);
-    } else {
-        // Caso nenhum arquivo tenha sido enviado, deixa o campo vazio
-        $target_file = "";
-    }
 
     // Montar a query de inserção
-    $sql = "INSERT INTO eixos_investigacao (nome, texto_pt, fotografia) 
+    $sql = "INSERT INTO eixos_investigacao (chave, texto_pt, texto_en) 
             VALUES (?,?,?)";
 
     
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', $nome, $texto_pt, $target_file);
+    mysqli_stmt_bind_param($stmt, 'sss', $chave, $texto_pt, $texto_en);
 
    
     if (mysqli_stmt_execute($stmt)) {
@@ -102,10 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 
                 <div class="form-group">
-                    <label>Nome</label>
+                    <label>Chave</label>
                     <input type="text"
                            class="form-control"
-                           name="nome"
+                           name="chave"
                            required
                            data-error="Por favor adicione um nome"
                            maxlength="200">
@@ -121,20 +107,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="help-block with-errors"></div>
                 </div>
 
-                
                 <div class="form-group">
-                    <label>Fotografia</label>
-                    <input type="file"
-                           accept="image/*"
-                           onchange="previewImg(this);"
-                           class="form-control"
-                           name="fotografia">
+                    <label>Texto (English)</label>
+                    <textarea class="form-control ck_replace"
+                              name="texto_en"
+                              rows="5"></textarea>
+                    <div class="help-block with-errors"></div>
                 </div>
-                
-                
-                <img id="preview" class="img-preview" alt="Preview da imagem" />
 
-               
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary btn-block">Criar</button>
                 </div>

@@ -1258,3 +1258,106 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+/* Criação da tabela estrutura */
+CREATE TABLE estrutura (
+  chave VARCHAR(255) UNIQUE NOT NULL,
+  texto_pt TEXT NOT NULL,
+  texto_en TEXT NOT NULL
+);
+
+INSERT INTO estrutura (chave, texto_pt, texto_en) VALUES
+('org-struct-page-heading', 'Estrutura Orgânica', 'Organic Structure'),
+('org-struct-page-description', 'A atividade do TECHN&ART é suportada pelos seguintes órgãos de direção, gestão e administração:', 'TECHN&ART\s activity is supported by the following management, administration, and leadership bodies:'),
+('org-struct-page-director-tag', 'Diretora', 'Director'),
+('director', '<a href="/tecnart/integrado.php?integrado=29">Hermínia Maria Pimenta Ferreira Sol</a>', '<a href="/tecnart/integrado.php?integrado=29">Hermínia Maria Pimenta Ferreira Sol</a>'),
+('org-struct-page-deputy-director-tag', 'Diretora Adjunta', 'Deputy Director'),
+('deputy-director', '<a href="/tecnart/integrado.php?integrado=36">Ana Cláudia Leal Marques Pires da Silva</a>', '<a href="/tecnart/integrado.php?integrado=36">Ana Cláudia Leal Marques Pires da Silva</a>'),
+('org-struct-page-executive-secretary-tag', 'Secretário Administrativo', 'Executive Secretary'),
+('executive-secretary', 'Hirondina Alves São Pedro', 'Hirondina Alves São Pedro'),
+('org-struct-page-board-tag', 'Conselho Diretivo', 'Board of Directors'),
+('board-composed', 'Composto pela Diretora, pela Diretora Adjunta e por:', 'Composed of the Director, Deputy Director, and:'),
+('board-member1', '<a href="/tecnart/integrado.php?integrado=68">Eduardo Jorge Marques de Oliveira Ferraz</a>', '<a href="/tecnart/integrado.php?integrado=68">Eduardo Jorge Marques de Oliveira Ferraz</a>'),
+('board-member2', '<a href="/tecnart/integrado.php?integrado=119">Liliana Cristina Vidais Rosa</a>', '<a href="/tecnart/integrado.php?integrado=119">Liliana Cristina Vidais Rosa</a>'),
+('board-member3', '<a href="/tecnart/integrado.php?integrado=104">João Pedro Tomaz Simões</a>', '<a href="/tecnart/integrado.php?integrado=104">João Pedro Tomaz Simões</a>'),
+('board-member4', '<a href="/tecnart/integrado.php?integrado=44">Anabela Mendes Moreira</a>', '<a href="/tecnart/integrado.php?integrado=44">Anabela Mendes Moreira</a>'),
+('board-member5', '<a href="/tecnart/integrado.php?integrado=90">Miguel Duarte Antunes da Silva Jorge</a>', '<a href="/tecnart/integrado.php?integrado=90">Miguel Duarte Antunes da Silva Jorge</a>'),
+('org-struct-page-scientific-council-tag', 'Conselho Científico', 'Scientific Council'),
+('all-integrated-members', 'Composto por todos os membros integrados e colaboradores.', 'Composed of all integrated members and collaborators.'),
+('org-struct-page-advisory-council-tag', 'Conselho Consultivo', 'Advisory Council'),
+('advisory-council-one', 'Ana María Calvo Manuel, Faculdade de Belas Artes da Universidade Complutense de Madrid, Espanha.', 'Ana María Calvo Manuel, Faculty of Fine Arts, Complutense University of Madrid, Spain.');
+
+
+
+/* Criação tabela missao */
+CREATE TABLE missao (
+  chave VARCHAR(255) UNIQUE NOT NULL,
+  texto_pt TEXT NOT NULL,
+  texto_en TEXT NOT NULL,
+);
+
+INSERT INTO missao (chave, texto_pt, texto_en) VALUES
+('mission-and-goals-page-heading', 'Missão e Objetivos', 'Mission and Goals'),
+('mission-and-goals-page-point-one', 'O TECHN&ART desenvolve investigação nos domínios da Salvaguarda do Património e da sua Valorização, quer em desenvolvimento experimental, quer em investigação aplicada.', 'TECHN&ART conducts research in the fields of Heritage Preservation and Enhancement, both in experimental development and applied research.'),
+('mission-and-goals-page-point-two', 'Esta unidade de I&D tem por missão:', 'This R&D unit has the mission to:'),
+('mission-and-goals-page-a-txt', 'Contribuir para a consolidação dos programas de formação do IPT enquadrados nos domínios científicos listados;', 'Contribute to the consolidation of IPT training programs within the listed scientific domains;'),
+('mission-and-goals-page-b-txt', 'Contribuir para a sólida formação das/os alunas/os estreitando a colaboração entre os trabalhos de investigação científica desenvolvidos pelas/os investigadoras/es TECHN&ART;', 'Contribute to the solid education of students by strengthening collaboration between the scientific research work carried out by TECHN&ART researchers;'),
+('mission-and-goals-page-c-txt', 'Difundir a cultura científica, tecnológica e artística através da organização de conferências, colóquios, seminários, exposições e sessões culturais;', 'Disseminate scientific, technological, and artistic culture through the organization of conferences, symposiums, seminars, exhibitions, and cultural sessions;'),
+('mission-and-goals-page-d-txt', 'Promover a formação avançada dos recursos humanos, fomentando a sua constante valorização científica e cultural;', 'Promote the advanced training of human resources, fostering their continuous scientific and cultural development;'),
+('mission-and-goals-page-e-txt', 'Estabelecer a cooperação interinstitucional com entidades nacionais e internacionais;', 'Establish interinstitutional cooperation with national and international entities;'),
+('mission-and-goals-page-f-txt', 'Utilizar com eficácia os financiamentos de que é beneficiária e outros recursos disponíveis;', 'Effectively utilize the funding it receives and other available resources;'),
+('mission-and-goals-page-g-txt', 'Prestar serviços à comunidade no âmbito das suas atividades.', 'Provide services to the community within the scope of its activities.');
+
+
+/* Criação da tabela eixos*/
+CREATE TABLE eixos (
+  chave VARCHAR(255) UNIQUE NOT NULL,
+  texto_pt TEXT NOT NULL,
+  texto_en TEXT NOT NULL
+);
+
+INSERT INTO eixos (chave, texto_pt, texto_en) VALUES
+('axes-page-heading', 'Eixos de Investigação', 'Research Axes'),
+('axes-page-p1-txt', 'O Centro de Tecnologia, Restauro e Valorização das Artes desenvolve estratégias e metodologias de investigação no âmbito de dois domínios:', 'The Center for Technology, Restoration, and Valorization of the Arts develops research strategies and methodologies in two domains:'),
+('axes-page-a-txt', 'Salvaguarda', 'Safeguarding'),
+('axes-page-b-txt', 'Valorização do Património Artístico e Cultural', 'Valorization of Artistic and Cultural Heritage'),
+('axes-page-p2-txt', 'O domínio da <b>Salvaguarda</b> é constituída por duas áreas de ação: <b>a1) Conservação e Restauro</b> e <b>a2) Caraterização e Contextualização do Património</b>:', 'The <b>Safeguarding</b> domain consists of two areas of action: <b>a1) Conservation and Restoration</b> and <b>a2) Characterization and Contextualization of Heritage</b>:'),
+('axes-page-a-one-txt', '<b>Conservação e Restauro –</b> esta área ação sustenta-se nos estudos de na intervenção de conservação e restauro no património artístico móvel e integrado, e onde as questões relacionadas com as metodologias, materiais, tecnologia e ética estão sistematicamente em discussão. Esta área reúne conservadores restauradores e investigadores que direta ou indiretamente participam nos projetos de investigação, desenvolvimento e intervenção para a salvaguarda do património artístico e cultural;', '<b>Conservation and Restoration –</b> this area of action is based on studies and interventions in conservation and restoration of mobile and integrated artistic heritage, where issues related to methodologies, materials, technology, and ethics are systematically discussed. This area brings together conservator-restorers and researchers who directly or indirectly participate in research, development, and intervention projects for the safeguarding of artistic and cultural heritage;'),
+('axes-page-a-two-txt', '<b>Caraterização e Contextualização do Património –</b> esta área de ação sustenta-se nos estudos culturais, arqueológicos, históricos, artísticos, literários e também de caraterização física, química e biológica dos materiais e da respetiva alteração e alterabilidade da compatibilidade química e estrutural dos suportes a preservar e dos novos materiais a aplicar, considerando o meio de proveniência e também da sua preservação. Esta área reúne investigadores de diferentes formações que estudam, contextualizam e caracterizam o património material, imaterial e natural.', '<b>Characterization and Contextualization of Heritage –</b> this area of action is based on cultural, archaeological, historical, artistic, and literary studies, as well as on the physical, chemical, and biological characterization of materials and their alteration, structural compatibility, and preservation. This area gathers researchers from various backgrounds who study, contextualize, and characterize material, immaterial, and natural heritage.'),
+('axes-page-p3-txt', 'O domínio da <b>Valorização do Património Artístico e Cultural</b> reúne as áreas de ação:<b> b1) Didática, Tecnologia e Comunicação</b> e <b>b2) Design e Inovação:</b>', 'The <b>Valorization of Artistic and Cultural Heritage</b> domain includes the areas of action: <b>b1) Didactics, Technology, and Communication</b> and <b>b2) Design and Innovation</b>:'),
+('axes-page-b-one-txt', '<b>Didática, Tecnologia e Comunicação</b> – esta área de ação sustenta-se nos estudos da educação, sensibilização e difusão do património cultural e artístico e respetiva preservação, a diferentes escalas. No quadro da didática, pretende-se uma simbiose entre o património, a interpretação patrimonial e o turismo numa lógica sustentável. Visa-se, assim, proporcionar aprendizagens ativas e integradas através da interpretação das manifestações do património cultural (material e imaterial), com elevado valor científico, didático, patrimonial e turístico. A gestão patrimonial na ótica da fruição proporcionará conhecimentos sobre as dinâmicas sociais e culturais da contemporaneidade. Assim, esta área de investigação, pode ser integrada na interação entre contextos de promoção da aprendizagem através da exploração de conexões didáticas, tecnológicas e comunicacionais. Estas metodologias e estratégias englobam e-learning, mobile-learning, objetos de aprendizagem, bibliotecas e repositórios de conteúdos digitais e gamification. Incluem-se ainda os ambientes imersivos, realidade aumentada, realidade virtual, sistemas de informação, sistemas multimédia e hipermédia, apps. Esta área de ação reúne investigadores no âmbito do turismo cultural, do cinema e vídeo documental, do design e da informática;', '<b>Didactics, Technology, and Communication</b> – this area of action is based on studies of education, awareness, and dissemination of cultural and artistic heritage and its preservation on different scales. In the didactic framework, it aims to create a symbiosis between heritage, heritage interpretation, and tourism in a sustainable logic. The goal is to provide active and integrated learning through the interpretation of cultural heritage manifestations (material and immaterial) with high scientific, didactic, heritage, and touristic value. Heritage management from a fruition perspective will provide insights into contemporary social and cultural dynamics. This research area can be integrated into the interaction between learning promotion contexts through exploring didactic, technological, and communication connections. These methodologies and strategies include e-learning, mobile learning, learning objects, digital libraries and repositories, and gamification. They also encompass immersive environments, augmented reality, virtual reality, information systems, multimedia and hypermedia systems, and apps. This area of action brings together researchers in the fields of cultural tourism, documentary film and video, design, and computing;'),
+('axes-page-b-two-txt', '<b>Design e Inovação</b> – respeita à componente criativa, responde às funções estéticas, práticas e simbólicas dos produtos ou projetos e tem compromisso com a sociedade e sua envolvente de forma sustentável, inclusiva e inovadora. Esta área de ação considera aspetos tecnológicos, sociais, económicos e culturais, e trabalha com a forma e a função, tanto na comunicação como no produto, agindo em consonância com as necessidades materiais e culturais da sociedade. Reporta também formas de expressão e manifestações artísticas e culturais, tangíveis e intangíveis; no sentido de perpetuar a memória, sintetizada nas diversas manifestações, bem como descodificar ou reinterpretar o património à luz dos entendimentos, conceitos e linguagens atuais.', '<b>Design and Innovation</b> – this area relates to the creative component, responding to the aesthetic, practical, and symbolic functions of products or projects and is committed to society and its environment in a sustainable, inclusive, and innovative way. This area of action considers technological, social, economic, and cultural aspects and works with form and function, both in communication and in the product, acting in line with the material and cultural needs of society. It also reports on forms of expression and artistic and cultural manifestations, both tangible and intangible, aiming to perpetuate memory as synthesized in various manifestations and to decode or reinterpret heritage in light of contemporary understandings, concepts, and languages.'),
+('bottom-text', 'Estas áreas de ação complementam-se e imbricam-se para que o todo que a missão do TECHN&ART seja coerente e tire partido do visando a transferência de conhecimento, de competências e de experiências de todas/os as/os investigadoras/es e colaboradoras/es do nosso centro.', 'These areas of action complement and intertwine so that the TECHN&ART mission as a whole remains coherent and benefits from the transfer of knowledge, skills, and experiences of all the researchers and collaborators at our center.');
+
+
+
+/* Criação da tabela carrosel*/
+CREATE TABLE carrosel (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    chave VARCHAR(255) NOT NULL,
+    titulo_pt VARCHAR(255) NOT NULL,
+    titulo_en VARCHAR(255) NOT NULL,
+    subtitulo_pt TEXT,
+    subtitulo_en TEXT,
+    imagem VARCHAR(255)
+);
+
+INSERT INTO carrosel (chave, titulo_pt, titulo_en, subtitulo_pt, subtitulo_en, imagem) VALUES
+('index-first-slide', 'Sobre o TECHN&ART', 'About TECHN&ART', 
+ 'Centro de investigação e desenvolvimento nos domínios da Salvaguarda do Património e da sua Valorização, experimental e aplicada.', 
+ 'Research and development center in the fields of Heritage Safeguarding and its experimental and applied enhancement.', 
+ NULL),
+
+('index-second-slide', 'Tecnologia e interdisciplinaridade ao serviço do Património', 'Technology and interdisciplinarity in the service of Heritage', 
+ 'O TECHN&ART une investigadores/as das mais diversas áreas disciplinares presentes no Instituto Politécnico de Tomar, das TIC às artes, das ciências sociais às ciências naturais', 
+ 'TECHN&ART brings together researchers from various disciplinary fields at the Polytechnic Institute of Tomar, from ICT to arts, from social sciences to natural sciences', 
+ NULL),
+
+('index-third-slide-slider', 'Investigação e desenvolvimento em rede', 'Research and development in network', 
+ 'O TECHN&ART acolhe e coordena projetos de I&D numa ampla rede de parceiros nacionais e internacionais, na linha da frente da salvaguarda e valorização patrimoniais.', 
+ 'TECHN&ART hosts and coordinates R&D projects within a broad network of national and international partners, at the forefront of heritage safeguarding and enhancement.', 
+ NULL);
+
+
+

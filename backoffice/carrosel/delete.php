@@ -2,23 +2,24 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-
-
+// Verifica se é POST (exclusão confirmada)
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // POST => Apagar
     $id     = $_POST["id"];
     $imagem = $_POST["imagem"] ?? '';
 
-    // Apaga o registo
+    // Apaga o registo 
     $sql  = "DELETE FROM carousel WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
     if (mysqli_stmt_execute($stmt)) {
-        // Apagar a imagem do servidor
-        if (!empty($imagem) && file_exists($imagem)) {
-            unlink($imagem);
+
+        // Apagar a imagem do servidor (se existir)
+        $imgPath = "../assets/carousel/" . $imagem;
+
+        if (!empty($imagem) && file_exists($imgPath)) {
+            unlink($imgPath);
         }
         header("Location: index.php");
         exit;
@@ -27,19 +28,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
 } else {
-   
+
+    // GET => Exibir o formulário de confirmação
     $id = $_GET["id"] ?? 0;
 
-    $sql  = "SELECT titulo, subtitulo, imagem FROM carousel WHERE id = ?";
+    $sql  = "SELECT id, chave, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
+             FROM carousel
+             WHERE id = ?";
+
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $titulo    = $row["titulo"];
-        $subtitulo = $row["subtitulo"];
-        $imagem    = $row["imagem"];
+
+        $titulo_pt    = $row["titulo_pt"];
+        $subtitulo_pt = $row["subtitulo_pt"];
+        $titulo_en    = $row["titulo_en"];
+        $subtitulo_en = $row["subtitulo_en"];
+        $imagem       = $row["imagem"];
+
     } else {
         echo "Slide não encontrado.";
         exit;
@@ -68,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .btn-danger  { background: red;  border: none; }
         .btn-success { background: green;border: none; }
         .btn-warning { background: orange;border: none; }
+
         img.fotografia {
             max-width: 200px;
             max-height: 200px;
@@ -90,26 +100,46 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
         <input type="hidden" name="imagem" value="<?= htmlspecialchars($imagem) ?>">
 
-        <!-- Título -->
+        <!-- Título (PT) -->
         <div class="form-group">
-            <label>Título</label>
+            <label>Título (PT)</label>
             <input type="text"
                    class="form-control"
-                   value="<?= htmlspecialchars($titulo) ?>"
+                   value="<?= htmlspecialchars($titulo_pt) ?>"
                    readonly>
         </div>
 
-        <!-- Subtítulo -->
+        <!-- Subtítulo (PT) -->
         <div class="form-group">
-            <label>Subtítulo</label>
-            <textarea class="form-control" rows="3" readonly><?= htmlspecialchars($subtitulo) ?></textarea>
+            <label>Subtítulo (PT)</label>
+            <textarea class="form-control" rows="3" readonly><?= htmlspecialchars($subtitulo_pt) ?></textarea>
+        </div>
+
+        <!-- Título (EN) -->
+        <div class="form-group">
+            <label>Título (EN)</label>
+            <input type="text"
+                   class="form-control"
+                   value="<?= htmlspecialchars($titulo_en) ?>"
+                   readonly>
+        </div>
+
+        <!-- Subtítulo (EN) -->
+        <div class="form-group">
+            <label>Subtítulo (EN)</label>
+            <textarea class="form-control" rows="3" readonly><?= htmlspecialchars($subtitulo_en) ?></textarea>
+
         </div>
 
         <!-- Imagem -->
         <div class="form-group">
             <label>Imagem</label><br>
-            <?php if (!empty($imagem) && file_exists($imagem)): ?>
-                <img src="<?= htmlspecialchars($imagem) ?>" alt="Slide" class="fotografia mb-3">
+            <?php
+            $imgPath = "../assets/carousel/" . $imagem;
+            if (!empty($imagem) && file_exists($imgPath)): ?>
+                <img src="<?= htmlspecialchars($imgPath) ?>"
+                     alt="Slide"
+                     class="fotografia mb-3">
             <?php else: ?>
                 <p>Sem imagem</p>
             <?php endif; ?>

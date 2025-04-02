@@ -2,16 +2,18 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-$search = $_GET['search'] ?? '';
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+
 $perPage = 10;
 $searchName = '%' . $search . '%';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $perPage;
 
-$sql = "SELECT id, nome, texto_pt, fotografia FROM eixos_investigacao WHERE nome LIKE '$searchName' LIMIT $start, $perPage";
+$sql = "SELECT id, chave, texto_pt,texto_en FROM eixos_investigacao WHERE chave LIKE '$searchName' LIMIT $start, $perPage";
 $result = mysqli_query($conn, $sql);
 
-$totalSql = "SELECT COUNT(*) FROM eixos_investigacao WHERE nome LIKE '$searchName'";
+$totalSql = "SELECT COUNT(*) FROM eixos_investigacao WHERE chave LIKE '$searchName'";
 $totalResult = mysqli_query($conn, $totalSql);
 $totalRows = mysqli_fetch_row($totalResult)[0];
 $totalPages = ceil($totalRows / $perPage);
@@ -22,7 +24,7 @@ $totalPages = ceil($totalRows / $perPage);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missão e Objetivos</title>
+    <title>Eixos de Investigação</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -91,24 +93,18 @@ $totalPages = ceil($totalRows / $perPage);
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Chave</th>
                     <th>Texto (PT)</th>
-                    <th>Fotografia</th>
+                    <th>Texto (EN)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><?= $row['nome'] ?></td>
+                        <td><?= $row['chave'] ?></td>
                         <td><textarea class="form-control" readonly><?= $row['texto_pt'] ?></textarea></td>
-                        <td>
-                            <?php if ($row['fotografia']): ?>
-                                <img src="<?= $row['fotografia'] ?>" alt="Fotografia" class="fotografia">
-                            <?php else: ?>
-                                <span>Sem imagem</span>
-                            <?php endif; ?>
-                        </td>
+                        <td> <textarea class="form-control" readonly><?= $row['texto_en'] ?></textarea> </td>
                         <td style="min-width:200px;">
                             <a href="edit.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-primary">Alterar</a>
                             <a href="delete.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-danger">Apagar</a>

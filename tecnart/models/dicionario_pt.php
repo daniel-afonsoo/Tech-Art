@@ -187,6 +187,8 @@ function ret_dic_pt(){
         "org-struct-page-advisory-council-tag" => "Conselho Consultivo",
         //Elementos integrantes do conselho consultivo
         "advisory-council-one" => "Ana María Calvo Manuel, Faculdade de Belas Artes da Universidade Complutense de Madrid, Espanha.",
+
+        //já não é usado
         "advisory-council-two" => "Chao Gejin, Instituto de Tradição Oral da Academia Chinesa de Ciências Sociais, Pequim, China",
         "advisory-council-three" => "José Julio García Arranz, Universidade da Extremadura, Espanha.",
         "advisory-council-four" => "Laurent Tissot, Universidade de Neuchâtel, Suíça.",
@@ -239,6 +241,9 @@ function ret_dic_pt(){
         "team-steakholders-tab-title-class" => "Equipa e intervenientes",
         //Subtitulo separador 'equipa e intervenientes'
         "team-steakholders-tab-subtitle-class" => "Subtitulo ",
+
+        //Titulo investigador principal
+        "team-principal-res-tab-title-class" => "Investigador principal",
         //
 
         //::::::integrados.php/colaboradores.php/alunos.php::::::

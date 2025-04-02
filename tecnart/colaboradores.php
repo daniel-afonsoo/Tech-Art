@@ -11,7 +11,7 @@ $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 
 //Paginação
-$perPage = 8;
+$perPage = 9;
 
 // Determina a página atual com base no parâmetro 'page' no URL
 $currentPage = isset($_GET['page']) ? max((int)$_GET['page'],1) : 1;

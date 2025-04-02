@@ -8,47 +8,24 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-// Diretoria aonde as imagens serão salvas
-$mainDir = "../assets/estrutura_organica/";
 
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $titulo    = $_POST["titulo"];
-    $subtitulo = $_POST["subtitulo"];
-    $cargo     = $_POST["cargo"];
-    $nome      = $_POST["nome"];
+    $chave     = $_POST["chave"];
+    // Remove todas as tags HTML para salvar só texto puro
+    $texto_pt = strip_tags($_POST["texto_pt"]);
+    $texto_en = strip_tags($_POST["texto_en"]);
 
-    // Tratamento para evitar tags HTML indesejadas
-    $titulo    = strip_tags($titulo);
-    $subtitulo = strip_tags($subtitulo);
-    $cargo     = strip_tags($cargo);
-    $nome      = strip_tags($nome);
-
-    // Verifica se foi enviado um arquivo de imagem
-    if (isset($_FILES["fotografia"]) && $_FILES["fotografia"]["error"] === UPLOAD_ERR_OK) {
-        // Gera um nome único para o arquivo (ex.: 6412abc_arquivo.jpg)
-        $target_file = uniqid() . '_' . $_FILES["fotografia"]["name"];
-
-        // Move o arquivo para o diretoria definida
-        move_uploaded_file($_FILES["fotografia"]["tmp_name"], $mainDir . $target_file);
-    } else {
-        // Caso nenhum arquivo tenha sido enviado, deixa o campo vazio
-        $target_file = "";
-    }
 
     // Monta a query de inserção
-    $sql = "INSERT INTO estrutura_organica (titulo, subtitulo, cargo, nome, fotografia) 
-            VALUES (?,?,?,?,?)";
+    $sql = "INSERT INTO estrutura_organica (chave,texto_pt, texto_en) 
+            VALUES (?,?,?)";
 
     
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', 
-        $titulo, 
-        $subtitulo, 
-        $cargo, 
-        $nome, 
-        $target_file
+    mysqli_stmt_bind_param($stmt, 'sss', 
+     $chave, $texto_pt, $texto_en
     );
 
     
@@ -98,64 +75,49 @@ mysqli_close($conn);
     </style>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container-xl mt-5">
     <div class="card">
-        <h5 class="card-header text-center">Adicionar Registo</h5>
+        <h5 class="card-header text-center">Adicionar Texto</h5>
         <div class="card-body">
-            <form action="add.php" method="post" enctype="multipart/form-data">
+            <form role="form" data-toggle="validator" action="add.php" method="post" enctype="multipart/form-data">
                 
-                <!-- Título -->
+                <!-- Chave -->
                 <div class="form-group">
-                    <label>Título</label>
+                    <label>Chave</label>
                     <input type="text"
                            class="form-control"
-                           name="titulo"
+                           name="chave"
                            required
+                           data-error="Por favor adicione uma chave"
                            maxlength="200">
+                    <div class="help-block with-errors"></div>
                 </div>
 
-                <!-- Subtítulo -->
-                <div class="form-group">
-                    <label>Subtítulo</label>
-                    <input type="text"
-                           class="form-control"
-                           name="subtitulo"
-                           maxlength="200">
+                <!-- Texto (Português) e Texto (Inglês) -->
+                <div class="row">
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Texto (Português)</label>
+                            <textarea class="form-control ck_replace"
+                                      name="texto_pt"
+                                      rows="5"></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Texto (Inglês)</label>
+                            <textarea class="form-control ck_replace"
+                                      name="texto_en"
+                                      rows="5"></textarea>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Cargo -->
-                <div class="form-group">
-                    <label>Cargo</label>
-                    <input type="text"
-                           class="form-control"
-                           name="cargo"
-                           maxlength="200">
-                </div>
-
-                <!-- Nome -->
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input type="text"
-                           class="form-control"
-                           name="nome"
-                           required
-                           maxlength="200">
-                </div>
-
-                <!-- Fotografia-->
-                <div class="form-group">
-                    <label>Fotografia</label>
-                    <input type="file"
-                           accept="image/*"
-                           onchange="previewImg(this);"
-                           class="form-control"
-                           name="fotografia">
-                    <img id="preview" class="img-preview" style="display: none;" />
-                </div>
-
                 <!-- Botões -->
-                <div class="form-group mt-4">
+                <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Criar</button>
+                </div>
+                <div class="form-group">
                     <button type="button"
                             onclick="window.location.href='index.php'"
                             class="btn btn-danger btn-block">
@@ -167,5 +129,23 @@ mysqli_close($conn);
         </div>
     </div>
 </div>
+
+<script>
+    // Inicializa o CKEditor 5 em cada textarea que tiver a classe .ck_replace
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.ck_replace').forEach(function(el) {
+            ClassicEditor.create(el, {
+                licenseKey: '',
+                simpleUpload: {
+                    uploadUrl: '../ckeditor5/upload_image.php'
+                }
+            }).then(editor => {
+                // Editor inicializado
+            }).catch(error => {
+                console.error(error);
+            });
+        });
+    });
+</script>
 </body>
 </html>

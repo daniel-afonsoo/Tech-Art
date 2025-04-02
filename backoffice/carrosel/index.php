@@ -4,21 +4,23 @@ require "../config/basedados.php";
 
 
 
-$search    = $_GET['search'] ?? '';
+
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
 $perPage   = 10;
 $searchSQL = '%' . $search . '%';
 $page      = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start     = ($page - 1) * $perPage;
 
 // Consulta principal com pesquisa no campo 'titulo'
-$sql = "SELECT id, titulo, subtitulo, imagem
+$sql = "SELECT id,chave,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
         FROM carousel
-        WHERE titulo LIKE '$searchSQL'
+        WHERE chave LIKE '$searchSQL'
         LIMIT $start, $perPage";
 $result = mysqli_query($conn, $sql);
 
-// Conta total de registos para paginação
-$totalSql    = "SELECT COUNT(*) FROM carousel WHERE titulo LIKE '$searchSQL'";
+
+$totalSql    = "SELECT COUNT(*) FROM carousel WHERE chave LIKE '$searchSQL'";
 $totalResult = mysqli_query($conn, $totalSql);
 $totalRows   = mysqli_fetch_row($totalResult)[0];
 $totalPages  = ceil($totalRows / $perPage);
@@ -107,41 +109,49 @@ $totalPages  = ceil($totalRows / $perPage);
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Subtítulo</th>
+                    <th>Chave</th>
+                    <th>Título_PT</th>
+                    <th>Título_EN</th>
+                    <th>Subtítulo_PT</th>
+                    <th>Subtítulo_EN</th>
                     <th>Imagem</th>
                     <th style="min-width:200px;">Ações</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['titulo']) ?></td>
-                        <td>
-                            <textarea class="form-control" readonly><?= $row['subtitulo'] ?></textarea>
-                        </td>
-                        <td>
-                            <?php if (!empty($row['imagem'])): ?>
-                                <img src="<?= htmlspecialchars($row['imagem']) ?>"
-                                     alt="Imagem"
-                                     class="fotografia">
-                            <?php else: ?>
-                                <span>Sem imagem</span>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <a href="edit.php?id=<?= $row['id'] ?>"
-                               class="w-100 mb-1 btn btn-primary">
-                                Alterar
-                            </a>
-                            <a href="delete.php?id=<?= $row['id'] ?>"
-                               class="w-100 mb-1 btn btn-danger">
-                                Apagar
-                            </a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
+
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <tr>
+            <td><?= htmlspecialchars($row['chave']) ?></td>
+            <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
+            <td><?= htmlspecialchars($row['titulo_en']) ?></td>
+            <td><?= htmlspecialchars($row['subtitulo_pt']) ?></td>
+            <td><?= htmlspecialchars($row['subtitulo_en']) ?></td>
+            
+            <!-- Coluna de IMAGEM -->
+            <td>
+                <?php if ($row['imagem']): ?>
+                    <img src="../assets/carousel/<?= htmlspecialchars($row['imagem']) ?>" 
+                         alt="Imagem" 
+                         class="fotografia">
+                <?php else: ?>
+                    <span>Sem imagem</span>
+                <?php endif; ?>
+            </td>
+
+            <!-- Coluna de AÇÕES -->
+            <td style="min-width:200px;">
+                <a href="edit.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-primary">
+                    Alterar
+                </a>
+                <a href="delete.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-danger">
+                    Apagar
+                </a>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
+
         </table>
 
         <!-- Paginação -->

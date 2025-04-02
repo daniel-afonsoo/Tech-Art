@@ -8,24 +8,17 @@ if ($_SESSION["autenticado"] != 'administrador') {
 }
 
 
-$filesDir = "../assets/eixos_investigacao/";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $id         = $_POST["id"];
-    $fotografia = $_POST["fotografia"];
-
+ 
     
     $sql  = "DELETE FROM eixos_investigacao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
-    if (mysqli_stmt_execute($stmt)) {
-        
-        if ($fotografia && file_exists($filesDir . $fotografia)) {
-            unlink($filesDir . $fotografia);
-        }
-        
+    if (mysqli_stmt_execute($stmt)) {      
         header("Location: index.php");
         exit;
     } else {
@@ -35,16 +28,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $id = $_GET["id"];
 
-    $sql  = "SELECT nome, texto_pt, fotografia FROM eixos_investigacao WHERE id = ?";
+    $sql  = "SELECT chave, texto_pt,texto_en FROM eixos_investigacao WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $nome       = $row["nome"];
+        $chave       = $row["chave"];
         $texto_pt   = $row["texto_pt"];
-        $fotografia = $row["fotografia"];
+        $texto_en  = $row["texto_en"];
     } else {
         echo "Registo não encontrado.";
         mysqli_close($conn);
@@ -95,9 +88,9 @@ mysqli_close($conn);
 
                
                 <div class="form-group">
-                    <label>Nome</label>
+                    <label>Chave</label>
                     <input type="text" readonly name="nome" class="form-control" 
-                           value="<?= htmlspecialchars($nome) ?>">
+                           value="<?= htmlspecialchars($chave) ?>">
                     <div class="help-block with-errors"></div>
                 </div>
 
@@ -118,18 +111,6 @@ mysqli_close($conn);
                         </div>
                     </div>
                 </div>
-
-               
-                <div class="form-group">
-                    <label>Fotografia</label><br>
-                    <?php if ($fotografia && file_exists($filesDir . $fotografia)): ?>
-                        <img src="<?= $filesDir . $fotografia ?>" alt="Fotografia" 
-                             style="max-width: 200px; max-height: 200px;">
-                    <?php else: ?>
-                        <p>Imagem não encontrada.</p>
-                    <?php endif; ?>
-                </div>
-
                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
