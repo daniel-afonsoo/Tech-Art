@@ -505,6 +505,20 @@ function show_error($error)
 </div>';
 }
 
+
+//função para ir buscar o titulo da tabela missao
+function get_titulo_missao($key) {
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'titulo_en' : 'titulo_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM missao WHERE id = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
 //função para ir buscar os textos da tabela missão
 function get_text_missao($key) {
   $pdo = pdo_connect_mysql(); 
@@ -513,7 +527,20 @@ function get_text_missao($key) {
   $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
 
  
-  $stmt = $pdo->prepare("SELECT $language FROM missao WHERE chave = ?");
+  $stmt = $pdo->prepare("SELECT $language FROM missao WHERE id = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
+
+function get_titulo_estrutura($key){
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'titulo_en' : 'titulo_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE id = ?");
   $stmt->execute([$key]);
   return $stmt->fetchColumn() ?: 'Texto não encontrado';
 }
@@ -526,10 +553,25 @@ function get_text_estrutura($key) {
   $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
 
  
-  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE chave = ?");
+  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE id = ?");
   $stmt->execute([$key]);
   return $stmt->fetchColumn() ?: 'Texto não encontrado';
 }
+
+
+//Função para ir buscar o titulo da tabela eixos
+function get_titulo_eixos($key){
+  $pdo = pdo_connect_mysql(); 
+  
+
+  $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'titulo_en' : 'titulo_pt';
+
+ 
+  $stmt = $pdo->prepare("SELECT $language FROM eixos WHERE id = ?");
+  $stmt->execute([$key]);
+  return $stmt->fetchColumn() ?: 'Texto não encontrado';
+}
+
 
 //função para ir buscar os textos da tabela eixos
 function get_text_eixos($key) {
@@ -539,7 +581,7 @@ function get_text_eixos($key) {
   $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
 
  
-  $stmt = $pdo->prepare("SELECT $language FROM eixos WHERE chave = ?");
+  $stmt = $pdo->prepare("SELECT $language FROM eixos WHERE id = ?");
   $stmt->execute([$key]);
   return $stmt->fetchColumn() ?: 'Texto não encontrado';
 }
