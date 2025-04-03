@@ -14,7 +14,7 @@ include 'models/functions.php';
                 <div class="heading_container3">
                     
                     <h3 style="text-transform: uppercase;">
-                        <?= get_text_missao("mission-and-goals-page-heading") ?>
+                        <?= get_titulo_missao(1) ?>
                     </h3>
 
                     <div class="flex-container mobile_reverse">
@@ -25,18 +25,9 @@ include 'models/functions.php';
                             </figure>
                         </div>
                         <div class="flex-right">
-                            <?= get_text_missao("mission-and-goals-page-point-one") ?><br><br>
-                            <?= get_text_missao("mission-and-goals-page-point-two") ?><br><br>
-                            <b>a) </b><?= get_text_missao("mission-and-goals-page-a-txt") ?><br><br>
-                            <b>b) </b><?= get_text_missao("mission-and-goals-page-b-txt") ?><br><br>
-                            <b>c) </b><?= get_text_missao("mission-and-goals-page-c-txt") ?><br><br>
-                            <b>d) </b><?= get_text_missao("mission-and-goals-page-d-txt") ?><br><br>
-                            <b>e) </b><?= get_text_missao("mission-and-goals-page-e-txt") ?><br><br>
-                            <b>f) </b><?= get_text_missao("mission-and-goals-page-f-txt") ?><br><br>
-                            <b>g) </b><?= get_text_missao("mission-and-goals-page-g-txt") ?><br><br>
+                            <?= get_text_missao(1) ?>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
