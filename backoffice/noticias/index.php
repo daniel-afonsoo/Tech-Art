@@ -1,8 +1,26 @@
 <?php
 require "../verifica.php";
 require "../config/basedados.php";
-//Selecionar os dados das noticias da base de dados
-$sql = "SELECT id, titulo, conteudo, data, imagem FROM noticias ORDER BY DATA DESC, titulo";
+// Número de registros por página
+$registros_por_pagina = 5;
+
+// Página atual (obtida da URL, padrão é 1)
+$pagina_atual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+if ($pagina_atual < 1) $pagina_atual = 1;
+
+// Calcular o deslocamento (OFFSET)
+$offset = ($pagina_atual - 1) * $registros_por_pagina;
+
+// Obter o número total de registros
+$sql_total = "SELECT COUNT(*) AS total FROM noticias";
+$result_total = mysqli_query($conn, $sql_total);
+$total_registros = mysqli_fetch_assoc($result_total)['total'];
+
+// Calcular o número total de páginas
+$total_paginas = ceil($total_registros / $registros_por_pagina);
+
+// Selecionar os dados com LIMIT e OFFSET
+$sql = "SELECT id, titulo, conteudo, data, imagem FROM noticias ORDER BY data DESC, titulo LIMIT $registros_por_pagina OFFSET $offset";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -78,6 +96,30 @@ $result = mysqli_query($conn, $sql);
 					?>
 				</tbody>
 			</table>
+			 <!-- Paginação -->
+			 <nav>
+                <ul class="pagination justify-content-center">
+                    <?php if ($pagina_atual > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?pagina=<?php echo $pagina_atual - 1; ?>">Anterior</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                        <li class="page-item <?php echo ($i == $pagina_atual) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($pagina_atual < $total_paginas): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?pagina=<?php echo $pagina_atual + 1; ?>">Próxima</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
+
+			
 		</div>
 	</div>
 </div>
