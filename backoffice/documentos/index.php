@@ -34,7 +34,7 @@ $conn->close();
         margin-left: 30px;
         display: flex;
         align-items: center;
-        margin-bottom: 5px; /* Espaçamento entre os arquivos */
+        margin-bottom: 5px;
     }
 
     .actions {
@@ -44,19 +44,16 @@ $conn->close();
     .hidden {
         display: none;
     }
-    
+
     .btn-success {
-    padding: 8px 15px; /* Mesmo padding do botão vermelho */
-    font-size: 14px; /* Mantém o tamanho do texto igual */
-    border-radius: 5px; /* Bordas arredondadas */
-    height: 38px; /* Define altura igual */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-    
+        padding: 8px 15px;
+        font-size: 14px;
+        border-radius: 5px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>
 
 <!-- Container Principal -->
@@ -66,6 +63,30 @@ $conn->close();
             <h3>📂 Documentos</h3>
         </div>
         <div class="card-body">
+            
+            <!-- Documentos Fixos -->
+            <table class="table table-bordered mb-4">
+                <thead class="thead-light">
+                    <tr>
+                        <th style='width:100px;'>Documento</th>
+                        <th style='width:110px;'>Português</th>
+                        <th style='width:250px;'>Inglês</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Normas de afiliação e de publicitação</td>
+                        <td><a target="_blank" href="../assets/docs/PT_Normas-Afiliação_TECHN&ART_2025-01.pdf">Português</a></td>
+                        <td><a target="_blank" href="../assets/docs/EN_Author-Affiliation_TECHN&ART_2025-01.pdf">Inglês</a></td>
+                    </tr>
+                    <tr>
+                        <td>Comunicação interna</td>
+                        <td><a target="_blank" href="../assets/docs/PT_Com-Interna_TECHN&ART_2025-01.pdf">Português</a></td>
+                        <td><a target="_blank" href="../assets/docs/EN_Internal-Com_TECHN&ART_2025-01.pdf">Inglês</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <!-- Botões de Ação -->
             <div class="mb-3 d-flex justify-content-between">
                 <a href="upload.php" class="btn btn-success">

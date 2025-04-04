@@ -92,7 +92,7 @@ if ($conn && $conn instanceof mysqli) {
 
                 <!-- Chave -->
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input 
                         type="text" 
                         required 

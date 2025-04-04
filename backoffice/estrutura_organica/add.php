@@ -83,7 +83,7 @@ mysqli_close($conn);
                 
                 <!-- Chave -->
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input type="text"
                            class="form-control"
                            name="chave"

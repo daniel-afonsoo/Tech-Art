@@ -79,30 +79,12 @@ mysqli_close($conn);
         </a>
     </div>
 
-    <!-- Campo de pesquisa -->
-    <div class="mb-3">
-        <form method="GET" action="">
-            <div class="input-group">
-                <input type="text" 
-                       name="search" 
-                       class="form-control" 
-                       placeholder="Pesquisar por nome" 
-                       value="<?= htmlspecialchars($search) ?>">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
     <!-- Tabela -->
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Chave</th>
+                    <th>ID</th>
                     <th>Texto (PT)</th>
                     <th>Texto (EN)</th>
                     <th>Ações</th>

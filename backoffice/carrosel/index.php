@@ -85,23 +85,6 @@ $totalPages  = ceil($totalRows / $perPage);
         </a>
     </div>
 
-    <!-- Formulário de pesquisa -->
-    <div class="mb-3">
-        <form method="GET" action="">
-            <div class="input-group">
-                <input type="text"
-                       name="search"
-                       class="form-control"
-                       placeholder="Pesquisar"
-                       value="<?= htmlspecialchars($search) ?>">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
 
     <!-- Tabela -->
     <div class="table-responsive">
