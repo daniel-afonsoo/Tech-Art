@@ -5,7 +5,7 @@ require "../config/basedados.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $chave     = $_POST["chave"];
+    $id     = $_POST["id"];
 
     // Remove todas as tags HTML para salvar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);

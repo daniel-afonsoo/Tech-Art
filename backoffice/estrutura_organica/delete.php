@@ -64,7 +64,7 @@ mysqli_close($conn);
                 <input type="hidden" name="fotografia" value="<?= htmlspecialchars($fotografia) ?>">
 
                 <div class="form-group">
-                    <label>Chave</label>
+                    <label>ID</label>
                     <input type="text" readonly class="form-control" 
                            value="<?= htmlspecialchars($chave) ?>">
                 </div>

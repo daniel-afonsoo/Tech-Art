@@ -46,18 +46,6 @@ require "../verifica.php";
 						<th style='width:250px;'></th>
 					</tr>-->
 				</thead>
-				<tbody>
-					<tr>
-						<td style='width:100px;'>Normas de afiliação e de publicitação</td>
-						<td style='width:110px;'><a target="_blank" href="../assets/docs/PT_Normas-Afiliação_TECHN&ART_2025-01.pdf">Português</a></td>
-						<td style='width:250px;'><a target="_blank" href="../assets/docs/EN_Author-Affiliation_TECHN&ART_2025-01.pdf">Inglês</a></td>
-					</tr>
-					<tr>
-						<td style='width:100px;'>Comunicação interna</td>
-						<td style='width:110px;'><a target="_blank" href="../assets/docs/PT_Com-Interna_TECHN&ART_2025-01.pdf">Português</a></td>
-						<td style='width:250px;'><a target="_blank" href="../assets/docs/EN_Internal-Com_TECHN&ART_2025-01.pdf">Inglês</a></td>
-					</tr>
-				</tbody>
 			</table>
 		</div>
 	</div>

@@ -2,9 +2,8 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+
 $perPage = 10;
-$searchName = '%' . $search . '%';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $perPage;
 
@@ -75,18 +74,6 @@ $totalPages = ceil($totalRows / $perPage);
         <a href="add.php" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar Novo</a>
     </div>
 
-    <div class="mb-3">
-        <form method="GET" action="">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Pesquisar" value="<?= $search ?>">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
