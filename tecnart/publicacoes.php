@@ -31,7 +31,10 @@ include 'models/functions.php';
                 $groupedPublicacoes = array();
                 foreach ($publicacoes as $publicacao) {
                     
-                    $year = $publicacao['publication_year'] ?? change_lang("year-unknown");
+                    $year = $publicacao['publication_year'];
+                    if ($year == null) {
+                        $year = change_lang("year-unknown");
+                    }
                     $site = $publicacao[$valorSiteName];
                 
                   
