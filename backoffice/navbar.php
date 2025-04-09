@@ -148,7 +148,6 @@ ob_start();
         <li class="navLi"><a href="../projetos">Projetos</a></li>
         <li class="navLi"><a href="../noticias">Notícias</a></li>
         <li class="navLi"><a href="../oportunidades">Oportunidades</a></li>
-        <li class="navLi"><a href="../procedimentos">Procedimentos</a></li>
         <?php if ($_SESSION["autenticado"] === "administrador"): ?>
             <li class="navLi"><a href="../admissoes">Admissões</a></li>
         <?php endif; ?>
