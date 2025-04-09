@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $areapreferencial = $_POST["areapreferencial"];
     $financiamento = $_POST["financiamento"];
     $ambito = $_POST["ambito"];
-    $investigadores = $_POST["investigadores"] ?? [];
-    $investigador_principal = $_POST["investigador_principal"] ?? null;
+    $investigadores = isset($_POST["investigadores"]) ? $_POST["investigadores"] : [];
+    $investigador_principal = isset($_POST["investigador_principal"]) ? $_POST["investigador_principal"] : null;
     $concluido = isset($_POST['concluido']) ? 1 : 0;
     $site = $_POST["site"];
     $facebook = $_POST["facebook"];

@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $concluido = isset($_POST['concluido']) ? 1 : 0;
     $site = $_POST["site"];
     $facebook = $_POST["facebook"];
-    $investigadores = $_POST["investigadores"] ?? [];
-    $investigador_principal = $_POST["investigador_principal"] ?? null;
+    $investigadores = isset($_POST["investigadores"]) ? $_POST["investigadores"] : [];
+    $investigador_principal = isset($_POST["investigador_principal"]) ? $_POST["investigador_principal"] : null;
     $nome_en = $_POST["nome_en"];
     $descricao_en = $_POST["descricao_en"];
     $sobreprojeto_en = $_POST["sobreprojeto_en"];
@@ -102,7 +102,7 @@ mysqli_stmt_bind_param($stmt, 'i', $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
-$investigador_principal_selecionado = $row['investigadores_id'] ?? null;
+$investigador_principal_selecionado = isset($row['investigadores_id']) ? $row['investigadores_id'] : null;
 
 
 
