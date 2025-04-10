@@ -3,6 +3,14 @@ include 'config/dbconnection.php';
 include 'models/functions.php';
 
 $pdo = pdo_connect_mysql();
+
+if (!isset($_GET["integrado"])) {
+    die("O parâmetro 'integrado' está ausente na URL.");
+}
+$integradoId = $_GET["integrado"];
+
+redirectPageLanguageWithParam("integrado.php", "integrated.php", "integrado", $integradoId);
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
@@ -10,10 +18,9 @@ $query = "SELECT id, email, nome,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
         FROM investigadores WHERE id=? and tipo = \"Integrado\"";
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(1, $_GET["integrado"], PDO::PARAM_INT);
+$stmt->bindParam(1, $integradoId, PDO::PARAM_INT);
 $stmt->execute();
 $investigadores = $stmt->fetch(PDO::FETCH_ASSOC);
-$id =  $_GET["integrado"];
 ?>
 
 <?= template_header('Integrado/a'); ?>
@@ -136,7 +143,7 @@ $id =  $_GET["integrado"];
                                 ORDER BY publication_year DESC, pt.$valorSiteName, data DESC";
 
             $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':investigatorId', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':investigatorId', $integradoId, PDO::PARAM_INT);
             $stmt->execute();
             $publicacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -1,3 +1,3 @@
 <?php
-INCLUDE "integrados.php";
+INCLUDE "integrado.php"
 ?>

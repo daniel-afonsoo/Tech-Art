@@ -635,4 +635,25 @@ function redirectPageLanguage($ptPage, $enPage) {
     }
 }
 
+
+function redirectPageLanguageWithParam($ptPage, $enPage, $paramName, $paramValue) {
+    // Verificar se o idioma está definido na sessão
+    if (!isset($_SESSION["lang"])) {
+        $_SESSION["lang"] = "pt"; // Idioma padrão
+    }
+
+    // Obter o nome do ficheiro atual
+    $currentPage = basename($_SERVER['PHP_SELF']);
+
+    // Construir o URL correto com base no idioma
+    $targetPage = ($_SESSION["lang"] == "en") ? $enPage : $ptPage;
+    $targetUrl = "$targetPage?$paramName=$paramValue";
+
+    // Redirecionar se o URL atual não corresponder ao esperado
+    if ($currentPage != $targetPage || !isset($_GET[$paramName]) || $_GET[$paramName] != $paramValue) {
+        header("Location: $targetUrl");
+        exit;
+    }
+}
+
 ?>
