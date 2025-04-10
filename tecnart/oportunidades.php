@@ -2,6 +2,7 @@
 include 'config/dbconnection.php';
 include 'models/functions.php';
 
+
 $pdo = pdo_connect_mysql();
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
@@ -10,6 +11,8 @@ $stmt = $pdo->prepare($query);
 $stmt->execute();
 $oportunidades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<?= redirectPageLanguage("oportunidades.php", "opportunities.php") ?>
 
 <!DOCTYPE html>
 <html>

@@ -13,9 +13,9 @@ $pdo = pdo_connect_mysql();
     $stmt->execute();
     $conselho_consultivo_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 ?>
+
+<?=redirectPageLanguage("estrutura.php","structure.php") ?>
 
 <!DOCTYPE html>
 <html>

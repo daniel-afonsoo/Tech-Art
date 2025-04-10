@@ -2,6 +2,10 @@
 include 'models/functions.php';
 ?>
 
+
+<?= redirectPageLanguage("eixos.php","axes.php"); ?>
+
+
 <!DOCTYPE html>
 <html>
 

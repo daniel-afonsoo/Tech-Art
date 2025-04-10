@@ -3,6 +3,14 @@ include 'config/dbconnection.php';
 include 'models/functions.php';
 
 $pdo = pdo_connect_mysql();
+
+if (!isset($_GET["colaborador"])) {
+    die("O parâmetro 'colaborador' está ausente na URL.");
+}
+$colaboradorId = $_GET["colaborador"];
+
+redirectPageLanguageWithParam("colaborador.php", "collaborator.php", "colaborador", $colaboradorId);
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 $query = "SELECT id, email, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
@@ -10,10 +18,9 @@ $query = "SELECT id, email, nome,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
         FROM investigadores WHERE id=? and tipo = \"Colaborador\" ";
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(1, $_GET["colaborador"], PDO::PARAM_INT);
+$stmt->bindParam(1, $colaboradorId, PDO::PARAM_INT);
 $stmt->execute();
 $investigadores = $stmt->fetch(PDO::FETCH_ASSOC);
-$id =  $_GET["colaborador"];
 ?>
 
 <?= template_header('Colaborador/a'); ?>
@@ -135,7 +142,7 @@ $id =  $_GET["colaborador"];
                                 ORDER BY publication_year DESC, pt.$valorSiteName, data DESC";
 
             $stmt = $pdo->prepare($query);
-            $stmt->bindParam(':investigatorId', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':investigatorId', $colaboradorId, PDO::PARAM_INT);
             $stmt->execute();
             $publicacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

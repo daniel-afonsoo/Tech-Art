@@ -1,9 +1,14 @@
 <?php
 include 'models/functions.php';
+
 ?>
+
+
+<?= redirectPageLanguage("missao.php","mission.php"); ?>
 
 <!DOCTYPE html>
 <html>
+    
 
     <?= template_header('Missão'); ?>
 
