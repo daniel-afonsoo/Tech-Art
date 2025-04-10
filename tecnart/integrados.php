@@ -78,6 +78,9 @@ $totalPages = ceil($totalRows/$perPage);
 
 ?>
 
+
+<?= redirectPageLanguage("integrados.php","integrated.php"); ?>
+
 <!DOCTYPE html>
 <html>
 

@@ -71,6 +71,8 @@ $totalPages = ceil($totalRows/$perPage);
 
 ?>
 
+<?= redirectPageLanguage("projetos_em_curso.php", "ongoing_projects.php") ?>
+
 <!DOCTYPE html>
 <html>
 

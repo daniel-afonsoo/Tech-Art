@@ -23,6 +23,7 @@ $stmt->execute();
 $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
+
 <!DOCTYPE html>
 <html>
 

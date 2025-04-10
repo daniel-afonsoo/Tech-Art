@@ -615,4 +615,24 @@ function get_subtitulo_carrosel($key){
   return $stmt->fetchcolumn() ?: 'Texto não encontrado';
 }
 
+
+
+//Função para a internacionalização de URLs
+function redirectPageLanguage($ptPage, $enPage) {
+
+    // Verificar se o idioma está definido na sessão
+    if (!isset($_SESSION["lang"])) {
+        $_SESSION["lang"] = "pt"; // Idioma padrão
+    }
+
+    // Redirecionar com base no idioma
+    if ($_SESSION["lang"] == "en" && basename($_SERVER['PHP_SELF']) != $enPage) {
+        header("Location: $enPage");
+        exit;
+    } elseif ($_SESSION["lang"] == "pt" && basename($_SERVER['PHP_SELF']) != $ptPage) {
+        header("Location: $ptPage");
+        exit;
+    }
+}
+
 ?>

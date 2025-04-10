@@ -2,6 +2,8 @@
 include 'models/functions.php';
 ?>
 
+<?= redirectPageLanguage("novasadmissoes.php","new_admissions.php"); ?>
+
 <!DOCTYPE html>
 <html>
 
