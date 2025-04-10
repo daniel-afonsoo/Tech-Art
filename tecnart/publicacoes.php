@@ -4,6 +4,8 @@ include 'models/functions.php';
 
 ?>
 
+<?= redirectPageLanguage("publicacoes.php","publications.php"); ?>
+
 <?= template_header('Publicações'); ?>
 <section class='product_section layout_padding'>
     <div style='padding-top: 50px; padding-bottom: 30px;'>

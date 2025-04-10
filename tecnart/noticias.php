@@ -40,6 +40,8 @@ $totalPages = ceil($totalRows/$perPage);
 
 ?>
 
+<?= redirectPageLanguage("noticias.php","news.php"); ?>
+
 <!DOCTYPE html>
 <html>
 

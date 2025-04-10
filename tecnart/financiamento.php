@@ -2,6 +2,10 @@
 include 'models/functions.php';
 ?>
 
+
+<?=redirectPageLanguage("financiamento.php","funding.php") ?>
+
+
 <!DOCTYPE html>
 <html>
 

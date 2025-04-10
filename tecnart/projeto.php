@@ -5,6 +5,17 @@ error_reporting(E_ALL);
 
 include 'config/dbconnection.php';
 include 'models/functions.php';
+
+
+// Obter o ID do projeto da query string
+if (!isset($_GET["projeto"])) {
+    die("O parâmetro 'projeto' está ausente na URL.");
+}
+$projectId = $_GET["projeto"];
+
+// Redirecionar dinamicamente com base no idioma
+redirectPageLanguageWithParam("projeto.php", "project.php", "projeto", $projectId);
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 $pdo = pdo_connect_mysql();
 $query = "SELECT id, COALESCE(NULLIF(nome{$language}, ''), nome) AS nome, 
@@ -18,10 +29,11 @@ $query = "SELECT id, COALESCE(NULLIF(nome{$language}, ''), nome) AS nome,
             COALESCE(NULLIF(facebook{$language}, ''), facebook) AS facebook, 
             fotografia, concluido FROM projetos Where id = ?";
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(1, $_GET["projeto"], PDO::PARAM_INT);
+$stmt->bindParam(1, $projectId, PDO::PARAM_INT);
 $stmt->execute();
 $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html>

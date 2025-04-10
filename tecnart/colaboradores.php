@@ -83,6 +83,9 @@ $totalPages = ceil($totalRows/$perPage);
 
 ?>
 
+
+<?= redirectPageLanguage("colaboradores.php","collaborators.php"); ?>
+
 <!DOCTYPE html>
 <html>
 

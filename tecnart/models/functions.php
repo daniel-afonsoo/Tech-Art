@@ -615,4 +615,45 @@ function get_subtitulo_carrosel($key){
   return $stmt->fetchcolumn() ?: 'Texto não encontrado';
 }
 
+
+
+//Função para a internacionalização de URLs
+function redirectPageLanguage($ptPage, $enPage) {
+
+    // Verificar se o idioma está definido na sessão
+    if (!isset($_SESSION["lang"])) {
+        $_SESSION["lang"] = "pt"; // Idioma padrão
+    }
+
+    // Redirecionar com base no idioma
+    if ($_SESSION["lang"] == "en" && basename($_SERVER['PHP_SELF']) != $enPage) {
+        header("Location: $enPage");
+        exit;
+    } elseif ($_SESSION["lang"] == "pt" && basename($_SERVER['PHP_SELF']) != $ptPage) {
+        header("Location: $ptPage");
+        exit;
+    }
+}
+
+
+function redirectPageLanguageWithParam($ptPage, $enPage, $paramName, $paramValue) {
+    // Verificar se o idioma está definido na sessão
+    if (!isset($_SESSION["lang"])) {
+        $_SESSION["lang"] = "pt"; // Idioma padrão
+    }
+
+    // Obter o nome do ficheiro atual
+    $currentPage = basename($_SERVER['PHP_SELF']);
+
+    // Construir o URL correto com base no idioma
+    $targetPage = ($_SESSION["lang"] == "en") ? $enPage : $ptPage;
+    $targetUrl = "$targetPage?$paramName=$paramValue";
+
+    // Redirecionar se o URL atual não corresponder ao esperado
+    if ($currentPage != $targetPage || !isset($_GET[$paramName]) || $_GET[$paramName] != $paramValue) {
+        header("Location: $targetUrl");
+        exit;
+    }
+}
+
 ?>

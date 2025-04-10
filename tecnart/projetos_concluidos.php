@@ -71,6 +71,8 @@ $totalPages = ceil($totalRows/$perPage);
 
 ?>
 
+<?= redirectPageLanguage("projetos_concluidos.php","completed_projects.php"); ?>
+
 <!DOCTYPE html>
 <html>
 

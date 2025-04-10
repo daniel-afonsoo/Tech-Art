@@ -32,7 +32,7 @@ function ret_dic_en()
         //Drop-down 'Projetos'
         "projects-tab" => "Projects",
         "ongoing-option" => "Ongoing",
-        "finished-option" => "Finished",
+        "finished-option" => "Completed",
         //Drop-down 'Investigadores/as'
         "researchers-drop-down" => "Researchers",
         "integrated-option" => "Integrated",
