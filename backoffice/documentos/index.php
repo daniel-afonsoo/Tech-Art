@@ -104,6 +104,7 @@ $conn->close();
                         <button type="submit" class="btn btn-danger ml-2">
                             <i class="fa fa-trash"></i> Remover Pasta
                         </button>
+                        
                     </form>
                 </div>
             </div>
@@ -125,6 +126,13 @@ $conn->close();
                                                class="btn btn-sm btn-danger remove-btn" 
                                                onclick="return confirm('Tem certeza que deseja remover este documento?')">
                                                 Remover
+                                            </a>
+                                        <?php } ?>
+                                        <?php if ($_SESSION["autenticado"] == "administrador") { ?>
+                                            <a href="edit.php?id=<?= $arquivo['id'] ?>" 
+                                               class="btn btn-sm btn-primary" 
+                                              >
+                                                Editar
                                             </a>
                                         <?php } ?>
                                     </span>
