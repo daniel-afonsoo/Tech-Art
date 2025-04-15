@@ -2,6 +2,7 @@
 include 'config/dbconnection.php';
 include 'models/functions.php';
 $pdo = pdo_connect_mysql();
+registar_visita($pdo, "index.php");
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 ?>
 

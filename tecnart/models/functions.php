@@ -656,4 +656,53 @@ function redirectPageLanguageWithParam($ptPage, $enPage, $paramName, $paramValue
     }
 }
 
+
+
+
+  //Função para obter o país a partir do IP
+  function get_country_by_ip($ip){
+    $url = "http://ip-api.com/json/$ip";
+    $response = file_get_contents($url);
+    $data = json_decode($response, true);
+
+    if($data && $data['status'] === 'success'){
+      return $data['country'];
+    }
+    return "Localhost xD";
+  }
+
+  //Função para registar a visita
+  function registar_visita($pdo, $pagina){
+
+    //$ip = $_SERVER['HTTP_CLIENT_IP'];
+    //$ip = $_SERVER['REMOTE_ADDR'];
+    $ip= $_SERVER['HTTP_X_FORWARDED_FOR'];
+
+    $pais = get_country_by_ip($ip);
+
+    $stmt = $pdo->prepare("SELECT id FROM paises WHERE nome = ?");
+    $stmt->execute([$pais]);
+    $pais_id = $stmt->fetchColumn();
+
+    if (!$pais_id){
+      $stmt = $pdo->prepare("INSERT INTO paises (nome)
+      values (?)");
+      $stmt->execute([$pais]);
+      $pais_id = $pdo->lastInsertId();
+    }
+
+    $stmt = $pdo->prepare("SELECT id, numero_acessos FROM acessos WHERE nome = ? AND pais = ?");
+    $stmt->execute([$pagina, $pais_id]);
+    $acesso = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($acesso) {
+        $stmt = $pdo->prepare("UPDATE acessos SET numero_acessos = numero_acessos + 1 WHERE id = ?");
+        $stmt->execute([$acesso['id']]);
+    } else {
+        $stmt = $pdo->prepare("INSERT INTO acessos (nome, numero_acessos, pais) VALUES (?, 1, ?)");
+        $stmt->execute([$pagina, $pais_id]);
+    }
+  }
+
+
 ?>

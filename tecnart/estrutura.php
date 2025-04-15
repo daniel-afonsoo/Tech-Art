@@ -5,9 +5,9 @@ include 'models/functions.php';
 
 $pdo = pdo_connect_mysql();
 
+registar_visita($pdo, "estrutura.php");
 
 
-    $pdo = pdo_connect_mysql();
 
     $stmt = $pdo->prepare('SELECT * FROM conselho_consultivo');
     $stmt->execute();
