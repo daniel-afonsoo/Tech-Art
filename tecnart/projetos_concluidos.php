@@ -4,6 +4,10 @@ include 'models/functions.php';
 
 //ligação à base de dados
 $pdo = pdo_connect_mysql();
+
+//registar visita
+registar_visita($pdo, "projetos_concluidos.php");
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 

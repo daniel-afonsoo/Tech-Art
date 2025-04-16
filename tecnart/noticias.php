@@ -4,6 +4,8 @@ include 'models/functions.php';
 
 $pdo = pdo_connect_mysql();
 
+registar_visita($pdo, "noticias.php");
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 //Paginação

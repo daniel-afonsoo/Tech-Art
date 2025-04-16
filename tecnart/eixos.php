@@ -1,9 +1,15 @@
 <?php
+include 'config/dbconnection.php';
 include 'models/functions.php';
+$pdo = pdo_connect_mysql();
+
+registar_visita($pdo, "eixos.php");
 ?>
 
 
 <?= redirectPageLanguage("eixos.php","axes.php"); ?>
+
+
 
 
 <!DOCTYPE html>

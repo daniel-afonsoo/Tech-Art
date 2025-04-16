@@ -4,6 +4,9 @@ include 'models/functions.php';
 
 
 $pdo = pdo_connect_mysql();
+
+registar_visita($pdo, "oportunidades.php");
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 $query = "SELECT id,COALESCE(NULLIF(titulo{$language}, ''), titulo) AS titulo,visivel,imagem FROM oportunidades WHERE visivel=true ORDER BY ID DESC";

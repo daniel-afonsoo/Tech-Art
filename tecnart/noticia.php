@@ -4,6 +4,7 @@ include 'models/functions.php';
 
 $pdo = pdo_connect_mysql();
 
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 $query = "SELECT id,
         COALESCE(NULLIF(titulo{$language}, ''), titulo) AS titulo,

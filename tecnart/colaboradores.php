@@ -7,6 +7,10 @@ include 'models/functions.php';
 //Ligação à base de dados
 
 $pdo = pdo_connect_mysql();
+
+//Registar visita
+registar_visita($pdo, "colaboradores.php");
+
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
 
 
