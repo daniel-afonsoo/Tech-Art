@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && isset($_PO
       //Se for um admisnistrador guardar este facto nas variaveis de sessão
       $_SESSION["autenticado"] = 'administrador';
       $_SESSION["adminid"] =  $row["id"];
-      header("Location: projetos/index.php");
+      header("Location: Views/index.php");
     }
   } else {
     // se não for um administrador verificar se os dados pertencem a um investigador
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"]) && isset($_PO
         }
         //se pertencer a um investigador guardar o id do investigador
         $_SESSION["autenticado"] = $row["id"];
-        header("Location: projetos/index.php");
+        header("Location: Views/index.php");
         return;
       }
     }

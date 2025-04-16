@@ -124,6 +124,7 @@ ob_start();
 
 <ul class="navUl">
     <div class="navGroup">
+        <li class="navLi"><a href="../Views">Dashboard das Visitas no Site</a></li>
         <li class="navLi">
             <span class="dropbtn">Sobre o TECHN&amp;ART</span>
             <div class="dropdown-content">
