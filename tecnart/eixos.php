@@ -25,7 +25,7 @@ registar_visita($pdo, "eixos.php");
             <div class="heading_container3">
 
                 <h3 style="text-transform: uppercase;">
-                    <?= change_lang("axes-page-heading") ?>
+                    <?= get_titulo_eixos(1) ?>
                 </h3>
 
                 <div class="flex-container mobile_reverse">
@@ -36,7 +36,7 @@ registar_visita($pdo, "eixos.php");
                         </figure>
                     </div>
                     <div class="flex-right">
-                    ######////shhshshshs
+                        <?= get_text_eixos(1) ?>
                     </div>
                 </div>               
 

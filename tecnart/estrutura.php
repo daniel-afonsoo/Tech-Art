@@ -29,7 +29,7 @@ registar_visita($pdo, "estrutura.php");
             <div class="heading_container3">
 
                 <h3 style="font-size: 33px; text-transform: uppercase;">
-                    <?= change_lang("org-struct-page-heading") ?>
+                    <?= get_text_estrutura("org-struct-page-heading") ?>
                 </h3>
 
                 <div class="flex-container mobile_reverse">
