@@ -37,8 +37,7 @@ function template_header($title){
                 <meta name="keywords" content="" />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
-                <!-- <link rel="icon" type="image/svg+xml" href="./assets/images/icone-removebg-preview.png"> -->
-                <link rel="icon" type="image/png+xml" href="./assets/images/technart_logo-removebg-preview.png">
+                <link rel="shortcut icon" href="images/favicon.png" type="">
                 <title>$title</title>
                 <!-- bootstrap core css -->
                 <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.css" />
@@ -264,7 +263,7 @@ $change_lang =  function ($key) {
                             <!-- IPT Logo -->
                             <div class="footer-section">
                                 <a target="_blank" href="https://www.ipt.pt/">
-                                    <img class="footer-logo" src="./assets/images/IPT_LOGO_2025.svg" alt="IPT">
+                                    <img class="footer-logo" src="./assets/images/ipt.svg" alt="IPT">
                                 </a>
                             </div>
                             <!-- FCT Logo -->
@@ -276,7 +275,7 @@ $change_lang =  function ($key) {
                             <!-- Ciência Vitae Logo -->
                             <div class="footer-section">
                                 <a target="_blank" href="https://www.cienciavitae.pt/">
-                                    <img class="footer-logo" src="./assets/images/CV_logo_2025.svg" alt="Ciência Vitae">
+                                    <img class="footer-logo" src="./assets/images/cienciavitae.svg" alt="Ciência Vitae">
                                 </a>
                             </div>
                             <!-- Endereço -->

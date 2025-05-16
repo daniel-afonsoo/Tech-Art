@@ -107,8 +107,8 @@ $conn->close();
                 <label>Quem pode ver os arquivos dessa pasta?</label><br>
                 <div class="form-check">
                     <input type="checkbox" name="permissoes[]" value="todos" class="form-check-input"> Todos<br>
-                    <input type="checkbox" name="permissoes[]" value="Integrado" class="form-check-input"> Investigadores Integrados<br>
-                    <input type="checkbox" name="permissoes[]" value="Colaborador" class="form-check-input"> Colaboradores<br>
+                    <input type="checkbox" name="permissoes[]" value="Integrado" class="form-check-input"> Investigadores/as Integrados/as<br>
+                    <input type="checkbox" name="permissoes[]" value="Colaborador" class="form-check-input"> Colaboradores/as<br>
                     <input type="checkbox" name="permissoes[]" value="Aluno" class="form-check-input"> Alunos<br>
                     <input type="checkbox" name="permissoes[]" value="Externo" class="form-check-input"> Externos<br>
                 </div>

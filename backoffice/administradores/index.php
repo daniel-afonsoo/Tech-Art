@@ -27,11 +27,11 @@ $result = mysqli_query($conn, $sql);
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Administradores</h2>
+						<h2>Administradores/as</h2>
 					</div>
 					<div class="col-sm-6">
 						<a href="create.php" class="btn btn-success"><i class="material-icons">&#xE147;</i>
-							<span>Adicionar Novo Administrador</span></a>
+							<span>Adicionar novo/a Administrador/a</span></a>
 					</div>
 				</div>
 			</div>
