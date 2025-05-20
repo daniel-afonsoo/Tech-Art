@@ -28,6 +28,9 @@ function ret_dic_en()
         "org-struct-option" => "Organic Structure",
         "opportunities-option" => "Opportunities",
         "regulation-option" => "Regulations",
+        "regulation-option-geral" => "General Regulations",
+        "electoral-option-geral" => "Eleitoral Regulations",
+        "electoral-calendar-option-geral" => "Electoral Calendar",
         "funding-option" => "Funding",
         //Drop-down 'Projetos'
         "projects-tab" => "Projects",
@@ -305,6 +308,8 @@ function ret_dic_en()
         "new-admissions-regulations-link" => "general regulations document.",
         "new-admissions-regulations-fill" => "Fill out Form",
         "new-admissions-regulations-file" => "Regulations.pdf",
+        "electoral-regulations-file" => "RegulamentoEleitoral.pdf",
+        "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
 
         //:::admiissao.php
         //Título

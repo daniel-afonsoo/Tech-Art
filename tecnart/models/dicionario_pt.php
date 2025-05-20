@@ -26,7 +26,10 @@ function ret_dic_pt(){
         "research-axes-option" => "Eixos de Investigação",
         "org-struct-option" => "Estrutura Orgânica",
         "opportunities-option" => "Oportunidades",
-        "regulation-option" => "Regulamento",
+        "regulation-option" => "Regulamentos",
+        "regulation-option-geral" => "Regulamento Geral",
+        "electoral-option-geral" => "Regulamento Eleitoral",
+        "electoral-calendar-option-geral" => "Calendário Eleitoral",
         "funding-option" => "Financiamento",
         //Drop-down 'Projetos'
         "projects-tab" => "Projetos",
@@ -304,6 +307,8 @@ function ret_dic_pt(){
         "new-admissions-regulations-link" => "regulamento geral do TECHN&ART.",
         "new-admissions-regulations-fill" => "Preencher Formulário",
         "new-admissions-regulations-file" => "Regulamento.pdf",
+        "electoral-regulations-file" => "RegulamentoEleitoral.pdf",
+        "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
 
         //:::admissao.php
         //Título
