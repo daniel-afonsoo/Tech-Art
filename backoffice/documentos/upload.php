@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["arquivo"])) {
         mkdir($dirDestino, 0777, true);
     }
 
+    $tipo  = isset($_POST['permissoes_tipo']) ? $_POST['permissoes_tipo'] : "privado";
     $nomeArquivo = $_FILES["arquivo"]["name"];
     $caminhoCompleto = $dirDestino . $nomeArquivo;
 
@@ -60,9 +61,9 @@ $nomeArquivo = basename($caminhoCompleto);
 
     if (move_uploaded_file($_FILES["arquivo"]["tmp_name"], $caminhoCompleto)) {
         // Salvar na base de dados
-        $sql = "INSERT INTO documentos (nome_arquivo, caminho, pasta, permissoes) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO documentos (nome_arquivo, caminho, pasta, permissoes,tipo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $nomeArquivo, $caminhoCompleto, $pasta, $permissoes);
+        $stmt->bind_param("sssss", $nomeArquivo, $caminhoCompleto, $pasta, $permissoes, $tipo);
         $stmt->execute();
         $stmt->close();
 
@@ -112,6 +113,12 @@ $conn->close();
                     <input type="checkbox" name="permissoes[]" value="Aluno" class="form-check-input"> Alunos<br>
                     <input type="checkbox" name="permissoes[]" value="Externo" class="form-check-input"> Externos<br>
                 </div>
+
+                <!-- Definir permissões -->
+                <label>Tipo</label><br>
+                <div class="form-check">
+                    <input type="radio" name="permissoes_tipo" value="publico" class="form-check-input"> Público<br>
+                    <input type="radio" name="permissoes_tipo" value="privado" class="form-check-input"> Privado<br>
 
                 <button type="submit" class="btn btn-success mt-3">Enviar</button>
                 <a href="index.php" class="btn btn-secondary mt-3">Voltar</a>
