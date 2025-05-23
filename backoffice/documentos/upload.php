@@ -31,43 +31,63 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // Se a requisição for POST e houver um arquivo enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["arquivo"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["arquivo_pt"])) {
     $pasta = isset($_POST['nova_pasta']) && !empty($_POST['nova_pasta']) ? $_POST['nova_pasta'] : $_POST['pasta_existente'];
     $dirDestino = $uploadsDir . $pasta . "/";
 
-    // Criar a pasta se não existir
     if (!file_exists($dirDestino)) {
         mkdir($dirDestino, 0777, true);
     }
 
     $tipo  = isset($_POST['permissoes_tipo']) ? $_POST['permissoes_tipo'] : "privado";
-    $nomeArquivo = $_FILES["arquivo"]["name"];
-    $caminhoCompleto = $dirDestino . $nomeArquivo;
-
-    // Verificar se o ficheiro já existe na pasta
-    $contador = 1;
-    $info = pathinfo($nomeArquivo);
-    $extensao = isset($info['extension']) ? "." . $info['extension'] : "";
-
-   while (file_exists($caminhoCompleto)) {
-    $novoNome = $info['filename'] . "_v" . $contador . $extensao;
-    $caminhoCompleto = $dirDestino . $novoNome;
-    $contador++;
-  }
-
-$nomeArquivo = basename($caminhoCompleto);
-    // Permissões da pasta
     $permissoes = isset($_POST['permissoes']) ? implode(",", $_POST['permissoes']) : "privado";
 
-    if (move_uploaded_file($_FILES["arquivo"]["tmp_name"], $caminhoCompleto)) {
-        // Salvar na base de dados
-        $sql = "INSERT INTO documentos (nome_arquivo, caminho, pasta, permissoes,tipo) VALUES (?, ?, ?, ?, ?)";
+    // Upload PT
+    $nomeArquivoPT = $_FILES["arquivo_pt"]["name"];
+    $caminhoCompletoPT = $dirDestino . $nomeArquivoPT;
+    $contador = 1;
+    $infoPT = pathinfo($nomeArquivoPT);
+    $extensaoPT = isset($infoPT['extension']) ? "." . $infoPT['extension'] : "";
+    while (file_exists($caminhoCompletoPT)) {
+        $novoNomePT = $infoPT['filename'] . "_v" . $contador . $extensaoPT;
+        $caminhoCompletoPT = $dirDestino . $novoNomePT;
+        $contador++;
+    }
+    $nomeArquivoPT = basename($caminhoCompletoPT);
+
+    // Upload EN (opcional)
+    $nomeArquivoEN = "";
+    $caminhoCompletoEN = "";
+    if (isset($_FILES["arquivo_en"]) && $_FILES["arquivo_en"]["error"] == 0) {
+        $nomeArquivoEN = $_FILES["arquivo_en"]["name"];
+        $caminhoCompletoEN = $dirDestino . $nomeArquivoEN;
+        $contadorEN = 1;
+        $infoEN = pathinfo($nomeArquivoEN);
+        $extensaoEN = isset($infoEN['extension']) ? "." . $infoEN['extension'] : "";
+        while (file_exists($caminhoCompletoEN)) {
+            $novoNomeEN = $infoEN['filename'] . "_v" . $contadorEN . $extensaoEN;
+            $caminhoCompletoEN = $dirDestino . $novoNomeEN;
+            $contadorEN++;
+        }
+        $nomeArquivoEN = basename($caminhoCompletoEN);
+    }
+
+    // Move os ficheiros
+    $okPT = move_uploaded_file($_FILES["arquivo_pt"]["tmp_name"], $caminhoCompletoPT);
+    $okEN = true;
+    if ($nomeArquivoEN) {
+        $okEN = move_uploaded_file($_FILES["arquivo_en"]["tmp_name"], $caminhoCompletoEN);
+    }
+
+    if ($okPT && $okEN) {
+        // guardar na base de dados (adiciona os campos nome_arquivo_en e caminho_en na tabela!)
+        $sql = "INSERT INTO documentos (nome_arquivo, caminho, nome_arquivo_en, caminho_en, pasta, permissoes, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $nomeArquivo, $caminhoCompleto, $pasta, $permissoes, $tipo);
+        $stmt->bind_param("sssssss", $nomeArquivoPT, $caminhoCompletoPT, $nomeArquivoEN, $caminhoCompletoEN, $pasta, $permissoes, $tipo);
         $stmt->execute();
         $stmt->close();
 
-        echo "<script>alert('Arquivo enviado com sucesso!'); window.location.href='index.php';</script>";
+        echo "<script>alert('Arquivo(s) enviado(s) com sucesso!'); window.location.href='index.php';</script>";
     } else {
         echo "<script>alert('Erro no upload!');</script>";
     }
@@ -88,7 +108,11 @@ $conn->close();
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Escolha um arquivo:</label>
-                    <input type="file" name="arquivo" class="form-control" required>
+                    <input type="file" name="arquivo_pt" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Escolha o arquivo em Inglês se quiser: (Inglês, opcional):</label>
+                    <input type="file" name="arquivo_en" class="form-control">
                 </div>
 
                 <!-- Criar ou selecionar pasta -->
