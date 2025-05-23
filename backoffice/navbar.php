@@ -139,9 +139,9 @@ ob_start();
             <span class="dropbtn">Pessoas</span>
             <div class="dropdown-content">
                 <?php if ($_SESSION["autenticado"] === "administrador"): ?>
-                    <a href="../administradores">Administradores</a>
+                    <a href="../administradores">Administradores/as</a>
                 <?php endif; ?>
-                <a href="../investigadores">Investigadores</a>
+                <a href="../investigadores">Investigadores/as</a>
                 <a href="../conselho_consultivo">Conselho Consultivo</a>
             </div>
         </li>
