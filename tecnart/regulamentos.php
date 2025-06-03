@@ -33,6 +33,11 @@ include 'models/functions.php';
                             echo "<a href='./assets/".change_lang("electoral-calendar-2025-file")."' target='_blank'>".change_lang("electoral-calendar-option-geral")."</a>";
                         ?>
                     </li>
+                    <li>
+                        <?php
+                            echo "<a href='./assets/".change_lang("electoral-calendar-2025-file-rectification")."' target='_blank'>".change_lang("electoral-calendar-option-geral-rectification")."</a>";
+                        ?>
+                    </li>
                 </ul>
             </div>
          </div>

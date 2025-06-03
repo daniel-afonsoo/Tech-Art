@@ -29,7 +29,8 @@ function ret_dic_pt(){
         "regulation-option" => "Regulamentos",
         "regulation-option-geral" => "Regulamento Geral",
         "electoral-option-geral" => "Regulamento Eleitoral",
-        "electoral-calendar-option-geral" => "Calendário Eleitoral",
+        "electoral-calendar-option-geral" => "Calendário Eleitoral (última atualização: 2 de junho de 2025)",
+        "electoral-calendar-option-geral-rectification" => "Declaração de Retificação",
         "funding-option" => "Financiamento",
         //Drop-down 'Projetos'
         "projects-tab" => "Projetos",
@@ -309,6 +310,7 @@ function ret_dic_pt(){
         "new-admissions-regulations-file" => "Regulamento.pdf",
         "electoral-regulations-file" => "RegulamentoEleitoral.pdf",
         "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
+        "electoral-calendar-2025-file-rectification" => "DeclaracaoRetificacao.pdf",
 
         //:::admissao.php
         //Título
