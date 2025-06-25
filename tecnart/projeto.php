@@ -160,10 +160,11 @@ $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
                     $stmt->bindParam(1, $_GET["projeto"], PDO::PARAM_INT);
                     $stmt->execute();
                     $investigador_principal = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // Verifica se o investigador principal foi encontrado
                     if ($investigador_principal) :
                     ?>
                         <div class="col-12 text-center mb-4">
-                            <h4 class = "heading_h4"><?= change_lang("team-principal-res-tab-title-class") ?></h4>
+                            <h4 class="heading_h4" style="margin-left:55px"><?= change_lang("team-principal-res-tab-title-class") ?></h4>
                         </div>
                         <div class="col-12 text-center">
                             <div class="imgList d-inline-block">
@@ -171,7 +172,7 @@ $projetos = $stmt->fetch(PDO::FETCH_ASSOC);
                                 <?php if ($tipo != "externo") {
                                     echo "<a href='$tipo.php?$tipo={$investigador_principal['id']}'>";
                                 } ?>
-                                <div class="image_default" style="margin-left:65px">
+                                <div class="image_default" style="margin-left:55px">
                                     <img class="centrare" style="object-fit: cover; width:225px; height:280px;" src="../backoffice/assets/investigadores/<?= $investigador_principal['fotografia'] ?>" alt="">
                                     <div class="imgText justify-content-center m-auto">
                                         <?= $investigador_principal['nome'] ?>

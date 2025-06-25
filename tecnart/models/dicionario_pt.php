@@ -243,7 +243,7 @@ function ret_dic_pt(){
         "team-steakholders-tab-subtitle-class" => "Subtitulo ",
 
         //Titulo investigador principal
-        "team-principal-res-tab-title-class" => "Investigador principal",
+        "team-principal-res-tab-title-class" => "Investigador/a principal",
         //
 
         //::::::integrados.php/colaboradores.php/alunos.php::::::
