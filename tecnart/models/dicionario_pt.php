@@ -27,10 +27,13 @@ function ret_dic_pt(){
         "org-struct-option" => "Estrutura Orgânica",
         "opportunities-option" => "Oportunidades",
         "regulation-option" => "Regulamentos",
+        "electoral-process" => "Processo Eleitoral ",
         "regulation-option-geral" => "Regulamento Geral",
         "electoral-option-geral" => "Regulamento Eleitoral",
         "electoral-calendar-option-geral" => "Calendário Eleitoral (última atualização: 2 de junho de 2025)",
         "electoral-calendar-option-geral-rectification" => "Declaração de Retificação",
+        "voters-notebook" => "Caderno de Eleitores/as",
+        "application-admitted" => "Candidatura Admitida",
         "funding-option" => "Financiamento",
         //Drop-down 'Projetos'
         "projects-tab" => "Projetos",
@@ -311,6 +314,8 @@ function ret_dic_pt(){
         "electoral-regulations-file" => "RegulamentoEleitoral.pdf",
         "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
         "electoral-calendar-2025-file-rectification" => "DeclaracaoRetificacao.pdf",
+        "electoral-calendar-2025-voters-notebook" => "CadernoEleitoral2025.pdf",
+        "electoral-calendar-2025-application-admitted" => "CandidaturaAdmitida2025.pdf",
 
         //:::admissao.php
         //Título

@@ -28,10 +28,13 @@ function ret_dic_en()
         "org-struct-option" => "Organic Structure",
         "opportunities-option" => "Opportunities",
         "regulation-option" => "Regulations",
+        "electoral-process" => "Electoral Process ",
         "regulation-option-geral" => "General Regulations",
         "electoral-option-geral" => "Eleitoral Regulations",
         "electoral-calendar-option-geral" => "Electoral Calendar (last update: june 2, 2025)",
         "electoral-calendar-option-geral-rectification" => "Rectification Statement",
+        "voters-notebook" => "Voters Notebook",
+        "application-admitted" => "Application Admitted",
         "funding-option" => "Funding",
         //Drop-down 'Projetos'
         "projects-tab" => "Projects",
@@ -312,6 +315,8 @@ function ret_dic_en()
         "electoral-regulations-file" => "ElectoralRegulations.pdf",
         "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
         "electoral-calendar-2025-file-rectification" => "DeclaracaoRetificacao.pdf",
+        "electoral-calendar-2025-voters-notebook" => "CadernoEleitoral2025.pdf",
+        "electoral-calendar-2025-application-admitted" => "CandidaturaAdmitida2025.pdf",
 
         //:::admiissao.php
         //Título

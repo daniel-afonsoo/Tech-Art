@@ -28,6 +28,12 @@ include 'models/functions.php';
                             echo "<a href='./assets/".change_lang("electoral-regulations-file")."' target='_blank'>".change_lang("electoral-option-geral")."</a>";
                         ?>
                     </li>
+                </ul>
+                <br><br>
+                <h3 style="text-transform: uppercase;">
+                    <?= change_lang("electoral-process") ?>
+                </h3>
+                <ul>
                     <li>
                         <?php
                             echo "<a href='./assets/".change_lang("electoral-calendar-2025-file")."' target='_blank'>".change_lang("electoral-calendar-option-geral")."</a>";
@@ -36,6 +42,16 @@ include 'models/functions.php';
                     <li>
                         <?php
                             echo "<a href='./assets/".change_lang("electoral-calendar-2025-file-rectification")."' target='_blank'>".change_lang("electoral-calendar-option-geral-rectification")."</a>";
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                            echo "<a href='./assets/".change_lang("electoral-calendar-2025-voters-notebook")."' target='_blank'>".change_lang("voters-notebook")."</a>";
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                            echo "<a href='./assets/".change_lang("electoral-calendar-2025-application-admitted")."' target='_blank'>".change_lang("application-admitted")."</a>";
                         ?>
                     </li>
                 </ul>
