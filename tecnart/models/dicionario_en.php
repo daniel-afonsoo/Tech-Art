@@ -315,7 +315,7 @@ function ret_dic_en()
         "electoral-regulations-file" => "ElectoralRegulations.pdf",
         "electoral-calendar-2025-file" => "CalendárioEleicoes2025.pdf",
         "electoral-calendar-2025-file-rectification" => "DeclaracaoRetificacao.pdf",
-        "electoral-calendar-2025-voters-notebook" => "CadernoEleitoral2025.pdf",
+        "electoral-calendar-2025-voters-notebook" => "CadernoEleitoral2025b.pdf",
         "electoral-calendar-2025-application-admitted" => "CandidaturaAdmitida2025.pdf",
 
         //:::admiissao.php
