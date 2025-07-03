@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Inicia o buffer de saída
 require "../verifica.php";
 require "../config/basedados.php";
 
@@ -14,22 +15,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $chave     = $_POST["chave"];
     $texto_pt  = $_POST["texto_pt"];
     $texto_en     = $_POST["texto_en"];
+    $titulo_pt  = $_POST["titulo_pt"];
+    $titulo_en     = $_POST["titulo_en"];
 
     // Limpa tags HTML indesejadas
     $texto_en    = strip_tags($texto_en);
     $texto_pt  = strip_tags($texto_pt);
+    $titulo_en    = strip_tags($titulo_en);
+    $titulo_pt  = strip_tags($titulo_pt);
+
    
     // Atualiza os dados na base de dados
     $sql = "UPDATE estrutura
                SET texto_pt     = ?,
                    texto_en = ?,
+                   titulo_pt  = ?,
+                   titulo_en     = ?,
                    chave     = ?
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param(
-        $stmt, 'sssi', 
+        $stmt, 'sssssi', 
         $texto_pt, 
-        $texto_en, 
+        $texto_en,
+        $titulo_pt,
+        $titulo_en, 
         $chave,
         $id
     );
@@ -43,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT chave,texto_pt,texto_en
+    $sql = "SELECT chave,texto_pt,texto_en, titulo_pt, titulo_en
               FROM estrutura
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -55,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $chave     = $row["chave"];
     $texto_en  = $row["texto_en"];
     $texto_pt     = $row["texto_pt"];
+    $titulo_en  = $row["titulo_en"];
+    $titulo_pt     = $row["titulo_pt"];
 }
 
 // Fechar conexão
@@ -109,7 +121,7 @@ if ($conn && $conn instanceof mysqli) {
                     <label>Texto(Portugues)</label>
                     <input 
                         type="text" 
-                        maxlength="255" 
+                        maxlength="1000" 
                         name="texto_pt" 
                         class="form-control" 
                         value="<?= htmlspecialchars($texto_pt) ?>">
@@ -121,11 +133,32 @@ if ($conn && $conn instanceof mysqli) {
                     <label>Texto(Ingles)</label>
                     <input 
                         type="text" 
-                        maxlength="255" 
+                        maxlength="1000" 
                         name="texto_en" 
                         class="form-control" 
                         value="<?= htmlspecialchars($texto_en) ?>">
                 </div>
+
+                <div class="form-group">
+                    <label>Título(Portugues)</label>
+                    <input   
+                        type="text" 
+                        maxlength="255" 
+                        name="titulo_pt" 
+                        class="form-control" 
+                        value="<?= htmlspecialchars($titulo_pt) ?>">
+                </div>
+
+                <div class="form-group">
+                    <label>Título(Ingles)</label>
+                    <input
+                        type="text" 
+                        maxlength="255" 
+                        name="titulo_en" 
+                        class="form-control" 
+                        value="<?= htmlspecialchars($titulo_en) ?>">
+                </div>
+
 
                 <!-- Botões -->
                 <div class="form-group mt-4">

@@ -2,17 +2,19 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-// Filtro de pesquisa
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+// Filtro de pesquisa (usando operador null coalescing)
+$search = $_GET['search'] ?? '';
 
+// Garantir que page é inteiro e mínimo 1
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
 
 $perPage  = 10;
-$page     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start    = ($page - 1) * $perPage;
 $searchQ  = '%' . $search . '%';
 
-
-$sql = "SELECT id, chave , texto_pt, texto_en
+// Query corrigida para trazer titulo_pt e titulo_en
+$sql = "SELECT id, chave, texto_pt, texto_en, titulo_pt, titulo_en
           FROM estrutura
          WHERE chave LIKE ?
          LIMIT $start, $perPage";
@@ -40,7 +42,7 @@ mysqli_close($conn);
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Estrutura Organica</title>
+    <title>Estrutura Orgânica</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -87,6 +89,8 @@ mysqli_close($conn);
                     <th>ID</th>
                     <th>Texto (PT)</th>
                     <th>Texto (EN)</th>
+                    <th>Título (PT)</th>
+                    <th>Título (EN)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -94,20 +98,28 @@ mysqli_close($conn);
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
                         <td><?= htmlspecialchars($row['chave']) ?></td>
-                        <td><?= htmlspecialchars($row['texto_pt']) ?></td>
-                        <td><?= htmlspecialchars($row['texto_en']) ?></td>
+                        <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_pt']) ?></textarea></td>
+                        <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_en']) ?></textarea></td>
+                        <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
+                        <td><?= htmlspecialchars($row['titulo_en']) ?></td>
                         <td style="min-width:180px;">
                             <a href="edit.php?id=<?= $row['id'] ?>" 
                                class="btn btn-primary mb-1">
                                Alterar
                             </a>
                             <a href="delete.php?id=<?= $row['id'] ?>" 
-                               class="btn btn-danger mb-1">
+                               class="btn btn-danger mb-1"
+                               onclick="return confirm('Tem certeza que deseja apagar este registro?');">
                                Apagar
                             </a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
+                <?php if (mysqli_num_rows($result) === 0): ?>
+                    <tr>
+                        <td colspan="6" class="text-center">Nenhum registro encontrado.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 
