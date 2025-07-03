@@ -30,7 +30,7 @@ function deletarPasta($caminho) {
 // Remover ficheiro
 if ($id) {
     // Buscar o arquivo na base de dados
-    $sql = "SELECT caminho FROM documentos WHERE id = ?";
+    $sql = "SELECT caminho FROM documentos_backoffice WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -43,7 +43,7 @@ if ($id) {
     }
 
     // Remove da base de dados
-    $sql = "DELETE FROM documentos WHERE id = ?";
+    $sql = "DELETE FROM documentos_backoffice WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -59,7 +59,7 @@ if ($pasta) {
     $pastaPath = $uploadsDir . $pasta;
 
     // Busca todos os arquivos da pasta na base de dados
-    $sql = "SELECT id, caminho FROM documentos WHERE pasta = ?";
+    $sql = "SELECT id, caminho FROM documentos_backoffice WHERE pasta = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $pasta);
     $stmt->execute();
@@ -71,7 +71,7 @@ if ($pasta) {
         }
 
         // Remove da base de dados
-        $deleteSql = "DELETE FROM documentos WHERE id = ?";
+        $deleteSql = "DELETE FROM documentos_backoffice WHERE id = ?";
         $deleteStmt = $conn->prepare($deleteSql);
         $deleteStmt->bind_param("i", $row["id"]);
         $deleteStmt->execute();

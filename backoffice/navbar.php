@@ -152,7 +152,12 @@ ob_start();
         <?php if ($_SESSION["autenticado"] === "administrador"): ?>
             <li class="navLi"><a href="../admissoes">Admissões</a></li>
         <?php endif; ?>
-        <li class="navLi"><a href="../documentos">Documentos</a></li>
+        <li class="navLi">
+           <span class="dropbtn">Documentos</span>
+           <div class="dropdown-content">  
+             <a href="../documentos_backoffice">Documentos BackOffice</a>
+             <a href="../documentos_frontoffice">Documentos FrontOffice</a>
+          </div> 
     </div>
 
     <div class="navExit">
