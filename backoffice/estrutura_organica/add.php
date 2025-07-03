@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require "../verifica.php";
 require "../config/basedados.php";
 
@@ -16,16 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Remove todas as tags HTML para salvar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);
     $texto_en = strip_tags($_POST["texto_en"]);
-
+    $titulo_pt = strip_tags($_POST["titulo_pt"]);
+    $titulo_en = strip_tags($_POST["titulo_en"]);
 
     // Monta a query de inserção
-    $sql = "INSERT INTO estrutura (chave,texto_pt, texto_en) 
-            VALUES (?,?,?)";
+    $sql = "INSERT INTO estrutura (chave,texto_pt, texto_en,titulo_pt, titulo_en) 
+            VALUES (?,?,?,?,?)";
 
     
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sss', 
-     $chave, $texto_pt, $texto_en
+    mysqli_stmt_bind_param($stmt, 'sssss', 
+     $chave, $texto_pt, $texto_en,$titulo_pt, $titulo_en
     );
 
     
@@ -110,6 +112,27 @@ mysqli_close($conn);
                             <textarea class="form-control ck_replace"
                                       name="texto_en"
                                       rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Título (Português) e Título (Inglês) -->
+                <div class="row">
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Título (Português)</label>
+                            <textarea class="form-control ck_replace"   
+                                        name="titulo_pt"
+                                        rows="2"></textarea>            
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col halfCol">
+                        <div class="form-group">
+                            <label>Título (Inglês)</label>
+                            <textarea class="form-control ck_replace"
+                                      name="titulo_en"
+                                        rows="2"></textarea>
                         </div>
                     </div>
                 </div>

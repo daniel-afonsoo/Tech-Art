@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require "../verifica.php";
 require "../config/basedados.php";
 
