@@ -12,17 +12,10 @@ if ($_SESSION["autenticado"] != 'administrador') {
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id         = $_POST["id"];
-    $chave     = $_POST["chave"];
     $texto_pt  = $_POST["texto_pt"];
     $texto_en     = $_POST["texto_en"];
     $titulo_pt  = $_POST["titulo_pt"];
     $titulo_en     = $_POST["titulo_en"];
-
-    // Limpa tags HTML indesejadas
-    $texto_en    = strip_tags($texto_en);
-    $texto_pt  = strip_tags($texto_pt);
-    $titulo_en    = strip_tags($titulo_en);
-    $titulo_pt  = strip_tags($titulo_pt);
 
    
     // Atualiza os dados na base de dados
@@ -30,17 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                SET texto_pt     = ?,
                    texto_en = ?,
                    titulo_pt  = ?,
-                   titulo_en     = ?,
-                   chave     = ?
+                   titulo_en     = ?
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param(
-        $stmt, 'sssssi', 
+        $stmt, 'ssssi', 
         $texto_pt, 
         $texto_en,
         $titulo_pt,
         $titulo_en, 
-        $chave,
         $id
     );
 
@@ -53,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Carregar os dados para exibir no formulário
     $id = $_GET["id"];
-    $sql = "SELECT chave,texto_pt,texto_en, titulo_pt, titulo_en
+    $sql = "SELECT texto_pt,texto_en, titulo_pt, titulo_en
               FROM estrutura
              WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -62,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_stmt_get_result($stmt);
     $row = mysqli_fetch_assoc($result);
 
-    $chave     = $row["chave"];
     $texto_en  = $row["texto_en"];
     $texto_pt     = $row["texto_pt"];
     $titulo_en  = $row["titulo_en"];
@@ -102,63 +92,55 @@ if ($conn && $conn instanceof mysqli) {
             <form action="edit.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
 
-                <!-- Chave -->
-                <div class="form-group">
-                    <label>ID</label>
-                    <input 
-                        type="text" 
-                        required 
-                        maxlength="255" 
-                        name="chave" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($chave) ?>">
+                <!-- Texto (Português) e Texto (Inglês) -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Texto (Português)</label>
+                            <textarea 
+                                name="texto_pt" 
+                                class="form-control" 
+                                rows="5"
+                                maxlength="100000"><?= htmlspecialchars($texto_pt) ?></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Texto (Inglês)</label>
+                            <textarea 
+                                name="texto_en" 
+                                class="form-control" 
+                                rows="5"
+                                maxlength="100000"><?= htmlspecialchars($texto_en) ?></textarea>
+                        </div>
+                    </div>
                 </div>
 
-                
-
-              
-               <div class="form-group">
-                    <label>Texto(Portugues)</label>
-                    <input 
-                        type="text" 
-                        maxlength="1000" 
-                        name="texto_pt" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($texto_pt) ?>">
+                <!-- Título (Português) e Título (Inglês) -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título (Português)</label>
+                            <input   
+                                type="text" 
+                                maxlength="255" 
+                                name="titulo_pt" 
+                                class="form-control" 
+                                value="<?= htmlspecialchars($titulo_pt) ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título (Inglês)</label>
+                            <input
+                                type="text" 
+                                maxlength="255" 
+                                name="titulo_en" 
+                                class="form-control" 
+                                value="<?= htmlspecialchars($titulo_en) ?>">
+                        </div>
+                    </div>
                 </div>
-
-
-              
-                <div class="form-group">
-                    <label>Texto(Ingles)</label>
-                    <input 
-                        type="text" 
-                        maxlength="1000" 
-                        name="texto_en" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($texto_en) ?>">
-                </div>
-
-                <div class="form-group">
-                    <label>Título(Portugues)</label>
-                    <input   
-                        type="text" 
-                        maxlength="255" 
-                        name="titulo_pt" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($titulo_pt) ?>">
-                </div>
-
-                <div class="form-group">
-                    <label>Título(Ingles)</label>
-                    <input
-                        type="text" 
-                        maxlength="255" 
-                        name="titulo_en" 
-                        class="form-control" 
-                        value="<?= htmlspecialchars($titulo_en) ?>">
-                </div>
-
 
                 <!-- Botões -->
                 <div class="form-group mt-4">
@@ -180,4 +162,3 @@ if ($conn && $conn instanceof mysqli) {
 </div>
 </body>
 </html>
-

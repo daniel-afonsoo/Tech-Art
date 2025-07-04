@@ -2,38 +2,14 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-// Filtro de pesquisa (usando operador null coalescing)
-$search = $_GET['search'] ?? '';
-
-// Garantir que page é inteiro e mínimo 1
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($page < 1) $page = 1;
-
-$perPage  = 10;
-$start    = ($page - 1) * $perPage;
-$searchQ  = '%' . $search . '%';
-
-// Query corrigida para trazer titulo_pt e titulo_en
-$sql = "SELECT id, chave, texto_pt, texto_en, titulo_pt, titulo_en
+// Query simples para buscar todos os registros
+$sql = "SELECT id, texto_pt, texto_en, titulo_pt, titulo_en
           FROM estrutura
-         WHERE chave LIKE ?
-         LIMIT $start, $perPage";
+         ORDER BY id DESC";
 
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, 's', $searchQ);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-
-// Query para contar total de registros (para paginação)
-$totalSql = "SELECT COUNT(*) 
-               FROM estrutura
-              WHERE chave LIKE ?";
-$stmtTotal = mysqli_prepare($conn, $totalSql);
-mysqli_stmt_bind_param($stmtTotal, 's', $searchQ);
-mysqli_stmt_execute($stmtTotal);
-$totalResult = mysqli_stmt_get_result($stmtTotal);
-$totalRows   = mysqli_fetch_row($totalResult)[0];
-$totalPages  = ceil($totalRows / $perPage);
 
 mysqli_close($conn);
 ?>
@@ -68,6 +44,13 @@ mysqli_close($conn);
         .pagination a {
             margin: 0 2px;
         }
+        .text-preview {
+            max-width: 200px;
+            max-height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -87,21 +70,29 @@ mysqli_close($conn);
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Texto (PT)</th>
-                    <th>Texto (EN)</th>
                     <th>Título (PT)</th>
                     <th>Título (EN)</th>
+                    <th>Texto (PT)</th>
+                    <th>Texto (EN)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['chave']) ?></td>
-                        <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_pt']) ?></textarea></td>
-                        <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_en']) ?></textarea></td>
+                        <td><?= htmlspecialchars($row['id']) ?></td>
                         <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
                         <td><?= htmlspecialchars($row['titulo_en']) ?></td>
+                        <td>
+                            <div class="text-preview" title="<?= htmlspecialchars($row['texto_pt']) ?>">
+                                <?= htmlspecialchars(substr($row['texto_pt'], 0, 50)) ?>...
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-preview" title="<?= htmlspecialchars($row['texto_en']) ?>">
+                                <?= htmlspecialchars(substr($row['texto_en'], 0, 50)) ?>...
+                            </div>
+                        </td>
                         <td style="min-width:180px;">
                             <a href="edit.php?id=<?= $row['id'] ?>" 
                                class="btn btn-primary mb-1">
@@ -122,33 +113,6 @@ mysqli_close($conn);
                 <?php endif; ?>
             </tbody>
         </table>
-
-        <!-- Paginação -->
-        <div class="pagination">
-            <!-- Botão "Anterior" -->
-            <?php if ($page > 1): ?>
-                <a href="?search=<?= urlencode($search) ?>&page=<?= $page - 1 ?>" 
-                   class="btn btn-secondary">
-                   Anterior
-                </a>
-            <?php endif; ?>
-
-            <!-- Páginas -->
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="?search=<?= urlencode($search) ?>&page=<?= $i ?>" 
-                   class="btn btn-light <?= ($i === $page) ? 'active' : '' ?>">
-                   <?= $i ?>
-                </a>
-            <?php endfor; ?>
-
-            <!-- Botão "Próximo" -->
-            <?php if ($page < $totalPages): ?>
-                <a href="?search=<?= urlencode($search) ?>&page=<?= $page + 1 ?>" 
-                   class="btn btn-secondary">
-                   Próximo
-                </a>
-            <?php endif; ?>
-        </div>
     </div>
 </div>
 

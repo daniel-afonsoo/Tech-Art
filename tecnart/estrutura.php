@@ -1,5 +1,4 @@
 <?php
-
 include 'config/dbconnection.php';
 include 'models/functions.php';
 
@@ -7,15 +6,15 @@ $pdo = pdo_connect_mysql();
 
 registar_visita($pdo, "estrutura.php");
 
+redirectPageLanguage("estrutura.php", "structure.php");
 
-
-    $stmt = $pdo->prepare('SELECT * FROM conselho_consultivo');
-    $stmt->execute();
-    $conselho_consultivo_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Buscar o conteúdo completo da estrutura
+$stmt = $pdo->prepare('SELECT * FROM conselho_consultivo');
+$stmt->execute();
+$conselho_consultivo_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<?=redirectPageLanguage("estrutura.php","structure.php") ?>
 
 <!DOCTYPE html>
 <html>
@@ -23,13 +22,13 @@ registar_visita($pdo, "estrutura.php");
 <?= template_header('Estrutura'); ?>
 
 <!-- product section -->
-<section class="product_section layout  _padding">
+<section class="product_section layout_padding">
     <div style="padding-top: 50px; padding-bottom: 30px;">
         <div class="container">
             <div class="heading_container3">
 
                 <h3 style="font-size: 33px; text-transform: uppercase;">
-                    <?= get_text_estrutura("org-struct-page-heading") ?>
+                    <?= get_titulo_estrutura(1) ?>
                 </h3>
 
                 <div class="flex-container mobile_reverse">
@@ -40,24 +39,7 @@ registar_visita($pdo, "estrutura.php");
                         </figure>
                     </div>
                     <div class="flex-right">
-                        <?= get_text_estrutura("org-struct-page-description") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-director-tag") ?></b><br><?= get_text_estrutura("director") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-deputy-director-tag") ?></b><br><?= get_text_estrutura("deputy-director") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-executive-secretary-tag") ?></b><br><?= get_text_estrutura("executive-secretary") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-board-tag") ?><br> </b><?= get_text_estrutura("board-composed") ?><br>
-                        <?= get_text_estrutura("board-member1") ?><br>
-                        <?= get_text_estrutura("board-member2") ?><br>
-                        <?= get_text_estrutura("board-member3") ?><br>
-                        <?= get_text_estrutura("board-member4") ?><br>
-                        <?= get_text_estrutura("board-member5") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-scinetific-conucil-tag") ?><br> </b><?= get_text_estrutura("all-integrated-members") ?><br><br>
-
-                        <b><?= get_text_estrutura("org-struct-page-advisory-council-tag") ?><br></b>
+                        <?= get_text_estrutura(1) ?>
                         <section class="product_section layout_padding">
                             <div style="padding-top: 20px;">
                                 <div class="container">

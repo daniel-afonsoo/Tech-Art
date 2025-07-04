@@ -12,7 +12,7 @@ $integradoId = $_GET["integrado"];
 redirectPageLanguageWithParam("integrado.php", "integrated.php", "integrado", $integradoId);
 
 $language = ($_SESSION["lang"] == "en") ? "_en" : "";
-$query = "SELECT id, email, nome,
+$query = "SELECT id, nome,
         COALESCE(NULLIF(sobre{$language}, ''), sobre) AS sobre,
         COALESCE(NULLIF(areasdeinteresse{$language}, ''), areasdeinteresse) AS areasdeinteresse,
         ciencia_id, tipo, fotografia, orcid, scholar, research_gate, scopus_id
@@ -39,7 +39,6 @@ $investigadores = $stmt->fetch(PDO::FETCH_ASSOC);
                     <script>
                         const ratio = Math.ceil(window.devicePixelRatio);
                         const canvas = document.getElementById("canvas");
-                        const txt = "<?= $investigadores['email'] ?>";
                         const context = canvas.getContext("2d");
                         context.font = "15px 'Montserrat', sans-serif";
 

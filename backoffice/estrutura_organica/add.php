@@ -13,21 +13,20 @@ if ($_SESSION["autenticado"] != 'administrador') {
 // Se o formulário foi enviado (POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $chave     = $_POST["chave"];
     // Remove todas as tags HTML para salvar só texto puro
     $texto_pt = strip_tags($_POST["texto_pt"]);
     $texto_en = strip_tags($_POST["texto_en"]);
     $titulo_pt = strip_tags($_POST["titulo_pt"]);
     $titulo_en = strip_tags($_POST["titulo_en"]);
 
-    // Monta a query de inserção
-    $sql = "INSERT INTO estrutura (chave,texto_pt, texto_en,titulo_pt, titulo_en) 
-            VALUES (?,?,?,?,?)";
+    // Monta a query de inserção (sem o campo ID que é auto-incremento)
+    $sql = "INSERT INTO estrutura (texto_pt, texto_en, titulo_pt, titulo_en) 
+            VALUES (?,?,?,?)";
 
     
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', 
-     $chave, $texto_pt, $texto_en,$titulo_pt, $titulo_en
+    mysqli_stmt_bind_param($stmt, 'ssss', 
+     $texto_pt, $texto_en, $titulo_pt, $titulo_en
     );
 
     
@@ -83,18 +82,6 @@ mysqli_close($conn);
         <div class="card-body">
             <form role="form" data-toggle="validator" action="add.php" method="post" enctype="multipart/form-data">
                 
-                <!-- Chave -->
-                <div class="form-group">
-                    <label>ID</label>
-                    <input type="text"
-                           class="form-control"
-                           name="chave"
-                           required
-                           data-error="Por favor adicione uma chave"
-                           maxlength="200">
-                    <div class="help-block with-errors"></div>
-                </div>
-
                 <!-- Texto (Português) e Texto (Inglês) -->
                 <div class="row">
                     <div class="col halfCol">
