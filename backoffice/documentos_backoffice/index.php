@@ -105,12 +105,13 @@ $conn->close();
         <?php endif; ?>
         </tbody>
       </table>
-
+      <?php if ($tipoUtilizador === 'administrador'): ?> 
       <div class="d-flex justify-content-end">
         <a href="upload.php" class="btn btn-success">
           <i class="fa fa-plus"></i> Adicionar Novo Documento
         </a>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>
