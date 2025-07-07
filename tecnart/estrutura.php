@@ -9,7 +9,7 @@ registar_visita($pdo, "estrutura.php");
 redirectPageLanguage("estrutura.php", "structure.php");
 
 // Buscar o conteúdo completo da estrutura
-$stmt = $pdo->prepare('SELECT * FROM conselho_consultivo');
+$stmt = $pdo->prepare('SELECT * FROM conselho_consultivo WHERE ativo = 1 ORDER BY nome');
 $stmt->execute();
 $conselho_consultivo_members = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
