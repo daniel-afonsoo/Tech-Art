@@ -16,12 +16,15 @@ while ($row = $result->fetch_assoc()) {
     $pastas[] = $row["pasta"];
 }
 
-$sqlTitulos = "SELECT DISTINCT nome_titulo FROM documentos_frontoffice WHERE nome_titulo IS NOT NULL AND nome_titulo != '' ORDER BY nome_titulo";
+$sqlTitulos = "SELECT DISTINCT nome_titulo_pt, nome_titulo_en FROM documentos_frontoffice WHERE nome_titulo_pt IS NOT NULL AND nome_titulo_pt != '' ORDER BY nome_titulo_pt";
 $resultTitulos = $conn->query($sqlTitulos);
 
 $titulosExistentes = [];
 while ($rowTitulo = $resultTitulos->fetch_assoc()) {
-    $titulosExistentes[] = $rowTitulo['nome_titulo'];
+    $titulosExistentes[] = [
+        'pt' => $rowTitulo['nome_titulo_pt'],
+        'en' => $rowTitulo['nome_titulo_en']
+    ];
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["arquivo"])) {
@@ -47,15 +50,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["arquivo"])) {
 
     $nomeArquivo = basename($caminhoCompleto);
 
-    // Pegar os dados do formulário para nome_documento e nome_titulo
-    $nome_documento = isset($_POST['nome_documento']) ? $_POST['nome_documento'] : '';
-    // O título pode vir como texto livre, então pegamos do campo texto que vamos criar no JS
-    $nome_titulo = isset($_POST['nome_titulo']) ? $_POST['nome_titulo'] : '';
+    // Pegar os dados do formulário para os campos multilíngues
+    $nome_documento_pt = isset($_POST['nome_documento_pt']) ? $_POST['nome_documento_pt'] : '';
+    $nome_documento_en = isset($_POST['nome_documento_en']) ? $_POST['nome_documento_en'] : '';
+    $nome_titulo_pt = isset($_POST['nome_titulo_pt']) ? $_POST['nome_titulo_pt'] : '';
+    $nome_titulo_en = isset($_POST['nome_titulo_en']) ? $_POST['nome_titulo_en'] : '';
 
     if (move_uploaded_file($_FILES["arquivo"]["tmp_name"], $caminhoCompleto)) {
-        $sql = "INSERT INTO documentos_frontoffice (nome_arquivo, caminho, pasta, nome_documento, nome_titulo) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO documentos_frontoffice (nome_arquivo, caminho, pasta, nome_documento_pt, nome_documento_en, nome_titulo_pt, nome_titulo_en) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $nomeArquivo, $caminhoCompleto, $pasta, $nome_documento, $nome_titulo);
+        $stmt->bind_param("sssssss", $nomeArquivo, $caminhoCompleto, $pasta, $nome_documento_pt, $nome_documento_en, $nome_titulo_pt, $nome_titulo_en);
 
         if ($stmt->execute()) {
             echo "<script>alert('Arquivo enviado com sucesso!'); window.location.href='index.php';</script>";
@@ -99,22 +103,43 @@ $conn->close();
                     <input type="text" name="nova_pasta" class="form-control" placeholder="Criar nova pasta">
                 </div>
 
-                <div class="form-group">
-                    <label>Nome do Documento:</label>
-                    <input type="text" name="nome_documento" class="form-control" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nome do Documento (PT):</label>
+                            <small>Este será o nome visível do ficheiro (ex: "Regulamento 2025")</small>
+                            <input type="text" name="nome_documento_pt" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nome do Documento (EN):</label>
+                            <input type="text" name="nome_documento_en" class="form-control" required>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Título do Documento:</label>
-                    <select id="titulo-select" class="form-control" onchange="onSelectChange()">
-                        <option value="">-- Selecione um título existente --</option>
-                        <?php foreach ($titulosExistentes as $titulo): ?>
-                            <option value="<?= htmlspecialchars($titulo) ?>"><?= htmlspecialchars($titulo) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <input type="text" id="titulo-text" class="form-control mt-2" placeholder="Ou digite um novo título">
-                    <!-- campo oculto que vai enviar o valor para o servidor -->
-                    <input type="hidden" name="nome_titulo" id="nome_titulo_hidden" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título do Documento (PT) :</label>
+                            <small>Este será o título visível no site (ex: "Regulamentos")</small>
+                            <select id="titulo-select-pt" class="form-control" onchange="onSelectChange('pt')">
+                                <option value="">-- Selecione um título existente --</option>
+                                <?php foreach ($titulosExistentes as $titulo): ?>
+                                    <option value="<?= htmlspecialchars($titulo['pt']) ?>" data-en="<?= htmlspecialchars($titulo['en']) ?>"><?= htmlspecialchars($titulo['pt']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <input type="text" id="titulo-text-pt" class="form-control mt-2" placeholder="Ou digite um novo título">
+                            <input type="hidden" name="nome_titulo_pt" id="nome_titulo_pt_hidden" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título do Documento (EN):</label>
+                            <input type="text" id="titulo-text-en" name="nome_titulo_en" class="form-control" placeholder="Digite o título em inglês" required>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-success mt-3">Enviar</button>
@@ -127,9 +152,9 @@ $conn->close();
 <script>
     // Sincroniza o valor para o input hidden antes do submit
     function syncTitulo() {
-        const select = document.getElementById('titulo-select');
-        const texto = document.getElementById('titulo-text');
-        const hidden = document.getElementById('nome_titulo_hidden');
+        const select = document.getElementById('titulo-select-pt');
+        const texto = document.getElementById('titulo-text-pt');
+        const hidden = document.getElementById('nome_titulo_pt_hidden');
 
         // Se o select tiver um valor selecionado, usa ele
         if (select.value) {
@@ -137,23 +162,42 @@ $conn->close();
         } else if (texto.value.trim() !== "") {
             hidden.value = texto.value.trim();
         } else {
-            alert("Por favor, selecione ou digite o título do documento.");
-            return false; // impede submit
+            alert("Por favor, selecione ou digite o título do documento em português.");
+            return false;
         }
         return true;
     }
 
     // Quando selecionar algo no select, atualizar o campo texto para sincronizar visualmente
-    function onSelectChange() {
-        const select = document.getElementById('titulo-select');
-        const texto = document.getElementById('titulo-text');
+    function onSelectChange(idioma) {
+        const select = document.getElementById('titulo-select-' + idioma);
+        const texto = document.getElementById('titulo-text-' + idioma);
+        const textoEn = document.getElementById('titulo-text-en');
+        
         texto.value = select.value;
+        
+        // Se selecionou um título em português, preencher automaticamente a tradução em inglês
+        if (idioma === 'pt' && select.value) {
+            const selectedOption = select.options[select.selectedIndex];
+            const traducaoEn = selectedOption.getAttribute('data-en');
+            if (traducaoEn) {
+                textoEn.value = traducaoEn;
+            }
+        }
     }
 
     // Se o utilizador digitar no input texto, limpa seleção do select para evitar conflito
-    document.getElementById('titulo-text').addEventListener('input', function() {
+    document.getElementById('titulo-text-pt').addEventListener('input', function() {
         if(this.value.length > 0){
-            document.getElementById('titulo-select').value = "";
+            document.getElementById('titulo-select-pt').value = "";
+        }
+    });
+
+    // Se o utilizador digitar no input texto EN, limpa o campo PT para evitar conflito
+    document.getElementById('titulo-text-en').addEventListener('input', function() {
+        if(this.value.length > 0){
+            document.getElementById('titulo-select-pt').value = "";
+            document.getElementById('titulo-text-pt').value = "";
         }
     });
 </script>
