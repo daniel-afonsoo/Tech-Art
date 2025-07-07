@@ -182,7 +182,7 @@ function template_header($title){
                                             <a href="estrutura.php">{$change_lang("org-struct-option")}</a>
                                             <a href="financiamento.php">{$change_lang("funding-option")}</a>
                                             <a href="oportunidades.php">{$change_lang("opportunities-option")}</a>
-                                            <a href="regulamentos.php">{$change_lang("regulation-option")}</a>
+                                            <a href="documentos.php">{$change_lang("regulation-option")}</a>
                                     </div>
                                     </li>
                                     <li class="nav-item dropdown">

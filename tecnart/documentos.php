@@ -3,7 +3,7 @@ include 'config/dbconnection.php';
 include 'models/functions.php';
 $pdo = pdo_connect_mysql();
 
-registar_visita($pdo, "regulamentos.php");
+registar_visita($pdo, "documentos.php");
 
 $language = ($_SESSION["lang"] == "en") ? "_en" : "_pt";
 
@@ -23,7 +23,7 @@ foreach($documentos as $documento) {
 }
 ?>
 
-<?= redirectPageLanguage("regulamentos.php","regulations.php"); ?>
+<?= redirectPageLanguage("documentos.php","documents.php"); ?>
 
 <!DOCTYPE html>
 <html>
