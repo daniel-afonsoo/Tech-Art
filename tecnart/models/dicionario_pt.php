@@ -26,7 +26,7 @@ function ret_dic_pt(){
         "research-axes-option" => "Eixos de Investigação",
         "org-struct-option" => "Estrutura Orgânica",
         "opportunities-option" => "Oportunidades",
-        "regulation-option" => "Regulamento",
+        "regulation-option" => "Documentos",
         "funding-option" => "Financiamento",
         //Drop-down 'Projetos'
         "projects-tab" => "Projetos",

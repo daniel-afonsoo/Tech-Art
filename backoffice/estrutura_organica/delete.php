@@ -9,10 +9,9 @@ if ($_SESSION["autenticado"] != 'administrador') {
     exit;
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id         = $_POST["id"];
-    $sql  = "DELETE FROM estrutura WHERE id = ?";
+    $id = $_POST["id"];
+    $sql = "DELETE FROM estrutura WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
 
@@ -25,18 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     $id = $_GET["id"];
 
-    $sql  = "SELECT chave,texto_en,texto_pt
-               FROM estrutura
-              WHERE id = ?";
+    $sql = "SELECT texto_en, texto_pt, titulo_pt, titulo_en
+              FROM estrutura
+             WHERE id = ?";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        $chave     = $row["chave"];
-        $texto_pt  = $row["texto_pt"];
-        $texto_en     = $row["texto_en"];
+        $texto_pt = $row["texto_pt"];
+        $texto_en = $row["texto_en"];
+        $titulo_pt = $row["titulo_pt"];
+        $titulo_en = $row["titulo_en"];
     } else {
         echo "Registro não encontrado.";
         mysqli_close($conn);
@@ -60,35 +60,61 @@ mysqli_close($conn);
     <div class="card">
         <h5 class="card-header text-center">Remover Registo</h5>
         <div class="card-body">
+            <p class="text-center text-warning">
+                <strong>Tem certeza que deseja remover este registro?</strong>
+            </p>
+            
             <form action="delete.php" method="post">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-                <input type="hidden" name="fotografia" value="<?= htmlspecialchars($fotografia) ?>">
 
                 <div class="form-group">
-                    <label>ID</label>
+                    <label>ID do Registro</label>
                     <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($chave) ?>">
+                           value="<?= htmlspecialchars($id) ?>">
                 </div>
 
-                <div class="form-group">
-                    <label>Texto(PT)</label>
-                    <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($texto_pt) ?>">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título (Português)</label>
+                            <input type="text" readonly class="form-control" 
+                                   value="<?= htmlspecialchars($titulo_pt) ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Título (Inglês)</label>
+                            <input type="text" readonly class="form-control" 
+                                   value="<?= htmlspecialchars($titulo_en) ?>">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Texto(EN)</label>
-                    <input type="text" readonly class="form-control" 
-                           value="<?= htmlspecialchars($texto_en) ?>">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Texto (Português)</label>
+                            <textarea readonly class="form-control" rows="4"><?= htmlspecialchars($texto_pt) ?></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Texto (Inglês)</label>
+                            <textarea readonly class="form-control" rows="4"><?= htmlspecialchars($texto_en) ?></textarea>
+                        </div>
+                    </div>
                 </div>
+
                 <!-- Botões -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+                    <button type="submit" class="btn btn-danger btn-block">
+                        Confirmar Remoção
+                    </button>
                 </div>
                 <div class="form-group">
                     <button type="button" 
                             onclick="window.location.href='index.php'" 
-                            class="btn btn-danger btn-block">
+                            class="btn btn-secondary btn-block">
                         Cancelar
                     </button>
                 </div>

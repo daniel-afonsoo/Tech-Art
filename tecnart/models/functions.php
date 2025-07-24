@@ -182,7 +182,7 @@ function template_header($title){
                                             <a href="estrutura.php">{$change_lang("org-struct-option")}</a>
                                             <a href="financiamento.php">{$change_lang("funding-option")}</a>
                                             <a href="oportunidades.php">{$change_lang("opportunities-option")}</a>
-                                            <a href="regulamentos.php">{$change_lang("regulation-option")}</a>
+                                            <a href="documentos.php">{$change_lang("regulation-option")}</a>
                                     </div>
                                     </li>
                                     <li class="nav-item dropdown">
@@ -554,7 +554,7 @@ function get_text_estrutura($key) {
   $language = isset($_SESSION["lang"]) && $_SESSION["lang"] == "en" ? 'texto_en' : 'texto_pt';
 
  
-  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE chave = ?");
+  $stmt = $pdo->prepare("SELECT $language FROM estrutura WHERE id = ?");
   $stmt->execute([$key]);
   $html_escaped = $stmt->fetchColumn();
   return $html_escaped ? html_entity_decode($html_escaped) : 'Texto não encontrado';

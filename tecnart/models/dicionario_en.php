@@ -27,7 +27,7 @@ function ret_dic_en()
         "research-axes-option" => "Research Axes",
         "org-struct-option" => "Organic Structure",
         "opportunities-option" => "Opportunities",
-        "regulation-option" => "Regulations",
+        "regulation-option" => "Documents",
         "funding-option" => "Funding",
         //Drop-down 'Projetos'
         "projects-tab" => "Projects",
