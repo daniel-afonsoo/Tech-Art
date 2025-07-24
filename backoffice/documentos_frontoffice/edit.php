@@ -42,10 +42,10 @@ while ($rowTitulo = $resultTitulos->fetch_assoc()) {
 
 // Processar o formulário de edição
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome_documento_pt = $_POST["nome_documento_pt"] ?? "";
-    $nome_documento_en = $_POST["nome_documento_en"] ?? "";
-    $nome_titulo_pt = $_POST["nome_titulo_pt"] ?? "";
-    $nome_titulo_en = $_POST["nome_titulo_en"] ?? "";
+    $nome_documento_pt = isset($_POST["nome_documento_pt"]) ? $_POST["nome_documento_pt"] : "";
+    $nome_documento_en = isset($_POST["nome_documento_en"]) ? $_POST["nome_documento_en"] : "";
+    $nome_titulo_pt = isset($_POST["nome_titulo_pt"]) ? $_POST["nome_titulo_pt"] : "";
+    $nome_titulo_en = isset($_POST["nome_titulo_en"]) ? $_POST["nome_titulo_en"] : "";
 
     $sql = "UPDATE documentos_frontoffice SET nome_documento_pt = ?, nome_documento_en = ?, nome_titulo_pt = ?, nome_titulo_en = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);

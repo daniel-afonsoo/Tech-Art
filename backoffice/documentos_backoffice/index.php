@@ -3,7 +3,7 @@ require "../config/basedados.php";
 require "../verifica.php";
 
 // 1) Preparar permissões
-$tipoUtilizador   = $_SESSION["autenticado"] ?? null;
+$tipoUtilizador = isset($_SESSION["autenticado"]) ? $_SESSION["autenticado"] : null;
 $mapaPermissoes   = [
     'integrado'     => 'Integrado',
     'colaborador'   => 'Colaborador',

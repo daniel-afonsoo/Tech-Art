@@ -8,12 +8,12 @@ $mainDir = "../assets/carousel/";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Dados do formulário
 
-    $id            = $_POST["id"];
-    $titulo_pt     = $_POST["titulo_pt"]     ?? '';
-    $subtitulo_pt  = $_POST["subtitulo_pt"]  ?? '';
-    $titulo_en     = $_POST["titulo_en"]     ?? '';
-    $subtitulo_en  = $_POST["subtitulo_en"]  ?? '';
-    $oldImagem     = $_POST["old_imagem"]    ?? '';
+    $id            = isset($_POST["id"])            ? $_POST["id"]            : "";
+    $titulo_pt     = isset($_POST["titulo_pt"])     ? $_POST["titulo_pt"]     : "";
+    $subtitulo_pt  = isset($_POST["subtitulo_pt"])  ? $_POST["subtitulo_pt"]  : "";
+    $titulo_en     = isset($_POST["titulo_en"])     ? $_POST["titulo_en"]     : "";
+    $subtitulo_en  = isset($_POST["subtitulo_en"])  ? $_POST["subtitulo_en"]  : "";
+    $oldImagem     = isset($_POST["old_imagem"])    ? $_POST["old_imagem"]    : "";
 
     // Verifica se foi carregada nova imagem
     $nomeImagem = $oldImagem; // Se não fizer upload novo, mantemos a antiga
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 } else {
     // Se for GET, buscar dados do slide para exibir
-    $id = $_GET["id"] ?? 0;
+    $id = $_GET["id"] ? $_GET["id"] : 0;
 
 
     $sql = "SELECT id,titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem

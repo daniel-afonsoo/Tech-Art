@@ -2,7 +2,7 @@
 require "../verifica_sessao.php"; // Garante que o utilizador está autenticado
 
 $basePath = __DIR__ . "/../private_docs/";
-$filename = basename($_GET['file'] ?? '');
+$filename = basename(isset($_GET['file']) ? $_GET['file'] : '');
 
 if (!$filename || strpos($filename, '..') !== false) {
     http_response_code(400);

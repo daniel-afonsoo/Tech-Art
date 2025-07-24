@@ -20,11 +20,11 @@ $mainDir = "../assets/carousel/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Recupera os campos do formulário
-    $chave        = $_POST["chave"]        ?? '';
-    $titulo_pt    = $_POST["titulo_pt"]    ?? '';
-    $subtitulo_pt = $_POST["subtitulo_pt"] ?? '';
-    $titulo_en    = $_POST["titulo_en"]    ?? '';
-    $subtitulo_en = $_POST["subtitulo_en"] ?? '';
+    $chave        = isset($_POST["chave"])        ? $_POST["chave"]        : '';
+    $titulo_pt    = isset($_POST["titulo_pt"])    ? $_POST["titulo_pt"]    : '';
+    $subtitulo_pt = isset($_POST["subtitulo_pt"]) ? $_POST["subtitulo_pt"] : '';
+    $titulo_en    = isset($_POST["titulo_en"])    ? $_POST["titulo_en"]    : '';
+    $subtitulo_en = isset($_POST["subtitulo_en"]) ? $_POST["subtitulo_en"] : '';
 
     // Trata o upload da imagem (caso seja enviado um arquivo)
     $imagem = "";

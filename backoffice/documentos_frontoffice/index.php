@@ -6,7 +6,7 @@ require "../config/basedados.php";
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Identificar perfil de utilizador
-$tipoUtilizador = $_SESSION["autenticado"] ?? null;
+$tipoUtilizador = isset($_SESSION["autenticado"]) ? $_SESSION["autenticado"] : null;
 
 // Buscar documentos do FrontOffice
 $sql = "SELECT id, nome_arquivo, caminho, pasta, nome_documento_pt, nome_documento_en, nome_titulo_pt, nome_titulo_en

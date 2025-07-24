@@ -15,7 +15,7 @@ $documentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Organizar documentos por título
 $documentos_por_titulo = [];
 foreach($documentos as $documento) {
-    $titulo = $documento['nome_titulo' . $language] ?? 'Sem Título';
+    $titulo = isset($documento['nome_titulo' . $language]) ? $documento['nome_titulo' . $language] : 'Sem Título';
     if (!isset($documentos_por_titulo[$titulo])) {
         $documentos_por_titulo[$titulo] = [];
     }
@@ -50,7 +50,7 @@ foreach($documentos as $documento) {
                                         <a href="../backoffice/documentos_frontoffice/<?= htmlspecialchars($documento['caminho']) ?>" 
                                            target="_blank" 
                                            style="font-size:1.1em; text-decoration: none; color:rgb(46, 111, 249);">
-                                            <?= htmlspecialchars($documento['nome_documento' . $language] ?? $documento['nome_arquivo']) ?>
+                                            <?= htmlspecialchars(isset($documento['nome_documento' . $language]) ? $documento['nome_documento' . $language] : $documento['nome_arquivo']) ?>
                                         </a>
                                     </div>
                                 <?php endforeach; ?>

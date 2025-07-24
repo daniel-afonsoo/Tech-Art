@@ -6,7 +6,7 @@ require "../config/basedados.php";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $id     = $_POST["id"];
-    $imagem = $_POST["imagem"] ?? '';
+    $imagem = isset($_POST["imagem"]) ? $_POST["imagem"] : '';
 
     // Apaga o registo 
     $sql  = "DELETE FROM carrosel WHERE id = ?";
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 } else {
 
     // GET => Exibir o formulário de confirmação
-    $id = $_GET["id"] ?? 0;
+    $id = isset($_GET["id"]) ? $_GET["id"] : 0;
 
     $sql  = "SELECT id, titulo_pt, subtitulo_pt, titulo_en, subtitulo_en, imagem
              FROM carrosel
