@@ -2,14 +2,6 @@
 require "../verifica.php";
 require "../config/basedados.php";
 
-// Query simples para buscar todos os registros
-$sql = "SELECT id, texto_pt, texto_en, titulo_pt, titulo_en
-          FROM estrutura
-         ORDER BY id DESC";
-
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
 
 mysqli_close($conn);
 ?>
@@ -59,9 +51,12 @@ mysqli_close($conn);
     <div class="table-title d-flex justify-content-between align-items-center">
         <h2>Estrutura Orgânica</h2>
         <!-- Botão de adicionar -->
-        <a href="add.php" class="btn btn-success">
-            <i class="fas fa-plus"></i> Adicionar Novo
-        </a>
+    <?php if ($_SESSION["autenticado"] == 'administrador'): ?>
+        <a href="add.php" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar Novo </a>
+    <?php else: ?>
+        <span class="text-muted">Acesso Restrito</span>
+    <?php endif; ?>
+
     </div>
 
     <!-- Tabela -->
@@ -81,6 +76,7 @@ mysqli_close($conn);
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
                         <td><?= htmlspecialchars($row['id']) ?></td>
+
                         <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
                         <td><?= htmlspecialchars($row['titulo_en']) ?></td>
                         <td>
@@ -94,6 +90,7 @@ mysqli_close($conn);
                             </div>
                         </td>
                         <td style="min-width:180px;">
+                            <?php if ($_SESSION["autenticado"] == 'administrador'): ?>      
                             <a href="edit.php?id=<?= $row['id'] ?>" 
                                class="btn btn-primary mb-1">
                                Alterar
@@ -103,6 +100,9 @@ mysqli_close($conn);
                                onclick="return confirm('Tem certeza que deseja apagar este registro?');">
                                Apagar
                             </a>
+                            <?php else: ?>
+                                <span class="text-muted">Acesso Restrito</span>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endwhile; ?>

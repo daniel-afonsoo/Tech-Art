@@ -72,7 +72,11 @@ $totalPages = ceil($totalRows / $perPage);
 <div class="container mt-4">
     <div class="table-title d-flex justify-content-between align-items-center">
         <h2>Eixos de Investigação</h2>
-        <a href="add.php" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar Novo</a>
+          <?php if ($_SESSION["autenticado"] == 'administrador'): ?>
+            <a href="add.php" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar Novo</a>
+          <?php else: ?>
+            <span class="text-muted">Acesso Restrito</span>
+          <?php endif; ?>
     </div>
 
    
@@ -98,8 +102,13 @@ $totalPages = ceil($totalRows / $perPage);
                         <td><textarea class="form-control" readonly><?= $row['titulo_pt'] ?></textarea></td>
                         <td> <textarea class="form-control" readonly><?= $row['titulo_en'] ?></textarea> </td>
                         <td style="min-width:200px;">
-                            <a href="edit.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-primary">Alterar</a>
-                            <a href="delete.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-danger">Apagar</a>
+                            <!-- Verificação de permissões e seguranaça -->
+                            <?php if ($_SESSION["autenticado"] == 'administrador' || $_SESSION["autenticado"] == $row["id"]): ?>
+                                <a href="edit.php?id=<?= $row['id'] ?>" class="btn btn-primary">Alterar</a>
+                                <a href="delete.php?id=<?= $row['id'] ?>" class="btn btn-danger">Apagar</a>
+                            <?php else: ?>
+                                <span class="text-muted">Acesso Restrito</span>
+                            <?php endif; ?> 
                         </td>
                     </tr>
                 <?php endwhile; ?>
