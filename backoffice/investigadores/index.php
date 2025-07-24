@@ -183,7 +183,7 @@ if (@$_SESSION["anoRelatorio"] != "") {
 					<?php
 					if (mysqli_num_rows($result) > 0) {
 						while ($row = mysqli_fetch_assoc($result)) {
-							if ($_SESSION["autenticado"] == 'administrador' || $_SESSION["autenticado"] == $row["id"]) {
+							
 								echo "<tr>";
 								echo "<td>" . $row["tipo"] . "</td>";
 								echo "<td>" . $row["nome"] . "</td>";
@@ -196,18 +196,20 @@ if (@$_SESSION["anoRelatorio"] != "") {
 								echo "<td>".$row["scholar"]."</td>";
 								*/
 								echo "<td><img src='../assets/investigadores/$row[fotografia]' width = '100px' height = '100px'></td>";
+								if ($_SESSION["autenticado"] == 'administrador') {
 								echo "<td style='min-width:250px;'><a href='edit.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-primary'><span>Alterar Perfil</span></a>";
+								}
 								if ($_SESSION["autenticado"] == 'administrador') {
 									echo "<a href='remove.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-danger'><span>Apagar</span></a><br>";
 								}
-								if ($row["tipo"] != "Externo") {
+								if ($_SESSION["autenticado"] == 'administrador'){
 									echo "<a href='resetpassword.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-warning'><span>Alterar Password</span></a><br>";
 									//echo "<a data-id='" . $row["id"] . "' class='gerarRelatorio w-100 mb-1 btn btn-info'><span>Gerar Relatório</span></a><br>";
 									echo "<a href='publicacoes.php?id=" . $row["id"] . "' class='w-100 mb-1 btn btn-secondary'><span>Selecionar Publicações</span></a><br>";
 								}
 								echo "</td>";
 								echo "</tr>";
-							}
+							
 						}
 					}
 					?>

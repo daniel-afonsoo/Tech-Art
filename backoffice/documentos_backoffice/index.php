@@ -5,12 +5,19 @@ require "../verifica.php";
 // 1) Preparar permissões
 $tipoUtilizador   = $_SESSION["autenticado"] ?? null;
 $mapaPermissoes   = [
-    'administrador' => 'Todos',
     'integrado'     => 'Integrado',
     'colaborador'   => 'Colaborador',
     'aluno'         => 'Aluno',
     'externo'       => 'Externo',
 ];
+
+
+// Função para verificar se o utilizador tem permissão
+function temPermissao($tipo, $permissoes, $mapaPermissoes) {
+    if ($tipo === 'administrador') return true;
+    if (in_array('todos', $permissoes)) return true;
+    return isset($mapaPermissoes[$tipo]) && in_array($mapaPermissoes[$tipo], $permissoes);
+}
 
 // 2) Buscar todos os documentos
 $sql    = "SELECT * FROM documentos_backoffice ORDER BY nome_arquivo";
@@ -22,12 +29,7 @@ if ($result && $result->num_rows > 0) {
     while ($doc = $result->fetch_assoc()) {
         // 2.1) Verifica permissão
         $perms = array_map('trim', explode(',', $doc['permissoes']));
-        if (
-            $tipoUtilizador !== 'administrador' &&
-            !in_array('Todos', $perms) &&
-            (!isset($mapaPermissoes[$tipoUtilizador]) ||
-             !in_array($mapaPermissoes[$tipoUtilizador], $perms))
-        ) {
+          if (!temPermissao($tipoUtilizador, $perms, $mapaPermissoes)) {
             continue;
         }
 
@@ -71,14 +73,14 @@ $conn->close();
             <td><?= htmlspecialchars($doc['nome_arquivo']) ?></td>
             <td>
               <?php if ($prefix === 'PT'): ?>
-                <a href="<?= htmlspecialchars($doc['caminho']) ?>" target="_blank">File</a>
+                <a href="download.php?file=<?= urlencode($doc['nome_arquivo']) ?>" target="_blank">File</a>
               <?php else: ?>
                 &ndash;
               <?php endif; ?>
             </td>
             <td>
               <?php if ($prefix === 'EN'): ?>
-                <a href="<?= htmlspecialchars($doc['caminho']) ?>" target="_blank">File</a>
+                <a href="../download.php?file=<?= urlencode($doc['nome_arquivo']) ?>" target="_blank">File</a>
               <?php else: ?>
                 &ndash;
               <?php endif; ?>

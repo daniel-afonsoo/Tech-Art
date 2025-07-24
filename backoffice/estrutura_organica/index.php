@@ -14,22 +14,36 @@ $start    = ($page - 1) * $perPage;
 $searchQ  = '%' . $search . '%';
 
 // Query corrigida para trazer titulo_pt e titulo_en
-$sql = "SELECT id, chave, texto_pt, texto_en, titulo_pt, titulo_en
+$sql = "SELECT id, texto_pt, texto_en, titulo_pt, titulo_en
           FROM estrutura
-         WHERE chave LIKE ?
+          WHERE texto_pt LIKE ?
+            OR texto_en LIKE ?
+            OR titulo_pt LIKE ?
+            OR titulo_en LIKE ?
          LIMIT $start, $perPage";
 
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, 's', $searchQ);
+mysqli_stmt_bind_param(
+  $stmt,
+  'ssss',
+  $searchQ, $searchQ, $searchQ, $searchQ
+);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 // Query para contar total de registros (para paginação)
-$totalSql = "SELECT COUNT(*) 
-               FROM estrutura
-              WHERE chave LIKE ?";
+$totalSql = "SELECT COUNT(*) FROM estrutura
+               WHERE texto_pt LIKE ?
+                OR texto_en LIKE ?
+                OR titulo_pt LIKE ?
+                OR titulo_en LIKE ?";
+              
 $stmtTotal = mysqli_prepare($conn, $totalSql);
-mysqli_stmt_bind_param($stmtTotal, 's', $searchQ);
+mysqli_stmt_bind_param(
+  $stmtTotal,
+  'ssss',
+  $searchQ, $searchQ, $searchQ, $searchQ
+);
 mysqli_stmt_execute($stmtTotal);
 $totalResult = mysqli_stmt_get_result($stmtTotal);
 $totalRows   = mysqli_fetch_row($totalResult)[0];
@@ -76,9 +90,12 @@ mysqli_close($conn);
     <div class="table-title d-flex justify-content-between align-items-center">
         <h2>Estrutura Orgânica</h2>
         <!-- Botão de adicionar -->
-        <a href="add.php" class="btn btn-success">
-            <i class="fas fa-plus"></i> Adicionar Novo
-        </a>
+    <?php if ($_SESSION["autenticado"] == 'administrador'): ?>
+        <a href="add.php" class="btn btn-success"><i class="fas fa-plus"></i> Adicionar Novo </a>
+    <?php else: ?>
+        <span class="text-muted">Acesso Restrito</span>
+    <?php endif; ?>
+
     </div>
 
     <!-- Tabela -->
@@ -97,12 +114,13 @@ mysqli_close($conn);
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                     <tr>
-                        <td><?= htmlspecialchars($row['chave']) ?></td>
+                        <td><?= htmlspecialchars($row['id']) ?></td>
                         <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_pt']) ?></textarea></td>
                         <td><textarea class="form-control" readonly><?= htmlspecialchars($row['texto_en']) ?></textarea></td>
                         <td><?= htmlspecialchars($row['titulo_pt']) ?></td>
                         <td><?= htmlspecialchars($row['titulo_en']) ?></td>
                         <td style="min-width:180px;">
+                            <?php if ($_SESSION["autenticado"] == 'administrador'): ?>      
                             <a href="edit.php?id=<?= $row['id'] ?>" 
                                class="btn btn-primary mb-1">
                                Alterar
@@ -112,6 +130,9 @@ mysqli_close($conn);
                                onclick="return confirm('Tem certeza que deseja apagar este registro?');">
                                Apagar
                             </a>
+                            <?php else: ?>
+                                <span class="text-muted">Acesso Restrito</span>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endwhile; ?>

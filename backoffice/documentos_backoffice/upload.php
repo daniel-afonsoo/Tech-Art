@@ -3,7 +3,7 @@ require "../config/basedados.php";
 require "../verifica.php";
 
 // Diretoria base para uploads
-$uploadsDir = "../assets/docs/";
+$uploadsDir = "../private_docs/";
 
 // Criar a pasta base se não existir
 if (!file_exists($uploadsDir)) {

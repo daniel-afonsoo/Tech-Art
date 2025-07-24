@@ -80,8 +80,11 @@ $totalPages  = ceil($totalRows / $perPage);
     <!-- Título e botão de adicionar -->
     <div class="table-title d-flex justify-content-between align-items-center">
         <h2>Carrossel</h2>
-        <a href="add.php" class="btn btn-success">
-            <i class="fas fa-plus"></i> Adicionar Novo
+        <?php if ($_SESSION["autenticado"] == 'administrador'): ?>  
+           <a href="add.php" class="btn btn-success"> <i class="fas fa-plus"></i> Adicionar Novo~
+        <?php else: ?>
+            <span class="text-muted">Acesso Restrito</span>
+          <?php endif; ?>
         </a>
     </div>
 
@@ -123,12 +126,16 @@ $totalPages  = ceil($totalRows / $perPage);
 
             <!-- Coluna de AÇÕES -->
             <td style="min-width:200px;">
+                <?php if ($_SESSION["autenticado"] == 'administrador' || $_SESSION["autenticado"] == $row["id"]): ?>
                 <a href="edit.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-primary">
                     Alterar
                 </a>
                 <a href="delete.php?id=<?= $row['id'] ?>" class="w-100 mb-1 btn btn-danger">
                     Apagar
                 </a>
+                <?php else: ?>
+                    <span class="text-muted">Acesso Restrito</span>
+                <?php endif; ?> 
             </td>
         </tr>
     <?php endwhile; ?>
