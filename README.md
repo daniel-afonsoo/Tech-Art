@@ -6,9 +6,9 @@ O Portal Techn&Art é um site que foi desenvolvido através PHP e MySQLi, compos
 ## Tecnologias utilizadas:
 - Back-office: PHP/MySQLi
 
--Front-office: PHP/MySQLi
+- Front-office: PHP/MySQLi
 
--Administração da Base de dados: phpMyAdmin (para gestão da base de dados MySQL)
+- Administração da Base de dados: phpMyAdmin (para gestão da base de dados MySQL)
 
 
 ## Notas
