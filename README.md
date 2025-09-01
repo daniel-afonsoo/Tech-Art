@@ -6,7 +6,7 @@ O Portal Techn&Art já existia previamente, mas foi otimizado e aprimorado em eq
 - **Back-office:** PHP + MySQL 
 - **Front-office:** Selenium WebDriver (Java) + JUnit 5, PHP + MySQL
 
-## Funcionalidades validadas em testes automáticos
+## Funcionalidades validadas em testes automatizados
 - Navegação entre páginas  
 - Pesquisa  
 - Validação da consistência da informação apresentada
