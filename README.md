@@ -3,8 +3,8 @@
 O Portal Techn&Art já existia previamente, mas foi otimizado e aprimorado em equipa com melhorias no design e nas funcionalidades.
 
 ## Tecnologias utilizadas
-- **Back-office:** PHP/MySQLi 
-- **Front-office:** Selenium WebDriver (Java) + JUnit 5, PHP/MySQLi
+- **Back-office:** PHP + MySQL 
+- **Front-office:** Selenium WebDriver (Java) + JUnit 5, PHP + MySQL
 
 ## Funcionalidades validadas em testes automáticos
 - Navegação entre páginas  
