@@ -12,5 +12,5 @@ O Portal Techn&Art é um site que foi desenvolvido em PHP + MySQL, sendo compost
 
 
 ## Notas
-- O código que está na branch master serviu como base para o desenvolvimento das melhorias a nível de design e funcionalidades que foram feitas por mim e pela minha equipa.
+- O código que está na **branch master** serviu de base, e as melhorias de design e funcionalidades realizadas pela minha equipa no back-office e front-office do Portal Techn&Art foram implementadas e consolidadas na **branch sub-master**
 
