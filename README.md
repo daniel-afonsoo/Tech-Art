@@ -17,6 +17,7 @@ O Portal Techn&Art já existia previamente, mas foi otimizado e aprimorado em eq
 
 **************************************
 
+# Final Degree Project in Computer Engineering (Polytechnic Institute of Tomar) — Techn&Art Portal
 ## 🇺🇸 EN — About the Project
 The **Techn&Art Portal** already existed, but it was optimized and enhanced by my team, with improvements in **design** and **functionality**.
 
